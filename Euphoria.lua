@@ -1809,7 +1809,7 @@ if BF == true then
             Name = "Auto Farm",
             Default = false,
             Callback = function(value)
-                Auto_Farm = a
+                Auto_Farm = value
                 MainAutoFarmFunction:UpdateFarmMode("AutoFarmLevel")
                 if Auto_Farm then
                     MainAutoFarmFunction:Start()
