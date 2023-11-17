@@ -12,7 +12,6 @@ if placeId == 7449423635 then
     third_sea = true
 end
 if BF == true then
-    print("BF TRUE")
     repeat wait() until game:IsLoaded()
     function Notification(text)
         local StarterGui = game:GetService("StarterGui")
@@ -35,9 +34,7 @@ if BF == true then
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
             print(MyLevel)
             if _G.FastTween then
-                print("Passed to fast tween")
                 if first_sea then
-                    print("Passed to first_sea")
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
                         Nonquest = false
                         Ms = "Bandit [Lv. 5]"
@@ -1801,9 +1798,6 @@ if BF == true then
         spawn(function()
             while true do CheckQuest()
                 if _G.Auto_Farm then
-                    print(CFrameQuest)
-                    print(LevelQuest)
-                    print(NameQuest)
                     MainAutoFarmFunction:Update(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest)
                 end
                 fastWait(.05)
