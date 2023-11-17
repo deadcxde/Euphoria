@@ -1231,14 +1231,11 @@ if BF == true then
                                     local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
                                     Target:InvokeServer(string_1);
                                 end
-                                print(Ms)
-                                print(game:GetService("Workspace").Enemies:FindFirstChild(Ms))
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                        print(v.Name)
-                                        print(Ms)
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
+                                                print("asd")
                                                 repeat wait()
                                                     pcall(function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
@@ -1249,6 +1246,7 @@ if BF == true then
                                                                 PosMon = v.HumanoidRootPart.CFrame
                                                                 StartMagnetAutoFarmLevel = true
                                                                 Usefastattack = true
+                                                                print(Usefastattack)
                                                                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                                                     local args = {
                                                                         [1] = "Buso"
