@@ -32,7 +32,6 @@ if BF == true then
         local Nonquest = false
         function CheckQuest()
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
-            print(MyLevel)
             if _G.FastTween then
                 if first_sea then
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
@@ -1235,6 +1234,8 @@ if BF == true then
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                            print(v.Name)
+                                            print(Ms)
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat wait()
                                                     pcall(function()
