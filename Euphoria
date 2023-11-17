@@ -1783,7 +1783,7 @@ if BF == true then
             return AutoFarmfunc
         end
 
-
+        _G.SelectWeapon = "Melee"
         _G.EuphoriaLoaded = 1
         wait(1)
         Notification("Euphoria Loaded Successfully")
