@@ -1788,7 +1788,107 @@ if BF == true then
         wait(1)
         Notification("Euphoria Loaded Successfully")
         print("Euphoria Loaded Successfully")
-	
+        spawn(function()
+            while wait() do
+                if sethiddenproperty then
+                    sethiddenproperty(game.Players.LocalPlayer,"SimulationRadius",99999999999)
+                end 
+                if setscriptable then
+                    setscriptable(game.Players.LocalPlayer, "SimulationRadius", true)
+                    game.Players.LocalPlayer.SimulationRadius = math.huge * math.huge, math.huge * math.huge * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0 * 1 / 0
+                end
+            end
+        end)
+        
+        function TP(P)
+            NoClip = true
+            Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if Distance < 10 then
+                Speed = 1000
+            elseif Distance < 170 then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P
+                Speed = 350
+            elseif Distance < 1000 then
+                Speed = 350
+            elseif Distance >= 1000 then
+                Speed = 250
+            end
+            game:GetService("TweenService"):Create(
+                game.Players.LocalPlayer.Character.HumanoidRootPart,
+                TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+                {CFrame = P}
+            ):Play()
+            NoClip = false
+        end
+        
+        local CameraShakeInstanceSet = require(game:GetService("ReplicatedStorage").Util.CameraShaker.Main.CameraShakeInstance)
+    
+        
+        spawn(function()
+            local gg = getrawmetatable(game)
+            local old = gg.__namecall
+            setreadonly(gg,false)
+            gg.__namecall = newcclosure(function(...)
+                local method = getnamecallmethod()
+                local args = {...}
+                if tostring(method) == "FireServer" then
+                    if tostring(args[1]) == "RemoteEvent" then
+                        if tostring(args[2]) ~= "true" and tostring(args[2]) ~= "false" then
+                            if UseSkillMasteryDevilFruit then
+                                args[2] = PositionSkillMasteryDevilFruit
+                                return old(unpack(args))
+                            elseif Skillaimbot then
+                                args[2] = AimBotSkillPosition
+                                return old(unpack(args))
+                            end
+                        end
+                    end
+                end
+                return old(...)
+            end)
+        end)
+        
+        local CombatFrameworkROld = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework) 
+        local CombatFrameworkR = getupvalues(CombatFrameworkROld)[2]
+        local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
+        CameraShakerR:Stop()
+        spawn(function()
+            game:GetService("RunService").Stepped:Connect(function()
+                pcall(function()
+                    CombatFrameworkR.activeController.hitboxMagnitude = 55
+                    if Usefastattack then
+                        if fastattack then
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
+                                CombatFrameworkR.activeController.timeToNextAttack = 3
+                            elseif game.Players.LocalPlayer.Character:FindFirstChild("Electro") then
+                                CombatFrameworkR.activeController.timeToNextAttack = 2
+                            else
+                                CombatFrameworkR.activeController.timeToNextAttack = 0
+                            end
+                            CombatFrameworkR.activeController.attacking = false
+                            CombatFrameworkR.activeController.increment = 3
+                            CombatFrameworkR.activeController.blocking = false
+                            CombatFrameworkR.activeController.timeToNextBlock = 0
+                            game.Players.LocalPlayer.Character.Humanoid.Sit = false	
+                        end
+                    end
+                end)
+            end)
+        end)
+        
+        spawn(function()
+            game:GetService("RunService").Stepped:Connect(function()
+                pcall(function()
+                    if Usefastattack then
+                        if fastattack then
+                            Click()
+                        end
+                    end
+                end)
+            end)
+        end)
+    
+
         local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
         local Window = OrionLib:MakeWindow({Name = "Euphoria 0_o", HidePremium = false, SaveConfig = true, ConfigFolder = "euphoriacfg"})
         local Main = Window:MakeTab({
