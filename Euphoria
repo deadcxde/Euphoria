@@ -16,7 +16,7 @@ if BF then
     local function Notification(text)
         local StarterGui = game:GetService("StarterGui")
         StarterGui:SetCore("SendNotification", {
-            Title = "Roblox Watcher";
+            Title = "Euphoria";
             Text = text
         })
     end
@@ -26,6 +26,11 @@ if BF then
         Notification("Another instance of Euphoria already loaded")
     end
     if load_script then
+        wait(1)
+	
+        if game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui") then game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui"):Destroy() end
+        local library = {RainbowColorValue = 0, HueSelectionPosition = 0}
+        local PresetColor = Color3.fromRGB(255, 0, 0)
         local UserInputService = game:GetService("UserInputService")
         local TweenService = game:GetService("TweenService")
         local RunService = game:GetService("RunService")
@@ -33,8 +38,41 @@ if BF then
         local MyNameIs = LocalPlayer.Name
         local Mouse = LocalPlayer:GetMouse()
         local CloseBind = Enum.KeyCode.RightControl
+        
         local ScreenGui = Instance.new("ScreenGui")
-	    local TabButtonLayout = Instance.new("UIListLayout")
+        local TabButtonLayout = Instance.new("UIListLayout")
+        
+        ScreenGui.Name = "Voice Chat Ui"
+        ScreenGui.Parent = game.CoreGui.RobloxGui
+        local uitoggled = false
+        UserInputService.InputBegan:Connect(function(io, p)
+            if io.KeyCode == Enum.KeyCode.RightControl then
+                if uitoggled == false then
+                    ScreenGui.Enabled = false
+                    uitoggled = true
+                else
+                    ScreenGui.Enabled = true
+                    uitoggled = false
+                end
+            end
+        end)
+        
+        coroutine.wrap(
+            function()
+                while wait() do
+                    library.RainbowColorValue = library.RainbowColorValue + 1 / 255
+                    library.HueSelectionPosition = library.HueSelectionPosition + 1
+        
+                    if library.RainbowColorValue >= 1 then
+                        library.RainbowColorValue = 0
+                    end
+        
+                    if library.HueSelectionPosition == 80 then
+                        library.HueSelectionPosition = 0
+                    end
+                end
+            end
+        )()
 	
         function library:Window(name,game)
             if getgenv().Theme ~= nil then
@@ -2458,6 +2496,6 @@ if BF then
 
         local Main = library:Window("Euphoria 0_o","Blox Fruit 2.0")
         local AutoFarmTab = Main:Tab("Auto Farm")
-        local MainAutoFarmFunction = AutoFarm(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest,"AutoFarmLevel")
+        -- local MainAutoFarmFunction = AutoFarm(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest,"AutoFarmLevel")
     end
 end
