@@ -36,7 +36,7 @@ if BF == true then
                 if first_sea then
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
                         Nonquest = false
-                        Ms = "Bandit [Lv. 5]"
+                        Ms = "Bandit"
                         NameQuest = "BanditQuest1"
                         LevelQuest = 1
                         NameMon = "Bandit"
