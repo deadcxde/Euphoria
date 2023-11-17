@@ -28,6 +28,8 @@ if BF == true then
         print("Euphoria Loaded Successfully")
     end
     if load_script == 1 then
+        task = task or getrenv().task;
+        fastSpawn,fastWait,delay = task.spawn,task.wait,task.delay
         local Nonquest = false
         function CheckQuest()
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
