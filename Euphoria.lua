@@ -49,7 +49,8 @@ if BF == true then
             Callback = function(value)
                 _G.AutoFarm = value
                 print(_G.AutoFarm)
-            end
+            end,
+            Save = true
         })
         -- СЕРВЕР МЕНЮ
         local Server = Window:MakeTab({
