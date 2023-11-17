@@ -1793,11 +1793,14 @@ if BF == true then
             Icon = "rbxassetid://4483345998",
             PremiumOnly = false
         })
-        Auto_Farm = false
+        _G.Auto_Farm = false
         local MainAutoFarmFunction = AutoFarm(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest,"AutoFarmLevel")
         spawn(function()
             while true do CheckQuest()
-                if Auto_Farm then
+                if _G.Auto_Farm then
+                    print(CFrameQuest)
+                    print(LevelQuest)
+                    print(NameQuest)
                     MainAutoFarmFunction:Update(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest)
                 end
                 fastWait(.05)
@@ -1811,9 +1814,9 @@ if BF == true then
             Name = "Auto Farm",
             Default = false,
             Callback = function(value)
-                Auto_Farm = value
+                _G.Auto_Farm = value
                 MainAutoFarmFunction:UpdateFarmMode("AutoFarmLevel")
-                if Auto_Farm then
+                if _G.Auto_Farm then
                     MainAutoFarmFunction:Start()
                 else
                     MainAutoFarmFunction:Stop()
