@@ -1857,6 +1857,7 @@ if BF == true then
                 pcall(function()
                     CombatFrameworkR.activeController.hitboxMagnitude = 55
                     if Usefastattack then
+                        print("Usefastattack")
                         if fastattack then
                             if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
                                 CombatFrameworkR.activeController.timeToNextAttack = 3
@@ -1881,6 +1882,7 @@ if BF == true then
                 pcall(function()
                     if Usefastattack then
                         if fastattack then
+                            print("fast attack")
                             Click()
                         end
                     end
