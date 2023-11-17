@@ -24,6 +24,7 @@ if BF then
     if _G.EuphoriaLoaded == 1 then
         load_script = 0
         Notification("Another instance of Euphoria already loaded")
+        print("Euphoria Loaded Successfully")
     end
     if load_script == 1 then
         _G.EuphoriaLoaded = 1
