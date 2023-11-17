@@ -1191,7 +1191,7 @@ if BF == true then
             function AutoFarmfunc:Stop()
                 farm = false
             end
-            SelectToolWeapon = 'Melee'
+            
             spawn(function()
                 while true do
                     if farm then
@@ -1240,7 +1240,7 @@ if BF == true then
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                                                             Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
-                                                                EquipWeapon(SelectToolWeapon)
+                                                                EquipWeapon(_G.SelectWeapon)
                                                                 print('1244')
                                                                 if Farmtween then Farmtween:Stop() end
                                                                 print('1246')
@@ -1339,7 +1339,7 @@ if BF == true then
                                                 repeat wait()
                                                     Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                     if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
-                                                        EquipWeapon(SelectToolWeapon)
+                                                        EquipWeapon(_G.SelectWeapon)
                                                         if Farmtween then Farmtween:Stop() end
                                                         if Modstween then Modstween:Stop() end
                                                         PosMon = v.HumanoidRootPart.CFrame
@@ -1354,16 +1354,16 @@ if BF == true then
                                                         HealthMin = v.Humanoid.MaxHealth*Persen/100
                                                         PosMonGun = v.HumanoidRootPart.CFrame
                                                         if v.Humanoid.Health <= HealthMin and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                                            EquipWeapon(SelectToolWeaponGun)
+                                                            EquipWeapon(_G.SelectWeaponGun)
                                                             -- v.HumanoidRootPart.CanCollide = false
                                                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 0)
-                                                            if game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectToolWeaponGun) and game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectToolWeaponGun):FindFirstChild("RemoteFunctionShoot") then
-                                                                tool = game:GetService("Players").LocalPlayer.Character[SelectToolWeaponGun]
+                                                            if game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.SelectWeaponGun) and game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.SelectWeaponGun):FindFirstChild("RemoteFunctionShoot") then
+                                                                tool = game:GetService("Players").LocalPlayer.Character[_G.SelectWeaponGun]
                                                                 v17 = workspace:FindPartOnRayWithIgnoreList(Ray.new(tool.Handle.CFrame.p, (v.HumanoidRootPart.Position - tool.Handle.CFrame.p).unit * 100), { game.Players.LocalPlayer.Character, workspace._WorldOrigin });
-                                                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectToolWeaponGun).RemoteFunctionShoot:InvokeServer(v.HumanoidRootPart.Position, (ReplicatedStorage_Util.Other.hrpFromPart(v17)));
+                                                                game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.SelectWeaponGun).RemoteFunctionShoot:InvokeServer(v.HumanoidRootPart.Position, (ReplicatedStorage_Util.Other.hrpFromPart(v17)));
                                                             end 
                                                         else
-                                                            EquipWeapon(SelectToolWeapon)
+                                                            EquipWeapon(_G.SelectWeapon)
                                                             Usefastattack = true
                                                             PosMonGun = v.HumanoidRootPart.CFrame
                                                             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 30)
@@ -1515,7 +1515,7 @@ if BF == true then
                                                                 end
                                                             else
                                                                 UseSkillMasteryDevilFruit = false
-                                                                EquipWeapon(SelectToolWeapon)
+                                                                EquipWeapon(_G.SelectWeapon)
                                                                 Click()
                                                                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                                                     local args = {
@@ -1635,13 +1635,13 @@ if BF == true then
                                                             HealthMin = v.Humanoid.MaxHealth*Persen/100
                                                             PosMon = v.HumanoidRootPart.CFrame
                                                             if v.Humanoid.Health <= HealthMin and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                                                                EquipWeapon(SelectToolWeaponSword)
+                                                                EquipWeapon(_G.SelectWeaponSword)
                                                                 Click()
                                                                 Usefastattack = true
                                                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 40, 1)
                                                                 StartMagnetAutoFarmLevel = true
                                                             else
-                                                                EquipWeapon(SelectToolWeapon)
+                                                                EquipWeapon(_G.SelectWeapon)
                                                                 Click()
                                                                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                                                     local args = {
@@ -1925,6 +1925,18 @@ if BF == true then
                 end
             end,
             Save = true
+        })
+        Main:AddDropdown({
+            Name = "Select Weapon",
+            Default = 'Melee',
+            Options = {
+                Melee = "Melee",
+                Sword = "Sword",
+                Fruit = "Fruit"
+            },
+            Callback = function(value)
+                _G.SelectWeapon = value
+            end
         })
         Main:AddToggle({
             Name = "Fast Attack",
