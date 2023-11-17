@@ -36,79 +36,51 @@ if BF == true then
         local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
         local Window = OrionLib:MakeWindow({Name = "Euphoria 0_o", HidePremium = false, SaveConfig = true, ConfigFolder = "euphoriacfg"})
         local Main = Window:MakeTab({
-            Name = "MainTab",
+            Name = "Main",
             Icon = "rbxassetid://4483345998",
             PremiumOnly = false
         })
 
-        local Section = Main:AddSection({
-            Name = "MainSection"
+        local DebugTab = Window:MakeTab({
+            Name = "Debug",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
         })
 
-        Main:AddSlider({
-            Name = "WalkSpeed",
-            Min = 16,
-            Max = 1000,
-            Default = 5,
-            Color = Color3.fromRGB(255,255,255),
-            Increment = 1,
-            ValueName = "WS",
-            Callback = function(Value)
-                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
-            end    
+        local DebugSection = Main:AddSection({
+            Name = "Debug"
         })
 
-        local Section = Main:AddSection({
-            Name = "JumpPower"
-        })
-
-        Main:AddSlider({
-            Name = "JumpPower",
-            Min = 50,
-            Max = 1000,
-            Default = 5,
-            Color = Color3.fromRGB(255,255,255),
-            Increment = 1,
-            ValueName = "JP",
-            Callback = function(Value)
-                game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
-            end    
-        })
-
-        local Section = Main:AddSection({
-            Name = "Admin"
-        })
-
-        Main:AddButton({
+        DebugTab:AddButton({
             Name = "IY ADMIN",
             Callback = function()
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
             end    
         })
 
-        Main:AddButton({
+        DebugTab:AddButton({
             Name = "CMD-X",
             Callback = function()
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source",true))()
             end    
         })
 
-        local Section = Main:AddSection({
+        local Section = DebugTab:AddSection({
             Name = "DEX"
         })
 
-        Main:AddButton({
+        DebugTab:AddButton({
             Name = "dark dex",
             Callback = function()
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
             end    
         })
 
-        local Section = Main:AddSection({
+        local Section = DebugTab:AddSection({
             Name = "Spy"
         })
 
-        Main:AddButton({
+        DebugTab:AddButton({
             Name = "Simple Spy",
             Callback = function()
                     loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
