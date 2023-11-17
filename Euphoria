@@ -24,7 +24,7 @@ if BF == true then
     if _G.EuphoriaLoaded == 1 then
         load_script = 0
         Notification("Another instance of Euphoria already loaded")
-        print("Euphoria Loaded Successfully")
+        print("Another instance of Euphoria already loaded")
     end
     if load_script == 1 then
         task = task or getrenv().task;
@@ -1241,14 +1241,10 @@ if BF == true then
                                                             Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
                                                                 EquipWeapon(_G.SelectWeapon)
-                                                                print('1244')
                                                                 if Farmtween then Farmtween:Stop() end
-                                                                print('1246')
                                                                 PosMon = v.HumanoidRootPart.CFrame
                                                                 StartMagnetAutoFarmLevel = true
                                                                 Usefastattack = true
-                                                                print('1250')
-                                                                print(Usefastattack)
                                                                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                                                     local args = {
                                                                         [1] = "Buso"
@@ -1857,7 +1853,6 @@ if BF == true then
                 pcall(function()
                     CombatFrameworkR.activeController.hitboxMagnitude = 55
                     if Usefastattack then
-                        print("Usefastattack")
                         if _G.FastAttack then
                             if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
                                 CombatFrameworkR.activeController.timeToNextAttack = 3
@@ -1882,7 +1877,6 @@ if BF == true then
                 pcall(function()
                     if Usefastattack then
                         if _G.FastAttack then
-                            print("fast attack")
                             Click()
                         end
                     end
