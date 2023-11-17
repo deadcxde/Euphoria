@@ -45,7 +45,7 @@ if BF == true then
         })
         Main:AddToggle({
             Name = "Auto Farm",
-            Default = false
+            Default = false,
             Callback = function(value)
                 _G.AutoFarm = value
                 print("AutoFarm set to " .. _G.AutoFarm)
