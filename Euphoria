@@ -1,6 +1,6 @@
 local placeId = game.PlaceId
 if placeId == 2753915549 or placeId == 4442272183 or placeId == 7449423635 then
-    local BF = true
+    BF = true
 end
 if placeId == 2753915549 then
     local first_sea = true
@@ -11,16 +11,17 @@ end
 if placeId == 7449423635 then
     local third_sea = true
 end
-if BF then
+if BF == true then
+    print("BF TRUE")
     repeat wait() until game:IsLoaded()
-    local function Notification(text)
+    function Notification(text)
         local StarterGui = game:GetService("StarterGui")
         StarterGui:SetCore("SendNotification", {
             Title = "Euphoria";
             Text = text
         })
     end
-    local load_script = 1
+    load_script = 1
     if _G.EuphoriaLoaded == 1 then
         load_script = 0
         Notification("Another instance of Euphoria already loaded")
