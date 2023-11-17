@@ -21,12 +21,14 @@ if BF then
         })
     end
     local load_script = 1
-    if getgenv()._G.EuphoriaLoaded == 1 then
+    if _G.EuphoriaLoaded == 1 then
         load_script = 0
         Notification("Another instance of Euphoria already loaded")
     end
     if load_script then
+        _G.EuphoriaLoaded = 1
         wait(1)
+        Notification("Euphoria Loaded Successfully")
 	
         if game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui") then game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui"):Destroy() end
         local library = {RainbowColorValue = 0, HueSelectionPosition = 0}
