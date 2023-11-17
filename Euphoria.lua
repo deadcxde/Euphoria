@@ -25,7 +25,7 @@ if BF then
         load_script = 0
         Notification("Another instance of Euphoria already loaded")
     end
-    if load_script then
+    if load_script == 1 then
         _G.EuphoriaLoaded = 1
         wait(1)
         Notification("Euphoria Loaded Successfully")
