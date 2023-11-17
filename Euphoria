@@ -120,7 +120,7 @@ if BF == true then
             Main.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
             Main.ClipsDescendants = true
             Main.Position = UDim2.new(0.5, -325, 0.5, -175)
-            Main.Size = UDim2.new(0, 650, 0, 425)
+            Main.Size = UDim2.new(0, 250, 0, 250)
         
             MainUICorner.Name = "MainUICorner"
             MainUICorner.Parent = Main
@@ -128,7 +128,7 @@ if BF == true then
             TopMain.Name = "TopMain"
             TopMain.Parent = Main
             TopMain.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-            TopMain.Size = UDim2.new(0, 650, 0, 30)
+            TopMain.Size = UDim2.new(0, 300, 0, 30)
         
             MakeDraggable(TopMain, Main)
         
