@@ -1233,9 +1233,8 @@ if BF == true then
                                 end
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                        if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                        if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
-                                                print("asd")
                                                 repeat wait()
                                                     pcall(function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
