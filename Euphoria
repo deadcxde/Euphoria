@@ -1858,7 +1858,7 @@ if BF == true then
                     CombatFrameworkR.activeController.hitboxMagnitude = 55
                     if Usefastattack then
                         print("Usefastattack")
-                        if fastattack then
+                        if _G.FastAttack then
                             if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
                                 CombatFrameworkR.activeController.timeToNextAttack = 3
                             elseif game.Players.LocalPlayer.Character:FindFirstChild("Electro") then
@@ -1881,7 +1881,7 @@ if BF == true then
             game:GetService("RunService").Stepped:Connect(function()
                 pcall(function()
                     if Usefastattack then
-                        if fastattack then
+                        if _G.FastAttack then
                             print("fast attack")
                             Click()
                         end
