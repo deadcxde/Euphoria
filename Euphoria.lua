@@ -3,13 +3,13 @@ if placeId == 2753915549 or placeId == 4442272183 or placeId == 7449423635 then
     BF = true
 end
 if placeId == 2753915549 then
-    local first_sea = true
+    first_sea = true
 end
 if placeId == 4442272183 then
-    local second_sea = true
+    second_sea = true
 end
 if placeId == 7449423635 then
-    local third_sea = true
+    third_sea = true
 end
 if BF == true then
     print("BF TRUE")
