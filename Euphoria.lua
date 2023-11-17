@@ -1234,6 +1234,7 @@ if BF == true then
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
+                                            print(string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon))
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat wait()
                                                     pcall(function()
