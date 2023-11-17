@@ -33,8 +33,11 @@ if BF == true then
         local Nonquest = false
         function CheckQuest()
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
+            print(MyLevel)
             if _G.FastTween then
+                print("Passed to fast tween")
                 if first_sea then
+                    print("Passed to first_sea")
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
                         Nonquest = false
                         Ms = "Bandit [Lv. 5]"
