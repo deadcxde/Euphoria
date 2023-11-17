@@ -567,7 +567,7 @@ if BF == true then
                 if first_sea then
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
                         Nonquest = false
-                        Ms = "Bandit [Lv. 5]"
+                        Ms = "Bandit"
                         NameQuest = "BanditQuest1"
                         LevelQuest = 1
                         NameMon = "Bandit"
@@ -575,7 +575,7 @@ if BF == true then
                         CFrameMon = CFrame.new(1353.44885, 3.40935516, 1376.92029, 0.776053488, -6.97791975e-08, 0.630666852, 6.99138596e-08, 1, 2.4612488e-08, -0.630666852, 2.49917598e-08, 0.776053488)
                     elseif MyLevel == 10 or MyLevel <= 14 then -- Monkey
                         Nonquest = false
-                        Ms = "Monkey [Lv. 14]"
+                        Ms = "Monkey"
                         NameQuest = "JungleQuest"
                         LevelQuest = 1
                         NameMon = "Monkey"
@@ -1231,6 +1231,8 @@ if BF == true then
                                     local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
                                     Target:InvokeServer(string_1);
                                 end
+                                print(Ms)
+                                print(game:GetService("Workspace").Enemies:FindFirstChild(Ms))
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                         print(v.Name)
