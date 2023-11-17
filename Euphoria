@@ -29,6 +29,7 @@ if BF then
         _G.EuphoriaLoaded = 1
         wait(1)
         Notification("Euphoria Loaded Successfully")
+        print("Euphoria Loaded Successfully")
 	
         if game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui") then game.CoreGui.RobloxGui:FindFirstChild("Voice Chat Ui"):Destroy() end
         local library = {RainbowColorValue = 0, HueSelectionPosition = 0}
