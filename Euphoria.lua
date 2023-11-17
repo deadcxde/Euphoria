@@ -48,7 +48,8 @@ if BF == true then
             Default = false,
             Callback = function(value)
                 _G.AutoFarm = value
-                print("AutoFarm set to " .. tostring(_G.AutoFarm))
+                print("AutoFarm set To")
+                print(_G.AutoFarm)
             end
         })
         -- СЕРВЕР МЕНЮ
