@@ -33,7 +33,7 @@ if BF == true then
         local Nonquest = false
         function CheckQuest()
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
-            if FastTween then
+            if _G.FastTween then
                 if first_sea then
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
                         Nonquest = false
@@ -1138,7 +1138,7 @@ if BF == true then
         end  
 
         function toTarget(targetPos, targetCFrame)
-            if FastTween then
+            if _G.FastTween then
                 Distance = (targetPos - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
                 if Distance < 1000 then
                     Speed = 325
@@ -1829,6 +1829,14 @@ if BF == true then
             Default = true,
             Callback = function(value)
                 _G.FastAttack = value
+            end,
+            Save = true
+        })
+        Main:AddToggle({
+            Name = "Fast Tween",
+            Default = true,
+            Callback = function(value)
+                _G.FastTween = value
             end,
             Save = true
         })
