@@ -40,6 +40,18 @@ if BF == true then
             Icon = "rbxassetid://4483345998",
             PremiumOnly = false
         })
+        local Server = Window:MakeTab({
+            Name = "Server",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
+        })
+        Server:AddButton({
+            Name = "Rejoin Server",
+            Callback = function()
+                local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) 
+            end
+        })
+        
 
         local DebugTab = Window:MakeTab({
             Name = "Debug",
