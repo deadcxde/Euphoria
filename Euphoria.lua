@@ -1191,7 +1191,7 @@ if BF == true then
             function AutoFarmfunc:Stop()
                 farm = false
             end
-            SelectWeapon = 'Melee'
+            SelectToolWeapon = 'Melee'
             spawn(function()
                 while true do
                     if farm then
