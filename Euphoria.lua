@@ -1237,18 +1237,18 @@ if BF == true then
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat wait()
                                                     pcall(function()
-                                                        print("1240")
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                                                            print("1242")
                                                             Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                                            print("1244")
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
-                                                                print("1246")
                                                                 EquipWeapon(SelectToolWeapon)
+                                                                print('1244')
                                                                 if Farmtween then Farmtween:Stop() end
+                                                                print('1246')
                                                                 PosMon = v.HumanoidRootPart.CFrame
                                                                 StartMagnetAutoFarmLevel = true
                                                                 Usefastattack = true
+                                                                print('1250')
+                                                                print(Usefastattack)
                                                                 if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                                                     local args = {
                                                                         [1] = "Buso"
