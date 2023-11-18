@@ -1106,6 +1106,40 @@ if BF == true then
             end,
             Save = true
         })
+        Main:AddButton({
+            Name = "Redeem All Codes",
+            Callback = function()
+                local redeem = function(code)
+                    local args = {
+                        [1] = code
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+                end
+                redeem("SECRET_ADMIN")
+                redeem("KITT_RESET")
+                redeem("Sub2CaptainMaui")
+                redeem("SUB2GAMERROBOT_RESET1")
+                redeem("kittgaming")
+                redeem("Sub2Fer999")
+                redeem("Enyu_is_Pro")
+                redeem("Magicbus")
+                redeem("JCWK")
+                redeem("Starcodeheo")
+                redeem("Bluxxy")
+                redeem("fudd10_v2")
+                redeem("FUDD10")
+                redeem("BIGNEWS")
+                redeem("THEGREATACE")
+                redeem("SUB2GAMERROBOT_EXP1")
+                redeem("Sub2OfficialNoobie")
+                redeem("StrawHatMaine")
+                redeem("SUB2NOOBMASTER123")
+                redeem("Sub2UncleKizaru")
+                redeem("Sub2Daigrock")
+                redeem("Axiore")
+                redeem("TantaiGaming")               
+            end
+        })
 
         -- СТАТЫ
         local Stats = Window:MakeTab({
@@ -1115,7 +1149,7 @@ if BF == true then
         })
         Stats:AddToggle({
             Name = "Melee",
-            Default = true,
+            Default = false,
             Callback = function(value)
                 _G.LearnMelee = value
             end,
@@ -1123,7 +1157,7 @@ if BF == true then
         })
         Stats:AddToggle({
             Name = "Defense",
-            Default = true,
+            Default = false,
             Callback = function(value)
                 _G.LearnDefense = value
             end,
@@ -1131,7 +1165,7 @@ if BF == true then
         })
         Stats:AddToggle({
             Name = "Sword",
-            Default = true,
+            Default = false,
             Callback = function(value)
                 _G.LearnSword = value
             end,
@@ -1139,7 +1173,7 @@ if BF == true then
         })
         Stats:AddToggle({
             Name = "Gun",
-            Default = true,
+            Default = false,
             Callback = function(value)
                 _G.LearnGun = value
             end,
@@ -1147,7 +1181,7 @@ if BF == true then
         })
         Stats:AddToggle({
             Name = "Fruit",
-            Default = true,
+            Default = false,
             Callback = function(value)
                 _G.LearnFruit = value
             end,
