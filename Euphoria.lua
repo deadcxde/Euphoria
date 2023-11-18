@@ -952,7 +952,7 @@ if BF == true then
         end)
         spawn(function()
             while wait() do 
-                if _G.AutoFarmLevelReal then
+                if _G.Auto_Farm then
                     if syn then
                         setfflag("HumanoidParallelRemoveNoPhysics", "False")
                         setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -985,7 +985,24 @@ if BF == true then
                     end
                 end
             end
-            end)
+        end)
+        
+        coroutine.wrap(function()
+            while task.wait(.1) do
+                local ac = CombatFrameworkR.activeController
+                if ac and ac.equipped then
+                    if FastAttack and _G.FastAttack then
+                        AttackFunction()
+                        if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+                    elseif FastAttack and _G.FastAttack == false then
+                        if ac.hitboxMagnitude ~= 55 then
+                            ac.hitboxMagnitude = 55
+                        end
+                        ac:attack()
+                    end
+                end
+            end
+        end)()
     
 
         local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
@@ -996,6 +1013,7 @@ if BF == true then
             PremiumOnly = false
         })
         _G.Auto_Farm = false
+
 
         local AutoFarmSection = Main:AddSection({
             Name = "Farm"
