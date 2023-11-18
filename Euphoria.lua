@@ -1929,6 +1929,7 @@ if BF == true then
                 Fruit = "Fruit"
             },
             Callback = function(value)
+                print(value)
                 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == value then
                         game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
