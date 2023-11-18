@@ -1236,12 +1236,12 @@ if BF == true then
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat wait()
-                                                    pcall(function()
+                                                    function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                                                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >= 350 then
                                                                 Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,40,0))
                                                             end
-                                                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
+                                                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 and v.Humanoid.Health > 0 then
                                                                 EquipWeapon(_G.SelectWeapon)
                                                                 if Farmtween then Farmtween:Stop() end
                                                                 PosMon = v.HumanoidRootPart.CFrame
@@ -1258,11 +1258,11 @@ if BF == true then
                                                                     vim:SendKeyEvent(true, "V", false, game)
                                                                     vim:SendKeyEvent(false, "V", false, game)
                                                                 end
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 70, 1)
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 50, 1)
                                                                 Click()
                                                             end
                                                         end
-                                                    end)
+                                                    end
                                                 until (not farm or not v.Parent or v.Humanoid.Health <= 0) or (not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and Nonquest == false) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and Nonquest == false)
                                                 if not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and Nonquest == false then
                                                     game.ReplicatedStorage:WaitForChild("Remotes").CommF_:InvokeServer("AbandonQuest");
