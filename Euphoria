@@ -27,12 +27,12 @@ if BF == true then
         print("Another instance of Euphoria already loaded")
     end
     if load_script == 1 then
-        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
-            game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
-        end
-        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
-            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
-        end
+        -- if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+        --     game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+        -- end
+        -- if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+        --     game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+        -- end
         task = task or getrenv().task;
         fastSpawn,fastWait,delay = task.spawn,task.wait,task.delay
         local Nonquest = false
