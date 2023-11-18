@@ -43,6 +43,113 @@ if BF == true then
         Notification("Euphoria Loaded Successfully")
         print("Euphoria Loaded Successfully")
         
+        local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
+        local CombatFrameworkR = getupvalues(CombatFramework)[2]
+        local RigController = require(game:GetService("Players")["LocalPlayer"].PlayerScripts.CombatFramework.RigController)
+        local RigControllerR = getupvalues(RigController)[2]
+        local realbhit = require(game.ReplicatedStorage.CombatFramework.RigLib)
+        local cooldownfastattack = tick()
+        function getAllBladeHits(Sizes)
+            local Hits = {}
+            local Client = game.Players.LocalPlayer
+            local Enemies = game:GetService("Workspace").Enemies:GetChildren()
+            for i=1,#Enemies do local v = Enemies[i]
+                local Human = v:FindFirstChildOfClass("Humanoid")
+                if Human and Human.RootPart and Human.Health > 0 and Client:DistanceFromCharacter(Human.RootPart.Position) < Sizes+5 then
+                    table.insert(Hits,Human.RootPart)
+                end
+            end
+            return Hits
+        end
+        function CurrentWeapon()
+            local ac = CombatFrameworkR.activeController
+            local ret = ac.blades[1]
+            if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
+            pcall(function()
+                while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+            end)
+            if not ret then return game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name end
+            return ret
+        end
+        function AttackFunction()
+            local ac = CombatFrameworkR.activeController
+            if ac and ac.equipped then
+                for indexincrement = 1, 1 do
+                    local bladehit = getAllBladeHits(60)
+                    if #bladehit > 0 then
+                        local AcAttack8 = debug.getupvalue(ac.attack, 5)
+                        local AcAttack9 = debug.getupvalue(ac.attack, 6)
+                        local AcAttack7 = debug.getupvalue(ac.attack, 4)
+                        local AcAttack10 = debug.getupvalue(ac.attack, 7)
+                        local NumberAc12 = (AcAttack8 * 798405 + AcAttack7 * 727595) % AcAttack9
+                        local NumberAc13 = AcAttack7 * 798405
+                        (function()
+                            NumberAc12 = (NumberAc12 * AcAttack9 + NumberAc13) % 1099511627776
+                            AcAttack8 = math.floor(NumberAc12 / AcAttack9)
+                            AcAttack7 = NumberAc12 - AcAttack8 * AcAttack9
+                        end)()
+                        AcAttack10 = AcAttack10 + 1
+                        debug.setupvalue(ac.attack, 5, AcAttack8)
+                        debug.setupvalue(ac.attack, 6, AcAttack9)
+                        debug.setupvalue(ac.attack, 4, AcAttack7)
+                        debug.setupvalue(ac.attack, 7, AcAttack10)
+                        for k, v in pairs(ac.animator.anims.basic) do
+                            v:Play(0.01,0.01,0.01)
+                        end                 
+                        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") and ac.blades and ac.blades[1] then 
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(CurrentWeapon()))
+                            game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(NumberAc12 / 1099511627776 * 16777215), AcAttack10)
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, 2, "") 
+                        end
+                    end
+                end
+            end
+        end
+        local EnemySpawns = Instance.new("Folder",workspace)
+        EnemySpawns.Name = "EnemySpawns"
+
+        for i, v in pairs(workspace._WorldOrigin.EnemySpawns:GetChildren()) do
+        if v:IsA("Part") then
+            local EnemySpawnsX2 = v:Clone()
+            local result = string.gsub(v.Name, "Lv. ", "")
+            local result2 = string.gsub(result, "[%[%]]", "")
+            local result3 = string.gsub(result2, "%d+", "")
+            local result4 = string.gsub(result3, "%s+", "")
+            EnemySpawnsX2.Name = result4
+            EnemySpawnsX2.Parent = workspace.EnemySpawns
+            EnemySpawnsX2.Anchored = true
+        end
+        end
+        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+        if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+            print(v.HumanoidRootPart.Parent)
+            local EnemySpawnsX2 = v.HumanoidRootPart:Clone()
+            local result = string.gsub(v.Name, "Lv. ", "")
+            local result2 = string.gsub(result, "[%[%]]", "")
+            local result3 = string.gsub(result2, "%d+", "")
+            local result4 = string.gsub(result3, "%s+", "")
+
+            print(result4)
+            EnemySpawnsX2.Name = result4
+            EnemySpawnsX2.Parent = workspace.EnemySpawns
+            EnemySpawnsX2.Anchored = true
+        end
+        end
+        for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
+        if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+            local EnemySpawnsX2 = v.HumanoidRootPart:Clone()
+            local result = string.gsub(v.Name, "Lv. ", "")
+            local result2 = string.gsub(result, "[%[%]]", "")
+            local result3 = string.gsub(result2, "%d+", "")
+            local result4 = string.gsub(result3, "%s+", "")
+
+            print(result4)
+            EnemySpawnsX2.Name = result4
+            EnemySpawnsX2.Parent = workspace.EnemySpawns
+            EnemySpawnsX2.Anchored = true
+        end
+        end
+        
         spawn(function()
         while wait() do
             if _G.Auto_Farm then
