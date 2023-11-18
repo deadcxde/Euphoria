@@ -1259,7 +1259,6 @@ if BF == true then
                                                                     vim:SendKeyEvent(false, "V", false, game)
                                                                 end
                                                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 70, 1)
-                                                                931.684021, 5.14744043, 4534.0332, 0.999995947, 0, -0.00284862355, 0, 1, 0, 0.00284862355, 0, 0.999995947
                                                                 Click()
                                                             end
                                                         end
