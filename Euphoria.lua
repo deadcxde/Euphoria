@@ -521,9 +521,6 @@ if BF == true then
             Callback = function(value)
                 _G.Auto_Farm = value
                 Auto_Farm_Level = value
-                if value == false then
-                    toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                end
             end,
             Save = true
         })
