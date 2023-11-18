@@ -1923,13 +1923,8 @@ if BF == true then
         Main:AddDropdown({
             Name = "Select Weapon",
             Default = 'Melee',
-            Options = {
-                Melee = "Melee",
-                Sword = "Sword",
-                Fruit = "Fruit"
-            },
+            Options = {"Melee","Sword","Fruit"},
             Callback = function(value)
-                print(value)
                 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == value then
                         game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
