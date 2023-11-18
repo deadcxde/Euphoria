@@ -91,7 +91,7 @@ if BF == true then
                 local result3 = string.gsub(result2, "%d+", "")
                 local result4 = string.gsub(result3, "%s+", "")
                 
-                for i,v in pairs(game.workspace.EnemySpawns:GetChildren()) do
+                for i,v in pairs(game.Workspace._WorldOrigin.EnemySpawns:GetChildren()) do
                     if v.Name == result4 then
                         table.insert(matchingCFrames, v.CFrame)
                     end
@@ -207,7 +207,7 @@ if BF == true then
             local result3 = string.gsub(result2, "%d+", "")
             local result4 = string.gsub(result3, "%s+", "")
             
-            for i,v in pairs(game.workspace.EnemySpawns:GetChildren()) do
+            for i,v in pairs(game.Workspace._WorldOrigin.EnemySpawns:GetChildren()) do
                 if v.Name == result4 then
                     table.insert(matchingCFrames, v.CFrame)
                 end
