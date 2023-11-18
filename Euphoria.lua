@@ -42,6 +42,12 @@ if BF == true then
         wait(1)
         Notification("Euphoria Loaded Successfully")
         print("Euphoria Loaded Successfully")
+        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Death") then
+            game:GetService("ReplicatedStorage").Effect.Container.Death:Destroy()
+        end
+        if game:GetService("ReplicatedStorage").Effect.Container:FindFirstChild("Respawn") then
+            game:GetService("ReplicatedStorage").Effect.Container.Respawn:Destroy()
+        end
         
         local CombatFramework = require(game:GetService("Players").LocalPlayer.PlayerScripts:WaitForChild("CombatFramework"))
         local CombatFrameworkR = getupvalues(CombatFramework)[2]
