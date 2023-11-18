@@ -684,35 +684,7 @@ if BF == true then
             }
         end
 
-        function Bypass(Point)
-            toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-            wait(1.5)
-            _G.StopTween = true
-            _G.StertScript = false
         
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-            game.Players.LocalPlayer.Character.Head:Destroy()
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
-            wait(.2)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
-            wait(.1)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-            wait(.1)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
-            wait(0.5)
-            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(900,900,900)
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-        
-            _G.StopTween = false
-            _G.StertScript = false
-            _G.Clip = false
-            if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
-            end
-            _G.Clip = false
-        end
         local function GetIsLand(...)
             local RealtargetPos = {...}
             local targetPos = RealtargetPos[1]
@@ -878,7 +850,35 @@ if BF == true then
                 _G.NotAutoEquip = false
             end
         end
-
+        function Bypass(Point)
+            toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            wait(1.5)
+            _G.StopTween = true
+            _G.StertScript = false
+        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+            game.Players.LocalPlayer.Character.Head:Destroy()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
+            wait(.2)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
+            wait(.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+            wait(.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
+            wait(0.5)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(900,900,900)
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+        
+            _G.StopTween = false
+            _G.StertScript = false
+            _G.Clip = false
+            if game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip"):Destroy()
+            end
+            _G.Clip = false
+        end
         spawn(function()
             while wait() do 
                 local MyLevel = game.Players.LocalPlayer.Data.Level.Value
@@ -886,7 +886,7 @@ if BF == true then
                 if _G.Auto_Farm then
                     if QuestC.Visible == true then
                         if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                            Bypass(QuestCheck()[2])
+                            toTarget(QuestCheck()[2])
                         end
                         if game:GetService("Workspace").Enemies:FindFirstChild(QuestCheck()[3]) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -931,7 +931,7 @@ if BF == true then
                             toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
                         else
                             if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                Bypass(QuestCheck()[2])
+                                toTarget(QuestCheck()[2])
                             else
                                 repeat wait() toTarget(QuestCheck()[2]) until (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.StartFarm
                             end
