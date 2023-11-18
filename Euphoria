@@ -159,7 +159,7 @@ if BF == true then
             end
         end
         end)
-        function CheckQuest()
+        function QuestCheck()
             local MyLevel = game.Players.LocalPlayer.Data.Level.Value
 
             if first_sea then
