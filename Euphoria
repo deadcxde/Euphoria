@@ -811,7 +811,7 @@ if BF == true then
                 pcall(function()
                     if _G.Auto_Farm and BringMobFarm then
                         for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                            if not string.find(v.Name,"Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= 400 then
+                            if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= 400 then
                                 if InMyNetWork(v.HumanoidRootPart) then
                                     v.HumanoidRootPart.CFrame = PosMon
                                     v.Humanoid.JumpPower = 0
