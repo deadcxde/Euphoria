@@ -255,7 +255,34 @@ if BF == true then
                 end
                 _G.Clip = false
             end
-            
+        local function GetIsLand(...)
+            local RealtargetPos = {...}
+            local targetPos = RealtargetPos[1]
+            local RealTarget
+            if type(targetPos) == "vector" then
+                RealTarget = targetPos
+            elseif type(targetPos) == "userdata" then
+                RealTarget = targetPos.Position
+            elseif type(targetPos) == "number" then
+                RealTarget = CFrame.new(unpack(RealtargetPos))
+                RealTarget = RealTarget.p
+            end
+        
+            local ReturnValue
+            local CheckInOut = math.huge;
+            if game.Players.LocalPlayer.Team then
+                for i,v in pairs(game.Workspace._WorldOrigin.PlayerSpawns:FindFirstChild(tostring(game.Players.LocalPlayer.Team)):GetChildren()) do 
+                    local ReMagnitude = (RealTarget - v:GetModelCFrame().p).Magnitude;
+                    if ReMagnitude < CheckInOut then
+                        CheckInOut = ReMagnitude;
+                        ReturnValue = v.Name
+                    end
+                end
+                if ReturnValue then
+                    return ReturnValue
+                end 
+            end
+        end
         local function toTarget(...)
             local RealtargetPos = {...}
             local targetPos = RealtargetPos[1]
