@@ -911,7 +911,6 @@ if BF == true then
                                 end
                             end
                         else
-                            UnEquipWeapon(_G.SelectWeapon)
                             toTarget(QuestCheck()[7] * CFrame.new(0,30,5))
                             if (QuestCheck()[7].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
                                 if SetCFarme == nil or SetCFarme == '' then
