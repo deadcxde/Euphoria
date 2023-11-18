@@ -105,51 +105,7 @@ if BF == true then
                 end
             end
         end
-        local EnemySpawns = Instance.new("Folder",workspace)
-        EnemySpawns.Name = "EnemySpawns"
-
-        for i, v in pairs(workspace._WorldOrigin.EnemySpawns:GetChildren()) do
-        if v:IsA("Part") then
-            local EnemySpawnsX2 = v:Clone()
-            local result = string.gsub(v.Name, "Lv. ", "")
-            local result2 = string.gsub(result, "[%[%]]", "")
-            local result3 = string.gsub(result2, "%d+", "")
-            local result4 = string.gsub(result3, "%s+", "")
-            EnemySpawnsX2.Name = result4
-            EnemySpawnsX2.Parent = workspace.EnemySpawns
-            EnemySpawnsX2.Anchored = true
-        end
-        end
-        for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-        if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
-            print(v.HumanoidRootPart.Parent)
-            local EnemySpawnsX2 = v.HumanoidRootPart:Clone()
-            local result = string.gsub(v.Name, "Lv. ", "")
-            local result2 = string.gsub(result, "[%[%]]", "")
-            local result3 = string.gsub(result2, "%d+", "")
-            local result4 = string.gsub(result3, "%s+", "")
-
-            print(result4)
-            EnemySpawnsX2.Name = result4
-            EnemySpawnsX2.Parent = workspace.EnemySpawns
-            EnemySpawnsX2.Anchored = true
-        end
-        end
-        for i, v in pairs(game.ReplicatedStorage:GetChildren()) do
-        if v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
-            local EnemySpawnsX2 = v.HumanoidRootPart:Clone()
-            local result = string.gsub(v.Name, "Lv. ", "")
-            local result2 = string.gsub(result, "[%[%]]", "")
-            local result3 = string.gsub(result2, "%d+", "")
-            local result4 = string.gsub(result3, "%s+", "")
-
-            print(result4)
-            EnemySpawnsX2.Name = result4
-            EnemySpawnsX2.Parent = workspace.EnemySpawns
-            EnemySpawnsX2.Anchored = true
-        end
-        end
-        
+      
         spawn(function()
         while wait() do
             if _G.Auto_Farm then
@@ -946,7 +902,7 @@ if BF == true then
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.Head.CanCollide = false
                                                 BringMobFarm = true
-                                                EquipWeapon(_G.Settings.Configs["Select Weapon"])
+                                                EquipWeapon(_G.SelectWeapon)
                                                 v.HumanoidRootPart.Transparency = 1
                                                 toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
                                             end
@@ -955,9 +911,9 @@ if BF == true then
                                 end
                             end
                         else
-                            UnEquipWeapon(_G.Settings.Configs["Select Weapon"])
-                            toTarget(QuestCheck()[7][SetCFarme] * CFrame.new(0,30,5))
-                            if (QuestCheck()[7][SetCFarme].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                            UnEquipWeapon(_G.SelectWeapon)
+                            toTarget(QuestCheck()[7] * CFrame.new(0,30,5))
+                            if (QuestCheck()[7].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
                                 if SetCFarme == nil or SetCFarme == '' then
                                     SetCFarme = 1
                                     print(SetCFarme)
@@ -973,9 +929,9 @@ if BF == true then
                         end
                     else
                         wait(0.5)
-                        if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == tostring(GetIsLand(QuestCheck()[7][1])) then
+                        if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == tostring(GetIsLand(QuestCheck()[7])) then
                             game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
-                            toTarget(QuestCheck()[7][1] * CFrame.new(0,30,20))
+                            toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
                         else
                             if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
                                 Bypass(QuestCheck()[2])
@@ -987,7 +943,7 @@ if BF == true then
                                 BringMobFarm = false
                                 wait(0.2)
                                 game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
-                                toTarget(QuestCheck()[7][1] * CFrame.new(0,30,20))
+                                toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
                             end
                         end
                     end
