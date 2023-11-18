@@ -1000,6 +1000,60 @@ if BF == true then
                 end
             end
         end)()
+
+        spawn(function()
+            while wait() do
+                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                end
+            end
+        end)
+
+        spawn(function()
+            while wait() do
+                if _G.LearnMelee then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Melee",
+                        [3] = _G.LearnRate
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.LearnDefense then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Defense",
+                        [3] = _G.LearnRate
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.LearnSword then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Sword",
+                        [3] = _G.LearnRate
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.LearnGun then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Gun",
+                        [3] = _G.LearnRate
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                if _G.LearnFruit then
+                    local args = {
+                        [1] = "AddPoint",
+                        [2] = "Demon Fruit",
+                        [3] = _G.LearnRate
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
+                
+            end
+        end)
     
 
         local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
@@ -1052,6 +1106,66 @@ if BF == true then
             end,
             Save = true
         })
+
+        -- СТАТЫ
+        local Stats = Window:MakeTab({
+            Name = "Stats",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
+        })
+        Stats:AddToggle({
+            Name = "Melee",
+            Default = true,
+            Callback = function(value)
+                _G.LearnMelee = value
+            end,
+            Save = true
+        })
+        Stats:AddToggle({
+            Name = "Defense",
+            Default = true,
+            Callback = function(value)
+                _G.LearnDefense = value
+            end,
+            Save = true
+        })
+        Stats:AddToggle({
+            Name = "Sword",
+            Default = true,
+            Callback = function(value)
+                _G.LearnSword = value
+            end,
+            Save = true
+        })
+        Stats:AddToggle({
+            Name = "Gun",
+            Default = true,
+            Callback = function(value)
+                _G.LearnGun = value
+            end,
+            Save = true
+        })
+        Stats:AddToggle({
+            Name = "Fruit",
+            Default = true,
+            Callback = function(value)
+                _G.LearnFruit = value
+            end,
+            Save = true
+        })
+        StatSlider = Stats:AddSlider({
+            Name = "Learn Rate",
+            Min = 1,
+            Max = 30,
+            Default = 1,
+            Color = Color3.fromRGB(255,255,255),
+            Increment = 1,
+            ValueName = "points",
+            Callback = function(Value)
+                _G.LearnRate = Value
+            end    
+        })
+
         -- ФРУКТ МЕНЮ
         local Fruit = Window:MakeTab({
             Name = "Fruit",
