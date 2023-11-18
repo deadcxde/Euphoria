@@ -1233,6 +1233,46 @@ if BF == true then
                                 end
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then -- Находит одного из врагов
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do -- Проходит по каждому врагу
+                                        if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then -- Если совпадает имя, то
+                                            if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
+                                                repeat wait()
+                                                    pcall(function()
+                                                        if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
+                                                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >= 350 then
+                                                                Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,40,0))
+                                                            end
+                                                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
+                                                                EquipWeapon(_G.SelectWeapon)
+                                                                if Farmtween then Farmtween:Stop() end
+                                                                PosMon = v.HumanoidRootPart.CFrame
+                                                                StartMagnetAutoFarmLevel = true
+                                                                Usefastattack = true
+                                                                if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                                                                    local args = {
+                                                                        [1] = "Buso"
+                                                                    }
+                                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                                                end
+                                                                if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 150 then
+                                                                    local vim = game:service('VirtualInputManager')
+                                                                    vim:SendKeyEvent(true, "V", false, game)
+                                                                    vim:SendKeyEvent(false, "V", false, game)
+                                                                end
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1)
+                                                                Click()
+                                                            end
+                                                        end
+                                                    end)
+                                                until (not farm or not v.Parent or v.Humanoid.Health <= 0) or (not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and Nonquest == false) or (game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false and Nonquest == false)
+                                                if not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and Nonquest == false then
+                                                    game.ReplicatedStorage:WaitForChild("Remotes").CommF_:InvokeServer("AbandonQuest");
+                                                end
+                                                Usefastattack = false
+                                                StartMagnetAutoFarmLevel= false
+                                            else
+                                                game.ReplicatedStorage:WaitForChild("Remotes").CommF_:InvokeServer("AbandonQuest");
+                                            end 
+                                        end
                                     end
                                 else
                                     if not string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) and Nonquest == false then
