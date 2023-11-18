@@ -1235,7 +1235,7 @@ if BF == true then
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do -- Проходит по каждому врагу
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then -- Если совпадает имя, то
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
-                                                repeat wait()
+                                                repeat
                                                     pcall(function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                                                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >= 350 then
