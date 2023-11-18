@@ -1016,6 +1016,36 @@ if BF == true then
 
         spawn(function()
             while wait() do
+                if _G.AntiAFK then
+                    AntiAutoClick:GetPropertyChangedSignal("Visible"):Connect(function()
+                        if AntiAutoClick.Visible == true then
+                            wait(0.1)
+                            local Color
+                            for i,v in pairs(TextMatch) do
+                                if string.match(AntiAutoClick.TextFrame.ColorIndicator.Text,v) then
+                                    Color = v
+                                end
+                            end
+                            for i,v in pairs(AntiAutoClick.Colors:GetChildren()) do
+                                if v.Button.Text == Color:sub(1,1) then
+                                    firesignal(v.Button.MouseButton1Click)
+                                end
+                            end
+                        end
+                    end) 
+                    LocalPlayer.Idled:connect(function()
+                        local VirtualUser = game:GetService('VirtualUser')
+                        VirtualUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                        wait(1)
+                        VirtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                    end)
+                end
+                wait(1)
+            end
+        end)
+
+        spawn(function()
+            while wait() do
                 if _G.LearnMelee then
                     local args = {
                         [1] = "AddPoint",
@@ -1220,6 +1250,20 @@ if BF == true then
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
             end
+        })
+
+        local Misc = Window:MakeTab({
+            Name = "Misc",
+            Icon = "rbxassetid://4483345998",
+            PremiumOnly = false
+        })
+        Misc:AddToggle({
+            Name = "Anti AFK",
+            Default = true,
+            Callback = function(value)
+                _G.AntiAFK = value
+            end,
+            Save = true
         })
         -- СЕРВЕР МЕНЮ
         local Server = Window:MakeTab({
