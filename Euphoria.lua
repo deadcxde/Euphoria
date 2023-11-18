@@ -917,7 +917,7 @@ if BF == true then
                                 if SetCFarme == nil or SetCFarme == '' then
                                     SetCFarme = 1
                                     print(SetCFarme)
-                                elseif SetCFarme >= #QuestCheck()[7] then
+                                elseif SetCFarme >= QuestCheck()[7] then
                                     SetCFarme = 1
                                     print(SetCFarme)
                                 end
