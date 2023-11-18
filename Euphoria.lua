@@ -1241,7 +1241,7 @@ if BF == true then
                                                             Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
                                                                 EquipWeapon(_G.SelectWeapon)
-                                                                if Farmtween then Farmtween:Stop() end
+                                                                -- if Farmtween then Farmtween:Stop() end
                                                                 PosMon = v.HumanoidRootPart.CFrame
                                                                 StartMagnetAutoFarmLevel = true
                                                                 Usefastattack = true
@@ -1927,7 +1927,7 @@ if BF == true then
             Callback = function(value)
                 for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                     if v.ToolTip == value then
-                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                        _G.SelectWeapon = v.Name
                     end
                 end
             end
