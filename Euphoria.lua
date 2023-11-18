@@ -1233,7 +1233,7 @@ if BF == true then
                                 end
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then -- Находит одного из врагов
                                     for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do -- Проходит по каждому врагу
-                                        if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("Humanoid").Health > 0 then -- Если совпадает имя, то
+                                        if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then -- Если совпадает имя, то
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat wait()
                                                     function()
@@ -1665,7 +1665,7 @@ if BF == true then
             end,
             Save = true
         })
-        -- СЕРВЕР МЕНЮ
+        -- ФРУКТ МЕНЮ
         local Fruit = Window:MakeTab({
             Name = "Fruit",
             Icon = "rbxassetid://4483345998",
@@ -1741,6 +1741,5 @@ if BF == true then
             end    
         })
 
-        -- local MainAutoFarmFunction = AutoFarm(Ms,NameQuest,LevelQuest,NameMon,CFrameMon,CFrameQuest,"AutoFarmLevel")
     end
 end
