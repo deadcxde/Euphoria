@@ -892,7 +892,7 @@ if BF == true then
                 if _G.Auto_Farm then
                     if QuestC.Visible == true then
                         if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                            toTarget(QuestCheck()[2])
+                            BypassTP(QuestCheck()[2])
                         end
                         if game:GetService("Workspace").Enemies:FindFirstChild(QuestCheck()[3]) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
