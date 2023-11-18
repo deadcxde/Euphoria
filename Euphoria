@@ -1241,7 +1241,7 @@ if BF == true then
                                                             Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,40,0))
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
                                                                 EquipWeapon(_G.SelectWeapon)
-                                                                -- if Farmtween then Farmtween:Stop() end
+                                                                if Farmtween then Farmtween:Stop() end
                                                                 PosMon = v.HumanoidRootPart.CFrame
                                                                 StartMagnetAutoFarmLevel = true
                                                                 Usefastattack = true
@@ -1256,7 +1256,7 @@ if BF == true then
                                                                     vim:SendKeyEvent(true, "V", false, game)
                                                                     vim:SendKeyEvent(false, "V", false, game)
                                                                 end
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 100, 1)
+                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 70, 1)
                                                                 Click()
                                                             end
                                                         end
