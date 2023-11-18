@@ -936,7 +936,7 @@ if BF == true then
                             end
                             repeat wait() toTarget(QuestCheck()[2]) until (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.StartFarm
                             if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
-                                BringMobFarm = false
+                                BringMobFarm = true
                                 wait(0.2)
                                 game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
                                 toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
