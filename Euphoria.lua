@@ -917,6 +917,7 @@ if BF == true then
                                 if SetCFarme == nil or SetCFarme == '' then
                                     SetCFarme = 1
                                     print(SetCFarme)
+                                end
                                 SetCFarme = SetCFarme + 1
         
                                 print(SetCFarme)
