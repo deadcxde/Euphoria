@@ -1238,7 +1238,9 @@ if BF == true then
                                                 repeat wait()
                                                     pcall(function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                                                            Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,40,0))
+                                                            if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >= 350 then
+                                                                Farmtween = toTarget(v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame * CFrame.new(0,40,0))
+                                                            end
                                                             if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 350 then
                                                                 EquipWeapon(_G.SelectWeapon)
                                                                 if Farmtween then Farmtween:Stop() end
@@ -1257,6 +1259,7 @@ if BF == true then
                                                                     vim:SendKeyEvent(false, "V", false, game)
                                                                 end
                                                                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 70, 1)
+                                                                931.684021, 5.14744043, 4534.0332, 0.999995947, 0, -0.00284862355, 0, 1, 0, 0.00284862355, 0, 0.999995947
                                                                 Click()
                                                             end
                                                         end
