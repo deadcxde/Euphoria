@@ -1236,6 +1236,7 @@ if BF == true then
                                         if farm and v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") then -- Если совпадает имя, то
                                             if string.find(game.Players.LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) or Nonquest == true then
                                                 repeat
+                                                    wait()
                                                     pcall(function()
                                                         if game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                                                             if (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude >= 350 then
@@ -1258,7 +1259,7 @@ if BF == true then
                                                                     vim:SendKeyEvent(true, "V", false, game)
                                                                     vim:SendKeyEvent(false, "V", false, game)
                                                                 end
-                                                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1)
+                                                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0, 60, 1))
                                                                 Click()
                                                             end
                                                         end
