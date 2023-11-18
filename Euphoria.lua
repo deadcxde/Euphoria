@@ -892,7 +892,7 @@ if BF == true then
                 if _G.Auto_Farm then
                     if QuestC.Visible == true then
                         if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                            BypassTP(QuestCheck()[2])
+                            Bypass(QuestCheck()[2])
                         end
                         if game:GetService("Workspace").Enemies:FindFirstChild(QuestCheck()[3]) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -936,7 +936,7 @@ if BF == true then
                             toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
                         else
                             if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                BypassTP(QuestCheck()[2])
+                                Bypass(QuestCheck()[2])
                             else
                                 repeat wait() toTarget(QuestCheck()[2]) until (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.StartFarm
                             end
