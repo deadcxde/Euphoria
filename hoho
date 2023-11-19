@@ -51,6 +51,6 @@ _G["Fumo Blox Fruit - HoHo Hub Kaitun V3"] = {
     HopServerFarm = true, -- true/false why not?
     StopRaidWhenGetEnoughFrag = 10000, --10k is enough so we will farm faster
     PVP_FARM = false, -- kill player grind exp fast
-    ShowAccountInfo = true, -- an ui with your account information
+    ShowAccountInfo = false, -- an ui with your account information
 }
 loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HohoV2/main/ScriptLoad.lua'))()
