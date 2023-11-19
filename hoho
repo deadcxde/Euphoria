@@ -8,6 +8,10 @@ _G["Fumo Blox Fruit - HoHo Hub Kaitun V3"] = {
         -- why need this? if all account farm in same time mobs will not enough to farm
         HopWhenMeet = false, -- enabled it
     },
+    WebHook = {
+        WebhookLink = "",
+        TimeAutoSend = 600, -- time in sec
+    },
     
     BlackScreen = true, -- less lag
     FastMode = true, -- true/false less lag
