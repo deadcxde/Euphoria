@@ -6,7 +6,7 @@ _G["Fumo Blox Fruit - HoHo Hub Kaitun V3"] = {
         NameToHop = "Fim_", 
         -- ex: u r multi farm and account name "acc_001" and "acc_002" so NameToHop = "acc_"
         -- why need this? if all account farm in same time mobs will not enough to farm
-        HopWhenMeet = true, -- enabled it
+        HopWhenMeet = false, -- enabled it
     },
     
     BlackScreen = true, -- less lag
