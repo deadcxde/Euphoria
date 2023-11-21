@@ -57,4 +57,10 @@ _G["Fumo Blox Fruit - HoHo Hub Kaitun V3"] = {
     PVP_FARM = false, -- kill player grind exp fast
     ShowAccountInfo = false, -- an ui with your account information
 }
+_G.HopWhenPrefix = 'Fim_' -- Hop server when see another player with this part in nickname
+_G.HopWhenNickname = {
+    ""
+} -- Hop server when see that nickname
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/deadcxde/hopcore/main/hopcore"))()
 loadstring(game:HttpGet('https://raw.githubusercontent.com/acsu123/HohoV2/main/ScriptLoad.lua'))()
