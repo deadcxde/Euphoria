@@ -977,6 +977,7 @@ pcall(function()
                                 if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                     repeat task.wait()
                                         v = plr.Character
+                                        v.HumanoidRootPart.Size = Vector3.new(30,30,30)
                                         PosMon = v.HumanoidRootPart.CFrame
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 1
