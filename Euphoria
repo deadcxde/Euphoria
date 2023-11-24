@@ -1062,7 +1062,7 @@ pcall(function()
             end)
             spawn(function()
                 while wait() do 
-                    if _G.Auto_Farm then
+                    if _G.Auto_Farm or _G.AutoFarmPlayer then
                         if syn then
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
