@@ -943,15 +943,15 @@ pcall(function()
                         if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                         else
-                            for i, v in pairs(game:GetService("Players"):GetChildren()) do
-                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
+                            for i, plr in pairs(game:GetService("Players"):GetChildren()) do
+                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                     repeat task.wait()
-                                        v = v.Character
+                                        v = plr.Character
                                         PosMon = v.HumanoidRootPart.CFrame
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 1
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1))
-                                    until not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                    until not _G.AutoFarmPlayer or not v.Parent or plr.Data.Health.Value <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                 end 
                             end
                         end
