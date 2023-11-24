@@ -944,7 +944,7 @@ pcall(function()
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                         else
                             for i, v in pairs(game:GetService("Players"):GetChildren()) do
-                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, value.Name) then
+                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
                                     repeat task.wait()
                                         PosMon = v.HumanoidRootPart.CFrame
                                         EquipWeapon(_G.SelectWeapon)
