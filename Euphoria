@@ -940,10 +940,10 @@ pcall(function()
             spawn(function()
                 while wait() do
                     if _G.AutoFarmPlayer then
-                        if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest then
+                        if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                         else
-                            for i, v in pairs(game:GetService("Players")) do
+                            for i, v in pairs(game:GetService("Players"):GetChildren()) do
                                 if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, value.Name) then
                                     repeat task.wait()
                                         PosMon = v.HumanoidRootPart.CFrame
