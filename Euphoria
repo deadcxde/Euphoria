@@ -951,7 +951,7 @@ pcall(function()
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 1
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1))
-                                    until not QuestC.Visible == false
+                                    until not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                 end 
                             end
                         end
