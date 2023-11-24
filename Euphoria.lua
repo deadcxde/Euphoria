@@ -951,7 +951,7 @@ pcall(function()
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 1
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1))
-                                    until not _G.AutoFarmPlayer or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:WaitForChild("HumanoidRootPart")
+                                    until not QuestC.Visible == false
                                 end 
                             end
                         end
