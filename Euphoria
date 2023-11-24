@@ -946,11 +946,12 @@ pcall(function()
                             for i, v in pairs(game:GetService("Players"):GetChildren()) do
                                 if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
                                     repeat task.wait()
+                                        v = v.Character
                                         PosMon = v.HumanoidRootPart.CFrame
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 1
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1))
-                                    until not _G.AutoFarmPlayer or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                    until not _G.AutoFarmPlayer or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:WaitForChild("HumanoidRootPart")
                                 end 
                             end
                         end
