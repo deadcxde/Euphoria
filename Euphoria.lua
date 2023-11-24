@@ -189,7 +189,7 @@ pcall(function()
           
             spawn(function()
             while wait() do
-                if _G.Auto_Farm then
+                if _G.Auto_Farm or _G.AutoFarmPlayer then
                     FastAttack = true
                 else
                     FastAttack = false
@@ -926,6 +926,40 @@ pcall(function()
                 _G.Clip = false
             end
             spawn(function()
+                while wait() do
+                    if _G.AutoFarmPlayer then
+                        local args = {
+                            [1] = "EnablePvp"
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    end
+                    wait(2)
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
+                end
+            end)
+            spawn(function()
+                while wait() do
+                    if _G.AutoFarmPlayer then
+                        if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                        else
+                            for i, v in pairs(game:GetService("Players")) do
+                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, value.Name) then
+                                    repeat task.wait()
+                                        PosMon = v.HumanoidRootPart.CFrame
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.Transparency = 1
+                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 0, 1))
+                                    until not _G.AutoFarmPlayer or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                end 
+                            end
+                        end
+                    end
+                    wait(2)
+                end
+            end)
+
+            spawn(function()
                 while wait() do 
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                     local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
@@ -1145,6 +1179,14 @@ pcall(function()
                 Callback = function(value)
                     _G.Auto_Farm = value
                     Auto_Farm_Level = value
+                end,
+                Save = true
+            })
+            Main:AddToggle({
+                Name = "Auto Farm Player",
+                Default = false,
+                Callback = function(value)
+                    _G.AutoFarmPlayer = value
                 end,
                 Save = true
             })
