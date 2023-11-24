@@ -1037,30 +1037,17 @@ pcall(function()
                     end
                 end
             end)
-    
+            
             spawn(function()
                 while wait() do
+                    wait(20)
                     if _G.AntiAFK then
-                        wait(0.1)
-                        local Color
-                        for i,v in pairs(TextMatch) do
-                            if string.match(AntiAutoClick.TextFrame.ColorIndicator.Text,v) then
-                                Color = v
-                            end
-                        end
-                        for i,v in pairs(AntiAutoClick.Colors:GetChildren()) do
-                            if v.Button.Text == Color:sub(1,1) then
-                                firesignal(v.Button.MouseButton1Click)
-                            end
-                        end
-                        LocalPlayer.Idled:connect(function()
-                            local VirtualUser = game:GetService('VirtualUser')
-                            VirtualUser:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-                            wait(1)
-                            VirtualUser:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                        local VirtualUser=game:service'VirtualUser'
+                        game:service('Players').LocalPlayer.Idled:connect(function()
+                        VirtualUser:CaptureController()
+                        VirtualUser:ClickButton2(Vector2.new())
                         end)
                     end
-                    wait(1)
                 end
             end)
     
