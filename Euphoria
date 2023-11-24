@@ -862,7 +862,7 @@ pcall(function()
                                         v.HumanoidRootPart.CFrame = PosMon
                                         v.Humanoid.JumpPower = 0
                                         v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
                                         v.HumanoidRootPart.Transparency = 1
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Head.CanCollide = false
@@ -943,7 +943,7 @@ pcall(function()
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                 else
                                                     PosMon = v.HumanoidRootPart.CFrame
-                                                    v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+                                                    v.HumanoidRootPart.Size = Vector3.new(90,90,90)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.Head.CanCollide = false
@@ -1052,7 +1052,7 @@ pcall(function()
             coroutine.wrap(function()
                 while task.wait(.1) do
                     if _G.AntiCheat then
-                        task.wait(3000)
+                        task.wait(1800)
                         HopServer()
                     end
                 end
