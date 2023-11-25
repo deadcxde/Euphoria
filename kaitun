@@ -1261,6 +1261,17 @@ pcall(function()
                 end
             end
             
+            spawn(function()
+                while wait() do
+                    if _G.Kaitun or _G.AutoRejoinServer then
+                        wait(0.5)
+                        game:GetService("GuiService").ErrorMessageChanged:Connect(function()
+                            game:GetService("TeleportService"):Teleport(game.PlaceId)
+                        end)
+                    end
+                end
+            end)
+
             _G.KillingPlayer = false
             spawn(function()
                 while wait() do 
