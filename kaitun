@@ -1220,7 +1220,7 @@ pcall(function()
                             end
                         end
                         if not entity then HopServer() end
-                        v = object
+                        v = entity
                         repeat task.wait()
                             PosMon = v.HumanoidRootPart.CFrame
                             v.HumanoidRootPart.Size = Vector3.new(90,90,90)
@@ -1243,7 +1243,7 @@ pcall(function()
                         end
                     end
                     if not entity then HopServer() end
-                    v = object
+                    v = entity
                     repeat task.wait()
                         PosMon = v.HumanoidRootPart.CFrame
                         v.HumanoidRootPart.Size = Vector3.new(90,90,90)
