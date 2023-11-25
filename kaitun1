@@ -1169,9 +1169,12 @@ pcall(function()
             end
             
             local function isPlayerHunterQuest(Quest) 
-                for i,v in pairs(game:GetService("Players")) do
-                    if string.find(QuestC.Container.QuestTitle.Title.Text, v.Name)
+                for i,v in pairs(game:GetService("Players"):GetChildren()) do
+                    if string.find(QuestC.Container.QuestTitle.Title.Text, v.Name) then
+                        return true
+                    end
                 end
+                return false
             end
 
             spawn(function()
