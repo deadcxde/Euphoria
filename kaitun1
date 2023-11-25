@@ -1201,7 +1201,7 @@ pcall(function()
                                                     }
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                                     toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                                                    wait(4)
+                                                    wait(.1)
                                                 until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                             end
                                             v = plr.Character
@@ -1404,7 +1404,7 @@ pcall(function()
                         if FastAttack and _G.FastAttack then
                             AttackFunction()
                             if _G.KillingPlayer then
-                                if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+                                if tick() - cooldownfastattack > 1.5 then wait(.2) cooldownfastattack = tick() end
                             else
                                 if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
                             end
