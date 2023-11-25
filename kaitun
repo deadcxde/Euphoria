@@ -1176,7 +1176,7 @@ pcall(function()
                 end
                 return false
             end
-
+            _G.KillingPlayer = false
             spawn(function()
                 while wait() do 
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
@@ -1189,12 +1189,14 @@ pcall(function()
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                         repeat task.wait()
                                             v = plr.Character
+                                            _G.KillingPlayer = true
                                             v.HumanoidRootPart.Size = Vector3.new(30,30,30)
                                             PosMon = v.HumanoidRootPart.CFrame
                                             EquipWeapon(_G.SelectWeapon)
                                             v.HumanoidRootPart.Transparency = 1
                                             toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                         until not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                        _G.KillingPlayer = false
                                     end 
                                 end
                             else
@@ -1381,7 +1383,11 @@ pcall(function()
                     if ac and ac.equipped then
                         if FastAttack and _G.FastAttack then
                             AttackFunction()
-                            if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+                            if _G.KillingPlayer then
+                                if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+                            else
+                                if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
+                            end
                         elseif FastAttack and _G.FastAttack == false then
                             if ac.hitboxMagnitude ~= 55 then
                                 ac.hitboxMagnitude = 55
