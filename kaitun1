@@ -1154,10 +1154,10 @@ pcall(function()
                             end
                             if game:GetService("Workspace").Enemies:FindFirstChild(Quest[3]) then
                                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v.Name == QuestCheck()[3] then
+                                    if v.Name == Quest[3] then
                                         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                             repeat task.wait()
-                                                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, QuestCheck()[6]) then
+                                                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest[6]) then
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                 else
                                                     PosMon = v.HumanoidRootPart.CFrame
@@ -1170,7 +1170,7 @@ pcall(function()
                                                     v.HumanoidRootPart.Transparency = 1
                                                     toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
                                                 end
-                                            until not _G.Auto_Farm or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                            until not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         end
                                     end
                                 end
