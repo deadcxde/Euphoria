@@ -219,7 +219,7 @@ pcall(function()
           
             spawn(function()
             while wait() do
-                if _G.Auto_Farm or _G.AutoFarmPlayer then
+                if _G.Auto_Farm or _G.AutoFarmPlayer or _G.Kaitun then
                     FastAttack = true
                 else
                     FastAttack = false
@@ -1318,22 +1318,7 @@ pcall(function()
                     end
                 end
             end)
-            
-            coroutine.wrap(function()
-                while task.wait(.1) do
-                    local ac = CombatFrameworkR.activeController
-                    if ac and ac.equipped then
-                        if _G.Kaitun then
-                            AttackFunction()
-                            if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
-                            if ac.hitboxMagnitude ~= 55 then
-                                ac.hitboxMagnitude = 55
-                            end
-                            ac:attack()
-                        end
-                    end
-                end
-            end)()
+    
 
             coroutine.wrap(function()
                 while task.wait(.1) do
