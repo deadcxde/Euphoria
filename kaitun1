@@ -1266,7 +1266,7 @@ pcall(function()
             local function learnNeededStat()
                 local plr = game.Players.LocalPlayer
                 local plrChar = plr.Character
-                local Level = plr.Data.Level.Level.Value
+                local Level = plr.Data.Level.Value
                 local Melee = plr.Data.Stats.Melee.Level.Value
                 local Defense = plr.Data.Stats.Defense.Level.Value
                 local Sword = plr.Data.Stats.Sword.Level.Value
