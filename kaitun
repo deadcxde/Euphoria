@@ -1206,7 +1206,9 @@ pcall(function()
                                             end
                                             v = plr.Character
                                             _G.KillingPlayer = true
-                                            v.HumanoidRootPart.Size = Vector3.new(30,30,30)
+                                            if getDistance(v.CFrame) <= 2 then
+                                                game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                            end
                                             PosMon = v.HumanoidRootPart.CFrame
                                             EquipWeapon(_G.SelectWeapon)
                                             v.HumanoidRootPart.Transparency = 1
