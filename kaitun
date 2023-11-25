@@ -1390,6 +1390,17 @@ pcall(function()
                     end
                 end
             end)
+
+            spawn(function()
+                while wait() do
+                    if _G.Kaitun then
+                        if game.Players.LocalPlayer.Data.Level.Value > 700 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("DressrosaQuestProgress", "Dressrosa") ~= 0 then
+                            doSecondSea()
+                        end
+                    end
+                end
+            end)
+
             local function redeemcodes()
                 local redeem = function(code)
                     local args = {
@@ -1427,9 +1438,6 @@ pcall(function()
                         if game.Players.LocalPlayer.Data.Level.Value > 10 then
                             redeemcodes()
                             return
-                        end
-                        if game.Players.LocalPlayer.Data.Level.Value > 700 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("DressrosaQuestProgress", "Dressrosa") ~= 0 then
-                            doSecondSea()
                         end
                     end
                 end
