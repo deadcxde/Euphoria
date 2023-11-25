@@ -1195,7 +1195,7 @@ pcall(function()
                                                     }
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                                     toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
-                                                    wait(5)
+                                                    wait(4)
                                                 until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                             end
                                             v = plr.Character
