@@ -1188,14 +1188,14 @@ pcall(function()
                                 for i, plr in pairs(game:GetService("Players"):GetChildren()) do
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                         repeat task.wait()
-                                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Data.Visible == true then
+                                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                                 repeat wait()
                                                     local args = {
                                                         [1] = "EnablePvp"
                                                     }
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                                     wait(5)
-                                                until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Data.Visible == false
+                                                until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                             end
                                             v = plr.Character
                                             _G.KillingPlayer = true
