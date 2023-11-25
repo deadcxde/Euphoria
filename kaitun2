@@ -1184,7 +1184,7 @@ pcall(function()
                     local Quest = QuestCheck()
                     if _G.Kaitun then
                         if QuestC.Visible == true then
-                            if isPlayerHunterQuest(QuestC) then
+                            if isPlayerHunterQuest(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest) then
                                 for i, plr in pairs(game:GetService("Players"):GetChildren()) do
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                         repeat task.wait()
