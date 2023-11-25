@@ -156,65 +156,65 @@ pcall(function()
             
             local plr = game.Players.LocalPlayer
     
-        local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
-        local CbFw2 = CbFw[2]
-        
-        function GetCurrentBlade() 
-            local p13 = CbFw2.activeController
-            local ret = p13.blades[1]
-            if not ret then return end
-            while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
-            return ret
-        end
-        function AttackFunction() 
-            local AC = CbFw2.activeController
-            for i = 1, 1 do 
-                local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
-                    plr.Character,
-                    {plr.Character.HumanoidRootPart},
-                    60
-                )
-                local cac = {}
-                local hash = {}
-                for k, v in pairs(bladehit) do
-                    if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
-                        table.insert(cac, v.Parent.HumanoidRootPart)
-                        hash[v.Parent] = true
+            local CbFw = debug.getupvalues(require(plr.PlayerScripts.CombatFramework))
+            local CbFw2 = CbFw[2]
+            
+            function GetCurrentBlade() 
+                local p13 = CbFw2.activeController
+                local ret = p13.blades[1]
+                if not ret then return end
+                while ret.Parent~=game.Players.LocalPlayer.Character do ret=ret.Parent end
+                return ret
+            end
+            function AttackFunction() 
+                local AC = CbFw2.activeController
+                for i = 1, 1 do 
+                    local bladehit = require(game.ReplicatedStorage.CombatFramework.RigLib).getBladeHits(
+                        plr.Character,
+                        {plr.Character.HumanoidRootPart},
+                        60
+                    )
+                    local cac = {}
+                    local hash = {}
+                    for k, v in pairs(bladehit) do
+                        if v.Parent:FindFirstChild("HumanoidRootPart") and not hash[v.Parent] then
+                            table.insert(cac, v.Parent.HumanoidRootPart)
+                            hash[v.Parent] = true
+                        end
                     end
-                end
-                bladehit = cac
-                if #bladehit > 0 then
-                    local u8 = debug.getupvalue(AC.attack, 5)
-                    local u9 = debug.getupvalue(AC.attack, 6)
-                    local u7 = debug.getupvalue(AC.attack, 4)
-                    local u10 = debug.getupvalue(AC.attack, 7)
-                    local u12 = (u8 * 798405 + u7 * 727595) % u9
-                    local u13 = u7 * 798405
-                    (function()
-                        u12 = (u12 * u9 + u13) % 1099511627776
-                        u8 = math.floor(u12 / u9)
-                        u7 = u12 - u8 * u9
-                    end)()
-                    u10 = u10 + 1
-                    debug.setupvalue(AC.attack, 5, u8)
-                    debug.setupvalue(AC.attack, 6, u9)
-                    debug.setupvalue(AC.attack, 4, u7)
-                    debug.setupvalue(AC.attack, 7, u10)
-                    pcall(function()
-                        for k, v in pairs(AC.animator.anims.basic) do
-                            v:Play()
-                        end                  
-                    end)
-                    if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
-                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
-                        game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
-                        game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+                    bladehit = cac
+                    if #bladehit > 0 then
+                        local u8 = debug.getupvalue(AC.attack, 5)
+                        local u9 = debug.getupvalue(AC.attack, 6)
+                        local u7 = debug.getupvalue(AC.attack, 4)
+                        local u10 = debug.getupvalue(AC.attack, 7)
+                        local u12 = (u8 * 798405 + u7 * 727595) % u9
+                        local u13 = u7 * 798405
+                        (function()
+                            u12 = (u12 * u9 + u13) % 1099511627776
+                            u8 = math.floor(u12 / u9)
+                            u7 = u12 - u8 * u9
+                        end)()
+                        u10 = u10 + 1
+                        debug.setupvalue(AC.attack, 5, u8)
+                        debug.setupvalue(AC.attack, 6, u9)
+                        debug.setupvalue(AC.attack, 4, u7)
+                        debug.setupvalue(AC.attack, 7, u10)
+                        pcall(function()
+                            for k, v in pairs(AC.animator.anims.basic) do
+                                v:Play()
+                            end                  
+                        end)
+                        if plr.Character:FindFirstChildOfClass("Tool") and AC.blades and AC.blades[1] then 
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("weaponChange",tostring(GetCurrentBlade()))
+                            game.ReplicatedStorage.Remotes.Validator:FireServer(math.floor(u12 / 1099511627776 * 16777215), u10)
+                            game:GetService("ReplicatedStorage").RigControllerEvent:FireServer("hit", bladehit, i, "") 
+                        end
                     end
                 end
             end
-        end
-    
-        require(game.ReplicatedStorage.Util.CameraShaker):Stop()
+        
+            require(game.ReplicatedStorage.Util.CameraShaker):Stop()
 
           
             spawn(function()
@@ -1101,6 +1101,34 @@ pcall(function()
 
 
             -- kaitun mode
+            spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if _G.Kaitun and BringMobFarm then
+                            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= 400 then
+                                    if InMyNetWork(v.HumanoidRootPart) then
+                                        v.HumanoidRootPart.CFrame = PosMon
+                                        v.Humanoid.JumpPower = 0
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                        v.HumanoidRootPart.Transparency = 1
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Head.CanCollide = false
+                                        if v.Humanoid:FindFirstChild("Animator") then
+                                            v.Humanoid.Animator:Destroy()
+                                        end
+                                        v.Humanoid:ChangeState(11)
+                                        v.Humanoid:ChangeState(14)
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+
             local function getDistance(CFrame)
                 return (CFrame.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
             end
