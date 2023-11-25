@@ -1238,7 +1238,7 @@ pcall(function()
                 else
                     local entity = 0
                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                        if v.DisplayName == "Ice Admiral [Lv. 700] [Boss]" then
+                        if v.Humanoid.DisplayName == "Ice Admiral [Lv. 700] [Boss]" then
                             entity = v
                         end
                     end
