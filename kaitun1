@@ -1148,8 +1148,14 @@ pcall(function()
                     toTarget(CFrameMon)
                 end
                 repeat wait()
+                    local args = {
+                        [1] = "EnablePvp"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                     local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
+
                     if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                             if v.Name == Ms then
