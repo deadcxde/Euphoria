@@ -1170,7 +1170,7 @@ pcall(function()
             
             local function isPlayerHunterQuest(Quest) 
                 for i,v in pairs(game:GetService("Players"):GetChildren()) do
-                    if string.find(QuestC.Container.QuestTitle.Title.Text, v.Name) then
+                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
                         return true
                     end
                 end
