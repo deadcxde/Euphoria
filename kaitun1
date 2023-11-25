@@ -1165,7 +1165,7 @@ pcall(function()
                     else
                         toTarget(CFrameMon * CFrame.new(0,30,5))
                     end
-                until game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest == true
+                until game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest == true or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
             end
             
             local function isPlayerHunterQuest(Quest) 
