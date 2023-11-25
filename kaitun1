@@ -1235,6 +1235,28 @@ pcall(function()
                         wait(.5)
                         teleportToSecondSea()
                     end
+                else
+                    local entity = 0
+                    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                        if v.DisplayName == "Ice Admiral [Lv. 700] [Boss]" then
+                            entity = v
+                        end
+                    end
+                    if not entity then HopServer() end
+                    v = object
+                    repeat task.wait()
+                        PosMon = v.HumanoidRootPart.CFrame
+                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                        v.HumanoidRootPart.CanCollide = false
+                        v.Humanoid.WalkSpeed = 0
+                        v.Head.CanCollide = false
+                        BringMobFarm = true
+                        EquipWeapon(_G.SelectWeapon)
+                        v.HumanoidRootPart.Transparency = 0.9
+                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                    until not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                    wait(.5)
+                    teleportToSecondSea()
                 end
             end
             
