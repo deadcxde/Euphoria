@@ -1238,11 +1238,11 @@ pcall(function()
             local function learnNeededStat()
                 local plr = game.Players.LocalPlayer
                 local plrChar = plr.Character
-                local Level = plr.Data.Level.Value
-                local Melee = plr.Data.Stats.Melee.Value
-                local Defense = plr.Data.Stats.Defense.Value
-                local Sword = plr.Data.Stats.Sword.Value
-                local Fruit = plr.Data.Stats.DevilFruit.Value
+                local Level = plr.Data.Level.Level.Value
+                local Melee = plr.Data.Stats.Melee.Level.Value
+                local Defense = plr.Data.Stats.Defense.Level.Value
+                local Sword = plr.Data.Stats.Sword.Level.Value
+                local Fruit = plr.Data.Stats.DevilFruit.Level.Value
                 
                 if plr.Data.Points.Value == 0 then return end
 
