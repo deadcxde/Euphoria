@@ -1182,6 +1182,35 @@ pcall(function()
                 end
                 return false
             end
+            
+            local function doSecondSea()
+                if game.Workspace.Map.Ice.Door.Transparency == 0 then
+                    local args = {
+                        [1] = "DressrosaQuestProgress",
+                        [2] = "Detective"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    wait(.5)
+                    if game.Players.LocalPlayer.Backpack:FindFirstChild("Key") then
+                        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("Key")
+                        wait(.4)
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+                        repeat wait()
+                            toTarget(game.Workspace.Map.Ice.Door.CFrame)
+                            wait(1)
+                        until getDistance(game.Workspace.Map.Ice.Door.CFrame) < 10
+                        wait(1)
+                        if getDistance(game.Workspace.Map.Ice.Door.CFrame) < 5 then
+                            repeat wait()
+                                game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+                                wait(1)
+                            until game.Workspace.Map.Ice.Door.Transparency == 1
+                        end
+                        -- for i,v in pairs(game.Workspace.Enemies:FindFirstChild("Ice Admiral [Lv. 700] [Boss]"))
+                    end
+                end
+            end
+            
             _G.KillingPlayer = false
             spawn(function()
                 while wait() do 
@@ -1398,6 +1427,9 @@ pcall(function()
                         if game.Players.LocalPlayer.Data.Level.Value > 10 then
                             redeemcodes()
                             return
+                        end
+                        if game.Players.LocalPlayer.Data.Level.Value > 700 and game.ReplicatedStorage.Remotes.CommF_:InvokeServer("DressrosaQuestProgress", "Dressrosa") ~= 0 then
+                            doSecondSea()
                         end
                     end
                 end
