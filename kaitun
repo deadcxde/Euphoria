@@ -1206,7 +1206,7 @@ pcall(function()
                                             end
                                             v = plr.Character
                                             _G.KillingPlayer = true
-                                            if getDistance(v.CFrame) <= 2 then
+                                            if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
                                                 game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
                                             end
                                             PosMon = v.HumanoidRootPart.CFrame
