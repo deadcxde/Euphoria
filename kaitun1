@@ -1147,6 +1147,7 @@ pcall(function()
                 else
                     toTarget(CFrameMon)
                 end
+                local mobsKilled = 0
                 repeat wait()
                     local args = {
                         [1] = "EnablePvp"
@@ -1171,13 +1172,14 @@ pcall(function()
                                         v.HumanoidRootPart.Transparency = 0.9
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
                                     until not v.Parent or v.Humanoid.Health <= 0 or not v:FindFirstChild("HumanoidRootPart")
+                                    mobsKilled = 1
                                 end
                             end
                         end
                     else
                         toTarget(CFrameMon * CFrame.new(0,30,5))
                     end
-                until game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest == true or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                until game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest == true or mobsKilled == 1
             end
             
             local function isPlayerHunterQuest(Quest) 
