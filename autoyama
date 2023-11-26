@@ -93,6 +93,8 @@ local function HopServer()
     wait(1)
 end
 local function send_webhook()
+    local OSTime = os.time()
+    local Time = os.date('!*t', OSTime)
     local plr = game.Players.LocalPlayer
     local progress = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress")
     local Embed = {
