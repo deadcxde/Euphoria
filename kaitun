@@ -1291,6 +1291,9 @@ pcall(function()
                             if isPlayerHunterQuest(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest) then
                                 for i, plr in pairs(game:GetService("Players"):GetChildren()) do
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
+                                        if getDistance(plr.Character.CFrame) > 3000 then
+                                            Bypass(plr.Character.CFrame)
+                                        end
                                         repeat task.wait()
                                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                                 repeat wait()
@@ -1311,7 +1314,9 @@ pcall(function()
                                             PosMon = v.HumanoidRootPart.CFrame
                                             EquipWeapon(_G.SelectWeapon)
                                             v.HumanoidRootPart.Transparency = 1
+                                            
                                             toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+
                                         until not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         _G.KillingPlayer = false
                                     end 
