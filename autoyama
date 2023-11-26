@@ -124,6 +124,7 @@ if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter
     _G.AutoElitehunter = false
     _G.AutoYama = true
     wait(60)
+    return
 end
 wait(5)
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
