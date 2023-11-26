@@ -1167,7 +1167,7 @@ pcall(function()
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
-                                        BringMobFarm = true
+                                        BringMobFarm = false
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 0.9
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
@@ -1527,7 +1527,7 @@ pcall(function()
                         if FastAttack and _G.FastAttack then
                             AttackFunction()
                             if _G.KillingPlayer then
-                                if tick() - cooldownfastattack > 1.5 then wait(.2) cooldownfastattack = tick() end
+                                if tick() - cooldownfastattack > 1.5 then wait(.5) cooldownfastattack = tick() end
                             else
                                 if tick() - cooldownfastattack > 1.5 then wait(.01) cooldownfastattack = tick() end
                             end
