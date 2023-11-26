@@ -1314,6 +1314,7 @@ pcall(function()
                                                 game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
                                             end
                                             PosMon = v.HumanoidRootPart.CFrame
+                                            BringMobFarm = false
                                             EquipWeapon(_G.SelectWeapon)
                                             v.HumanoidRootPart.Transparency = 1
                                             
