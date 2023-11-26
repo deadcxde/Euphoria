@@ -1328,7 +1328,11 @@ pcall(function()
                                     if Quest[4] == 'FishmanQuest' then
                                         RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
                                     elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
-                                        RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
+                                        if Quest[4] == 'SkyExp1Quest' and Quest[1] == 1 then
+                                            RequestEntrance(Vector3.new(-4607.82275390625, 874.3905029296875, -1667.556884765625))
+                                        else
+                                            RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
+                                        end
                                     else
                                         Bypass(Quest[2])
                                     end
