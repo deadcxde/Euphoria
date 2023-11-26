@@ -96,7 +96,7 @@ local function send_webhook()
     local plr = game.Players.LocalPlayer
     local progress = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress")
     local Embed = {
-        ["title"] = "FARM YAMA <:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
+        ["title"] = "FARM YAMA! <:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
         ["description"] = "**Elite progress:**" .. progress,
         ["type"] = "rich",
         ["color"] = tonumber(0xffff00),
