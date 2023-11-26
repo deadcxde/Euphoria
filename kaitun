@@ -1512,7 +1512,7 @@ pcall(function()
             spawn(function()
                 while wait() do
                     if _G.Kaitun then
-                        if game.Players.LocalPlayer.Data.Level.Value > 10 then
+                        if game.Players.LocalPlayer.Data.Level.Value >= 10 then
                             redeemcodes()
                             return
                         end
