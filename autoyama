@@ -137,6 +137,12 @@ else
     repeat wait(1)
         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then _G.BossDead = true end
     until _G.BossDead == true
+    if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
+        _G.AutoElitehunter = false
+        _G.AutoYama = true
+        wait(60)
+        return
+    end
     send_webhook()
     HopServer()
 end
