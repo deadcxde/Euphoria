@@ -117,6 +117,31 @@ local function send_webhook()
     };
 end
 
+local function send_webhook()
+    local OSTime = os.time()
+    local Time = os.date('!*t', OSTime)
+    local plr = game.Players.LocalPlayer
+    local progress = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress")
+    local Embed = {
+        ["title"] = "FARM YAMA!=) <:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
+        ["description"] = "**Elite progress:** `" .. progress .. "`\nYAMA IS READY",
+        ["type"] = "rich",
+        ["color"] = tonumber(0xffff00),
+        ["footer"] = {
+            ["text"] = "yama farm bot",
+        },
+        ["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
+    };
+    http.request {
+        Url = "https://discord.com/api/webhooks/1178330972333289503/8fFAkiB5yVtN_4wmyaEQYusRalJx-F1XR7bHdfPHNPrDoMr1Q0prx_H7CRDkhDTBtGp-";
+        Method = 'POST';
+        Headers = {
+            ['Content-Type'] = 'application/json';
+        };
+        Body = game:GetService'HttpService':JSONEncode({embeds = {Embed};});
+    };
+end
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
 _G.AutoElitehunter = true
 _G.AutoYama = true
@@ -141,7 +166,7 @@ else
         _G.AutoElitehunter = false
         _G.AutoYama = true
         wait(60)
-        return
+
     end
     send_webhook()
     HopServer()
