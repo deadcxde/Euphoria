@@ -100,8 +100,9 @@ if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter
     _G.AutoYama = true
     wait(60)
 end
+wait(5)
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
-wait(2)
+wait(5)
 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then 
     HopServer()
 else
