@@ -979,6 +979,7 @@ pcall(function()
                                         v.HumanoidRootPart.Size = Vector3.new(30,30,30)
                                         PosMon = v.HumanoidRootPart.CFrame
                                         EquipWeapon(_G.SelectWeapon)
+                                        BringMobFarm = false
                                         v.HumanoidRootPart.Transparency = 1
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                     until not _G.AutoFarmPlayer or not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
@@ -1167,7 +1168,7 @@ pcall(function()
                                         v.HumanoidRootPart.CanCollide = false
                                         v.Humanoid.WalkSpeed = 0
                                         v.Head.CanCollide = false
-                                        BringMobFarm = false
+                                        BringMobFarm = true
                                         EquipWeapon(_G.SelectWeapon)
                                         v.HumanoidRootPart.Transparency = 0.9
                                         toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
