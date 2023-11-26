@@ -108,7 +108,7 @@ local function send_webhook()
         ["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
     };
     http.request {
-        Url = "https://discord.com/api/webhooks/1174720347526922292/8RAWz_Wm6jeScxTgYr0GhmJPRwLYBLL8cWfgh3g4UXz3qHF4CH8yU-ArleUEhqk4oaT8";
+        Url = "https://discord.com/api/webhooks/1178330972333289503/8fFAkiB5yVtN_4wmyaEQYusRalJx-F1XR7bHdfPHNPrDoMr1Q0prx_H7CRDkhDTBtGp-";
         Method = 'POST';
         Headers = {
             ['Content-Type'] = 'application/json';
