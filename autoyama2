@@ -18,7 +18,7 @@ pcall(function()
         end
     end
     until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded() 
-    
+    local function HopServer() print(1) end
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
     _G.AutoElitehunter = true
     _G.AutoYama = true
