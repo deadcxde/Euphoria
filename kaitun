@@ -1296,12 +1296,13 @@ pcall(function()
                                         end
                                         repeat task.wait()
                                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                                                local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
                                                 repeat wait()
                                                     local args = {
                                                         [1] = "EnablePvp"
                                                     }
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                                    toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+                                                    toTarget(respPos)
                                                     wait(.1)
                                                 until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                             end
