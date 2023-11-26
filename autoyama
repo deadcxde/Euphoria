@@ -120,6 +120,7 @@ end
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
 _G.AutoElitehunter = true
 _G.AutoYama = true
+_G.FastAttackDelay = 0.15
 if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
     _G.AutoElitehunter = false
     _G.AutoYama = true
