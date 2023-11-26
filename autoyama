@@ -103,7 +103,7 @@ local function send_webhook()
         ["type"] = "rich",
         ["color"] = tonumber(0xffff00),
         ["footer"] = {
-            ["text"] = "chest farm bot",
+            ["text"] = "yama farm bot",
         },
         ["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
     };
