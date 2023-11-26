@@ -1,3 +1,4 @@
+pcall(function() 
 repeat wait() until game:IsLoaded()
 if placeId ~= 7449423635 then return end
 if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
@@ -94,6 +95,4 @@ _G.AutoYama = true
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
 wait(.5)
 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then HopServer() return end
-
-
-
+end)
