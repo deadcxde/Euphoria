@@ -117,7 +117,7 @@ local function send_webhook()
     };
 end
 
-local function send_webhook()
+local function send_webhook_yama()
     local OSTime = os.time()
     local Time = os.date('!*t', OSTime)
     local plr = game.Players.LocalPlayer
@@ -165,6 +165,7 @@ else
     if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
         _G.AutoElitehunter = false
         _G.AutoYama = true
+        send_webhook_yama()
         wait(60)
 
     end
