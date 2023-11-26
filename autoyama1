@@ -95,14 +95,19 @@ end
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
 _G.AutoElitehunter = true
 _G.AutoYama = true
+if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
+    _G.AutoElitehunter = false
+    _G.AutoYama = true
+    wait(60)
+end
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
-wait(.5)
+wait(2)
 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then 
     HopServer()
 else
-_G.BossDead = false
-repeat wait(1)
-    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then _G.BossDead = true end
+    _G.BossDead = false
+    repeat wait(1)
+        if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then _G.BossDead = true end
     until _G.BossDead == true
     HopServer()
 end
