@@ -106,7 +106,7 @@ local function send_webhook()
         ["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
     };
     http.request {
-        Url = _G.WebhookURL;
+        Url = "https://discord.com/api/webhooks/1174720347526922292/8RAWz_Wm6jeScxTgYr0GhmJPRwLYBLL8cWfgh3g4UXz3qHF4CH8yU-ArleUEhqk4oaT8";
         Method = 'POST';
         Headers = {
             ['Content-Type'] = 'application/json';
@@ -117,7 +117,7 @@ end
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
 _G.AutoElitehunter = true
-_G.AutoYama = tru
+_G.AutoYama = true
 if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter", "Progress") >= 30 then
     _G.AutoElitehunter = false
     _G.AutoYama = true
@@ -127,12 +127,14 @@ wait(5)
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
 wait(5)
 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then 
+    send_webhook()
     HopServer()
 else
     _G.BossDead = false
     repeat wait(1)
         if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then _G.BossDead = true end
     until _G.BossDead == true
+    send_webhook()
     HopServer()
 end
 end)
