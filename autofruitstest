@@ -103,5 +103,3 @@ end
 
 repeat wait() until game:IsLoaded()
 repeat takeFruits() until isFruitsOnServer() == false
-HopServer()
-
