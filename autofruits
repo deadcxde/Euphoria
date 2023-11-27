@@ -150,6 +150,8 @@ end
 
 repeat wait() until game:IsLoaded()
 repeat takeFruits() until isFruitsOnServer() == false
+pcall(function() UnEquip() end)
+wait(1)
 if isFruitsInInventory() then
     pcall(function() UnEquip() end)
     storeAllFruits()
