@@ -913,9 +913,17 @@ pcall(function()
             end)
             function EquipWeapon(Tool)
                 pcall(function()
-                    if game.Players.LocalPlayer.Backpack:FindFirstChild(Tool) then 
-                        local ToolHumanoid = game.Players.LocalPlayer.Backpack:FindFirstChild(Tool) 
-                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(ToolHumanoid) 
+                    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == Tool then 
+                            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
+                            return
+                        end
+                    end
+                    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                        if v.ToolTip == 'Melee' then 
+                            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
+                            return
+                        end
                     end
                 end)
             end
