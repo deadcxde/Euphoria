@@ -94,6 +94,11 @@ local function takeFruits()
                 wait(2)
                 print(v.Name)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Fruit.Fruit.CFrame
+                wait(.1)
+                game:service('VirtualInputManager'):SendKeyEvent(true, "W", false, game)
+                game:service('VirtualInputManager'):SendKeyEvent(false, "W", false, game)
+                game:service('VirtualInputManager'):SendKeyEvent(true, "A", false, game)
+                game:service('VirtualInputManager'):SendKeyEvent(false, "A", false, game)
                 wait(.5)
                 game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
             end
@@ -146,6 +151,7 @@ end
 repeat wait() until game:IsLoaded()
 repeat takeFruits() until isFruitsOnServer() == false
 if isFruitsInInventory() then
+    UnEquip()
     storeAllFruits()
 end
 repeat wait() until isFruitsInInventory() == false
