@@ -131,6 +131,18 @@ local function isFruitsInInventory()
     return false
 end
 
+local function UnEquip()
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        if v.ToolTip == 'Melee' then 
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
+            wait(.2)
+            game.Players.LocalPlayer.Character:FindFirstChild(v).Parent = game.Players.LocalPlayer.Backpack
+            return
+        end
+    end
+end
+
+
 repeat wait() until game:IsLoaded()
 repeat takeFruits() until isFruitsOnServer() == false
 if isFruitsInInventory() then
