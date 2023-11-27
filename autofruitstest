@@ -140,7 +140,7 @@ local function UnEquip()
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if v.ToolTip == 'Melee' then 
             game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
-            wait(.2)
+            wait(1)
             game.Players.LocalPlayer.Character:FindFirstChild(v).Parent = game.Players.LocalPlayer.Backpack
             return
         end
@@ -151,7 +151,7 @@ end
 repeat wait() until game:IsLoaded()
 repeat takeFruits() until isFruitsOnServer() == false
 if isFruitsInInventory() then
-    UnEquip()
+    pcall(function() UnEquip() end)
     storeAllFruits()
 end
 repeat wait() until isFruitsInInventory() == false
