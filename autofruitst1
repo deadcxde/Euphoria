@@ -94,7 +94,7 @@ local function takeFruits()
                 wait(2)
                 print(v.Name)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Fruit.Fruit.CFrame
-                wait(.1)
+                wait(.5)
                 game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
             end
         end
