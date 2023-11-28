@@ -136,7 +136,7 @@ local function storeAllFruits()
         if string.find(v.Name, ' Fruit') then
             print("Storing", v.Name)
             pcall(function() storeFruit(v.Name, v:GetAttribute("OriginalName")) end)
-            wait(2)
+            wait(.75)
         end
     end
 end
