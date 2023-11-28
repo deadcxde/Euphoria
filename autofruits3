@@ -167,8 +167,9 @@ repeat takeFruits() until isFruitsOnServer() == false
 pcall(function() UnEquip() end)
 wait(1)
 if isFruitsInInventory() then
-    pcall(function() UnEquip() end)
     checkAllFruits()
+    wait(1)
+    pcall(function() UnEquip() end)
     wait(1)
     storeAllFruits()
 end
