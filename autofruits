@@ -72,6 +72,31 @@ local function HopServer()
     wait(1)
 end
 
+local function getFruitWorth(fruitName)
+    worth = {
+        ["Quake Fruit"] = 1000000,
+        ["Buddha Fruit"] = 1200000,
+        ["Love Fruit"] = 1300000,
+        ["Spider Fruit"] = 1500000,
+        ["Sound Fruit"] = 1700000,
+        ["Phoenix Fruit"] = 1800000,
+        ["Portal Fruit"] = 1900000,
+        ["Rumble Fruit"] = 2100000,
+        ["Pain Fruit"] = 2300000,
+        ["Blizzard Fruit"] = 2400000,
+        ["Gravity Fruit"] = 2500000,
+        ["Mammoth Fruit"] = 2700000,
+        ["Dough Fruit"] = 2800000,
+        ["Shadow Fruit"] = 2900000,
+        ["Venom Fruit"] = 3000000,
+        ["Control Fruit"] = 3200000,
+        ["Spirit Fruit"] = 3400000,
+        ["Dragon Fruit"] = 3500000,
+        ["Leopard Fruit"] = 5000000,
+    }
+    return worth[fruitName] or 0
+end
+
 local function isFruitsOnServer() 
     for i,v in pairs(game.Workspace:GetChildren()) do
         if v.Name == 'Blox Fruit Dealer' then
@@ -141,6 +166,16 @@ local function storeAllFruits()
     end
 end
 
+local function isWorthFruitInInventory()
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
+        if string.find(v.Name, ' Fruit') then
+            if getFruitWorth(v.Name) >= 1000000 then return true end
+        end
+    end
+    return false
+end
+
+
 local function isFruitsInInventory()
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
         if string.find(v.Name, ' Fruit') then
@@ -173,5 +208,5 @@ if isFruitsInInventory() then
     wait(1)
     storeAllFruits()
 end
-repeat wait() until isFruitsInInventory() == false
+repeat wait() until isWorthFruitInInventory() == false
 HopServer()
