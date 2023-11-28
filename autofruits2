@@ -117,6 +117,7 @@ end
 
 local function checkFruit(fruitName)
     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(fruitName)) 
+    wait(1)
     UnEquip()
 end
 
@@ -168,6 +169,7 @@ wait(1)
 if isFruitsInInventory() then
     pcall(function() UnEquip() end)
     checkAllFruits()
+    wait(1)
     storeAllFruits()
 end
 repeat wait() until isFruitsInInventory() == false
