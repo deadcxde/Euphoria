@@ -118,7 +118,7 @@ end
 local function checkFruit(fruitName)
     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(fruitName)) 
     wait(1)
-    UnEquip()
+    pcall(function() UnEquip() end)
 end
 
 local function checkAllFruits()
