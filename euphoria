@@ -2059,18 +2059,27 @@ pcall(function()
 
             if _G.AutoFarmFruit then
                 spawn(function() 
+                    print("auto farm fruit 1")
                     repeat takeFruits() until isFruitsOnServer() == false
                     pcall(function() UnEquip() end)
                     wait(1)
+                    print("auto farm fruit 2")
                     if isFruitsInInventory() then
+                        print("auto farm fruit 3")
                         checkAllFruits()
+                        print("auto farm fruit 4")
                         wait(1)
                         pcall(function() UnEquip() end)
+                        print("auto farm fruit 5")
                         wait(1)
                         storeAllFruits()
+                        print("auto farm fruit 6")
                     end
+                    print("auto farm fruit 7")
                     repeat wait() until isWorthFruitInInventory() == false
+                    print("auto farm fruit 8")
                     if _G.AutoHopServer then
+                        print("auto farm fruit 9")
                         HopServer()
                     end
                 end)
