@@ -29,7 +29,7 @@ pcall(function()
     end
 
     local function send_webhook2(clr)
-        if clr == nil then clr = 'Not Found'
+        if clr == nil then clr = 'Not Found' end
         local plr = game.Players.LocalPlayer
         local Embed = {
             ["title"] = "<:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
