@@ -7,6 +7,32 @@ pcall(function()
     _G.AutoColorLoaded = 1
     if not _G.NeededColor then return end
 
+    local function send_webhook(sended_from)
+        local plr = game.Players.LocalPlayer
+        function spacenumber(n) 
+           local s = string.reverse(n)
+           return s:gsub("(%d%d%d)", "%1 "):reverse() 
+        end
+        local beliInc = spacenumber(plr.Data.Beli.Value - beliOnStart)
+        local Embed = {
+            ["title"] = "<:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
+            ["description"] = "Successfully taked color: " .. _G.NeededColor,
+            ["type"] = "rich",
+            ["color"] = tonumber(0xffff00),
+            ["footer"] = {
+                ["text"] = "chest farm bot",
+            }
+        };
+        http.request {
+            Url = _G.WebhookURL;
+            Method = 'POST';
+            Headers = {
+                ['Content-Type'] = 'application/json';
+            };
+            Body = game:GetService'HttpService':JSONEncode({embeds = {Embed};});
+        };
+    end
+
     local function HopServer()
         local PlaceID = game.PlaceId
         local AllIDs = {}
