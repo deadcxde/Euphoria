@@ -1722,28 +1722,14 @@ pcall(function()
             end
             
             local function storeFruit(fruitName, fruitRealName) 
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(fruitName)) 
+                wait(.5)
                 local args = {
                     [1] = "StoreFruit",
                     [2] = fruitRealName,
                     [3] = game:GetService("Players").LocalPlayer.Character:FindFirstChild(fruitName)
                 }
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-            end
-            
-            local function checkFruit(fruitName)
-                game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(fruitName)) 
-                wait(1)
-                pcall(function() UnEquip() end)
-            end
-            
-            local function checkAllFruits()
-                for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do 
-                    if string.find(v.Name, ' Fruit') then
-                        print("Checking", v.Name)
-                        pcall(function() checkFruit(v.Name) end)
-                        wait(.6)
-                    end
-                end
             end
             
             local function storeAllFruits()
@@ -2059,27 +2045,17 @@ pcall(function()
 
             if _G.AutoFarmFruit then
                 spawn(function() 
-                    print("auto farm fruit 1")
                     repeat takeFruits() until isFruitsOnServer() == false
                     pcall(function() UnEquip() end)
                     wait(1)
-                    print("auto farm fruit 2")
                     if isFruitsInInventory() then
-                        print("auto farm fruit 3")
-                        checkAllFruits()
-                        print("auto farm fruit 4")
                         wait(1)
                         pcall(function() UnEquip() end)
-                        print("auto farm fruit 5")
                         wait(1)
                         storeAllFruits()
-                        print("auto farm fruit 6")
                     end
-                    print("auto farm fruit 7")
                     repeat wait() until isWorthFruitInInventory() == false
-                    print("auto farm fruit 8")
                     if _G.AutoHopServer then
-                        print("auto farm fruit 9")
                         HopServer()
                     end
                 end)
