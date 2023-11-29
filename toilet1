@@ -1,0 +1,56 @@
+local placeId = game.PlaceId
+
+if placeId == 14082129854 then
+    toilet = true
+end
+
+if toilet then
+    if _G.ToiletLoaded then
+        return
+    end
+    _G.ToiletLoaded = true
+    local function skipWaveAndPlayAgain()
+        t = {}
+        local str = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+        str:gsub(".",function(c) table.insert(t,c) end)
+        for i,v in pairs(t) do
+            local args = {
+                [1] = {
+                    [1] = {},
+                    [2] = v
+                }
+            }
+            game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))
+        end  
+    end
+    local function setDifficulty()
+        t = {}
+        local str = "qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890"
+        str:gsub(".",function(c) table.insert(t,c) end)
+        for i,v in pairs(t) do
+            local args = {
+                [1] = {
+                    [1] = {
+                        [1] = "Nightmare"
+                    },
+                    [2] = v
+                }
+            }
+            game:GetService("ReplicatedStorage").dataRemoteEvent:FireServer(unpack(args))
+        end 
+    end
+    spawn(function()
+        while wait() do
+            setDifficulty()
+            wait(4)
+        end
+    end)
+    spawn(function()
+        while wait() do
+            skipWaveAndPlayAgain()
+            wait(1)
+        end
+    end)
+else
+    return
+end
