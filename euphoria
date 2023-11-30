@@ -841,9 +841,9 @@ pcall(function()
                 local tweenfunc = {}
                 local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
                 if Distance < 1000 then
-                    Speed = 315
+                    Speed = 295
                 elseif Distance >= 1000 then
-                    Speed = 300
+                    Speed = 280
                 end
                    
                 local tween_s = game:service"TweenService"
@@ -953,7 +953,6 @@ pcall(function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
                 wait(0.5)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(900,900,900)
             
                 _G.StopTween = false
                 _G.StertScript = false
