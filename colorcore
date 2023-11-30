@@ -153,6 +153,7 @@ pcall(function()
         return game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ColorsDealer" , "2")
     end
 
+    wait(5)
     spawn(function()
         repeat wait() until game:IsLoaded()
         if not getColor() or not string.find(getColor(), _G.NeededColor) then send_webhook2(getColor()) HopServer() return end
