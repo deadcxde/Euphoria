@@ -33,7 +33,7 @@ pcall(function()
         local plr = game.Players.LocalPlayer
         local Embed = {
             ["title"] = "<:nhech_mep:1135495034289004545> " .. plr.Name .. " <:nhech_mep:1135495034289004545> ",
-            ["description"] = "Founded color: " .. clr,
+            ["description"] = "Founded color: " .. clr .. "\nJob ID: " .. game.JobId,
             ["type"] = "rich",
             ["color"] = tonumber(0xffff00),
             ["footer"] = {
