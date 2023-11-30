@@ -1412,55 +1412,76 @@ pcall(function()
                             end
                         else
                             wait(0.5)
-                            if MyLevel < 10 then
-                                game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1])
-                                toTarget(Quest[7] * CFrame.new(0,30,20))
-                            elseif MyLevel >= 10 and MyLevel < 300 then
-                                if MyLevel > 20 then
+                            if first_sea then
+                                if MyLevel < 10 then
+                                    game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1])
+                                    toTarget(Quest[7] * CFrame.new(0,30,20))
+                                elseif MyLevel >= 10 and MyLevel < 300 then
+                                    if MyLevel > 20 then
+                                        local args = {
+                                            [1] = "EnablePvp"
+                                        }
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                                        wait(.5)
+                                    end
+                                    
+                                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                                        farmSkyGuards()
+                                    end
+                                elseif MyLevel < 690 then
                                     local args = {
                                         [1] = "EnablePvp"
                                     }
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
                                     wait(.5)
-                                end
-                                
-                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                                    farmSkyGuards()
-                                end
-                            elseif MyLevel < 700 then
-                                local args = {
-                                    [1] = "EnablePvp"
-                                }
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                                wait(.5)
-                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                                    -- if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == tostring(GetIsLand(Quest[7])) then
-                                    --     game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1]) wait(0.5)
-                                    --     toTarget(Quest[7] * CFrame.new(0,30,20))
-                                    -- else
-                                    if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                        if Quest[4] == 'FishmanQuest' then
-                                            RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-                                        elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
-                                            RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
+                                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                                        -- if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == tostring(GetIsLand(Quest[7])) then
+                                        --     game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1]) wait(0.5)
+                                        --     toTarget(Quest[7] * CFrame.new(0,30,20))
+                                        -- else
+                                        if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
+                                            if Quest[4] == 'FishmanQuest' then
+                                                RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+                                            elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
+                                                RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
+                                            else
+                                                Bypass(Quest[2])
+                                            end
                                         else
-                                            Bypass(Quest[2])
+                                            repeat wait() toTarget(Quest[2]) until (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20
                                         end
-                                    else
                                         repeat wait() toTarget(Quest[2]) until (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20
+                                        if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+                                            BringMobFarm = true
+                                            wait(0.2)
+                                            game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1]) wait(0.5)
+                                            toTarget(Quest[7] * CFrame.new(0,30,20))
+                                        end
+                                        -- end
                                     end
+                                end 
+                            elseif second_sea then
+                                if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
+                                    if Quest[4] == 'FishmanQuest' then
+                                        RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+                                    elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
+                                        RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
+                                    else
+                                        Bypass(Quest[2])
+                                    end
+                                else
                                     repeat wait() toTarget(Quest[2]) until (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20
-                                    if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
-                                        BringMobFarm = true
-                                        wait(0.2)
-                                        game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1]) wait(0.5)
-                                        toTarget(Quest[7] * CFrame.new(0,30,20))
-                                    end
-                                    -- end
                                 end
-                            end 
+                                repeat wait() toTarget(Quest[2]) until (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20
+                                if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
+                                    BringMobFarm = true
+                                    wait(0.2)
+                                    game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest[4], Quest[1]) wait(0.5)
+                                    toTarget(Quest[7] * CFrame.new(0,30,20))
+                                end
+                            end
                         end
                     end
                 end
