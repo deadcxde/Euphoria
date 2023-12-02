@@ -1344,16 +1344,18 @@ local status, err = pcall(function()
                                             end
                                             v = plr.Character
                                             _G.KillingPlayer = true
-                                            if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
-                                                game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-                                                game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
-                                            end
-                                            PosMon = v.HumanoidRootPart.CFrame
-                                            BringMobFarm = false
-                                            EquipWeapon(_G.SelectWeapon)
-                                            v.HumanoidRootPart.Transparency = 1
+                                            if v:FindFirstChild("HumanoidRootPart") then
+                                                if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
+                                                    game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                                    game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                                                end
+                                                PosMon = v.HumanoidRootPart.CFrame
+                                                BringMobFarm = false
+                                                EquipWeapon(_G.SelectWeapon)
+                                                v.HumanoidRootPart.Transparency = 1
                                             
-                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                            end
 
                                         until not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         _G.KillingPlayer = false
