@@ -1383,15 +1383,18 @@ local status, err = pcall(function()
                                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest[6]) then
                                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                     else
-                                                        PosMon = v.HumanoidRootPart.CFrame
-                                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                                        v.HumanoidRootPart.CanCollide = false
-                                                        v.Humanoid.WalkSpeed = 0
-                                                        v.Head.CanCollide = false
-                                                        BringMobFarm = true
-                                                        EquipWeapon(_G.SelectWeapon)
-                                                        v.HumanoidRootPart.Transparency = 1
-                                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                                                        status, err = pcall(function()
+                                                            PosMon = v.HumanoidRootPart.CFrame
+                                                            v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                                            v.HumanoidRootPart.CanCollide = false
+                                                            v.Humanoid.WalkSpeed = 0
+                                                            v.FindFirstChild.CanCollide = false
+                                                            BringMobFarm = true
+                                                            EquipWeapon(_G.SelectWeapon)
+                                                            v.HumanoidRootPart.Transparency = 1
+                                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                                                        end)
+                                                        if err then print(err) end
                                                     end
                                                 until not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                             end
@@ -1587,15 +1590,14 @@ local status, err = pcall(function()
                     end
                 end
             end)
-    
 
             coroutine.wrap(function()
                 while task.wait(.1) do
                     local ac = CombatFrameworkR.activeController
                     if ac and ac.equipped then
                         if FastAttack and _G.FastAttack then
-                            status, err = pcall(function() AttackFunction() end)
-                            if err then print(err) end
+                            status, err = pcall(AttackFunction())
+                            print(err)
                             if _G.KillingPlayer then
                                 if tick() - cooldownfastattack > 1.5 then wait(.5) cooldownfastattack = tick() end
                             else
