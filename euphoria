@@ -1388,7 +1388,7 @@ local status, err = pcall(function()
                                                             v.HumanoidRootPart.Size = Vector3.new(90,90,90)
                                                             v.HumanoidRootPart.CanCollide = false
                                                             v.Humanoid.WalkSpeed = 0
-                                                            v.FindFirstChild.CanCollide = false
+                                                            v.Head.CanCollide = false
                                                             BringMobFarm = true
                                                             EquipWeapon(_G.SelectWeapon)
                                                             v.HumanoidRootPart.Transparency = 1
