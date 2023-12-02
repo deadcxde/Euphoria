@@ -1594,7 +1594,8 @@ local status, err = pcall(function()
                     local ac = CombatFrameworkR.activeController
                     if ac and ac.equipped then
                         if FastAttack and _G.FastAttack then
-                            AttackFunction()
+                            status, err = pcall(AttackFunction())
+                            print(err)
                             if _G.KillingPlayer then
                                 if tick() - cooldownfastattack > 1.5 then wait(.5) cooldownfastattack = tick() end
                             else
