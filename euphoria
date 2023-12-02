@@ -1597,7 +1597,7 @@ local status, err = pcall(function()
                     if ac and ac.equipped then
                         if FastAttack and _G.FastAttack then
                             status, err = pcall(function() AttackFunction() end)
-                            print(err)
+                            if err then print(err) end
                             if _G.KillingPlayer then
                                 if tick() - cooldownfastattack > 1.5 then wait(.5) cooldownfastattack = tick() end
                             else
