@@ -1470,7 +1470,7 @@ local status, err = pcall(function()
                                         -- end
                                     end
                                 end 
-                            elseif second_sea then
+                            elseif second_sea or third_sea then
                                 if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
                                     if Quest[4] == 'FishmanQuest' then
                                         RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
