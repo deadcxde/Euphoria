@@ -1347,19 +1347,17 @@ local status, err = pcall(function()
                                             if v then
                                                 if v:FindFirstChild("HumanoidRootPart") then
                                                     if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                                        game:service('VirtualInputManager'):SendKeyEvent(tdrue, "X", false, game)
                                                         game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
                                                     end
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     BringMobFarm = false
                                                     EquipWeapon(_G.SelectWeapon)
                                                     v.HumanoidRootPart.Transparency = 1
-                                                
                                                     toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                                 end
                                             end
-
-                                        until not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                        until not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         _G.KillingPlayer = false
                                     end 
                                 end
