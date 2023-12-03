@@ -1327,37 +1327,39 @@ local status, err = pcall(function()
                             if isPlayerHunterQuest(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest) then
                                 for i, plr in pairs(game:GetService("Players"):GetChildren()) do
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
-                                        if getDistance(plr.Character.HumanoidRootPart.CFrame) > 3000 then
-                                            Bypass(plr.Character.HumanoidRootPart.CFrame)
-                                        end
-                                        repeat task.wait()
-                                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                                                local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
-                                                repeat wait()
-                                                    local args = {
-                                                        [1] = "EnablePvp"
-                                                    }
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                                    toTarget(respPos)
-                                                    wait(.1)
-                                                until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
+                                        if plr.Character:FindFirstChild("HumanoidRootPart") then
+                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 3000 then
+                                                Bypass(plr.Character.HumanoidRootPart.CFrame)
                                             end
-                                            v = plr.Character
-                                            _G.KillingPlayer = true
-                                            if v then
-                                                if v:FindFirstChild("HumanoidRootPart") then
-                                                    if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
-                                                    end
-                                                    PosMon = v.HumanoidRootPart.CFrame
-                                                    BringMobFarm = false
-                                                    EquipWeapon(_G.SelectWeapon)
-                                                    v.HumanoidRootPart.Transparency = 1
-                                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                            repeat task.wait()
+                                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                                                    local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+                                                    repeat wait()
+                                                        local args = {
+                                                            [1] = "EnablePvp"
+                                                        }
+                                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                                        toTarget(respPos)
+                                                        wait(.1)
+                                                    until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                                 end
-                                            end
-                                        until not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                                v = plr.Character
+                                                _G.KillingPlayer = true
+                                                if v then
+                                                    if v:FindFirstChild("HumanoidRootPart") then
+                                                        if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
+                                                            game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                                            game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                                                        end
+                                                        PosMon = v.HumanoidRootPart.CFrame
+                                                        BringMobFarm = false
+                                                        EquipWeapon(_G.SelectWeapon)
+                                                        v.HumanoidRootPart.Transparency = 1
+                                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                                    end
+                                                end
+                                            until not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                        end
                                         _G.KillingPlayer = false
                                     end 
                                 end
