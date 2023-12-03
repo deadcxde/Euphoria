@@ -1347,7 +1347,7 @@ local status, err = pcall(function()
                                             if v then
                                                 if v:FindFirstChild("HumanoidRootPart") then
                                                     if getDistance(v.HumanoidRootPart.CFrame) <= 2 then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(tdrue, "X", false, game)
+                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
                                                         game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
                                                     end
                                                     PosMon = v.HumanoidRootPart.CFrame
