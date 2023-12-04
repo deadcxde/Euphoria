@@ -1,22 +1,25 @@
 status, err = pcall(function() 
 repeat wait() until game:IsLoaded()
-repeat wait()
-    if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-        if _G.Team == "Pirate" then
-            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
-                v.Function()
-            end
-        elseif _G.Team == "Marine" then
-            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do                                                                                                
-                v.Function()
-            end
-        else
-            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
-                v.Function()
+status_team, err_team = pcall(function()
+    repeat wait()
+        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+            if _G.Team == "Pirate" then
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
+                    v.Function()
+                end
+            elseif _G.Team == "Marine" then
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do                                                                                                
+                    v.Function()
+                end
+            else
+                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
+                    v.Function()
+                end
             end
         end
-    end
-until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded()
+end)
+if err_team then print(err_team) end
 local placeId = game.PlaceId
 if placeId ~= 7449423635 then return end
 local function HopServer()
@@ -139,4 +142,4 @@ else
     if _G.NotFounded then HopServer() else send_webhook() end
 end
 end)
-print(err)
+if err then print(err)
