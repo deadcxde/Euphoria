@@ -139,7 +139,7 @@ else
     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         if string.find(v.Name, "halice") then _G.NotFounded = false end
     end
-    if _G.NotFounded then HopServer() else send_webhook() end
+    if _G.NotFounded then HopServer() return else send_webhook() return end
 end
 end)
 if err then print(err) end
