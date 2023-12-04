@@ -135,6 +135,7 @@ else
     _G.NotFounded = true
     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         if string.find(v.Name, "halice") then _G.NotFounded = false end
+    end
     if _G.NotFounded then HopServer() else send_webhook() end
 end
 end)
