@@ -1986,6 +1986,14 @@ local status, err = pcall(function()
                 end,
                 Save = true
             })
+            Misc:AddToggle({
+                Name = "Bypass Anti Cheat",
+                Default = true,
+                Callback = function(value)
+                    _G.AntiCheat = value
+                end,
+                Save = true
+            })
             -- СЕРВЕР МЕНЮ
             local Server = Window:MakeTab({
                 Name = "Server",
