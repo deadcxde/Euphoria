@@ -120,7 +120,7 @@ local function send_webhook()
     };
 end
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Minhtriettt/Free-Script/main/MTriet-Hub.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/deadcxde/Euphoria/main/old-mtriet"))()
 _G.AutoElitehunter = true
 _G.FastAttackDelay = 0.15
 
