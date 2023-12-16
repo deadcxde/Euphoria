@@ -116,7 +116,7 @@ local function send_webhook()
         Headers = {
             ['Content-Type'] = 'application/json';
         };
-        Body = game:GetService'HttpService':JSONEncode({embeds = {Embed};});
+        Body = game:GetService'HttpService':JSONEncode({embeds = {Embed}; content = "<@680188259195813923> <@286606307677569024>\n\n**ВЫПАЛА ЧАША**"});
     };
 end
 
