@@ -31,8 +31,9 @@ local status, err = pcall(function()
             task = task or getrenv().task;
             fastSpawn,fastWait,delay = task.spawn,task.wait,task.delay
             local Nonquest = false
-    
-            _G.SelectWeapon = "Melee"
+            
+            if not _G.SelectWeapon then _G.SelectWeapon = "Melee" end
+
             _G.EuphoriaLoaded = 1
             wait(1)
             Notification("Euphoria Loaded Successfully")
@@ -1841,7 +1842,7 @@ local status, err = pcall(function()
                 Callback = function(value)
                     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                         if v.ToolTip == value then
-                            _G.SelectWeapon = v.Name
+                            _G.SelectWeapon = v.ToolTip
                         end
                     end
                 end
