@@ -1831,7 +1831,7 @@ local status, err = pcall(function()
             })
             Main:AddDropdown({
                 Name = "Select Weapon",
-                Default = 'Melee',
+                Default = _G.SelectWeapon,
                 Options = {"Melee","Sword","Fruit"},
                 Callback = function(value)
                     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
