@@ -2009,6 +2009,42 @@ local status, err = pcall(function()
             })          
             
             -- ДЕБАГ МЕНЮ
+            local EventTab = Window:MakeTab({
+                Name = "Event",
+                Icon = "rbxassetid://4483345998",
+                PremiumOnly = false
+            })
+
+            local EventSection = EventTab:AddSection({
+                Name = "Event"
+            })
+    
+            EventTab:AddButton({
+                Name = "Buy 15 min exp [50 candies]",
+                Callback = function()
+                    local args = {
+                        [1] = "Candies",
+                        [2] = "Buy",
+                        [3] = 1,
+                        [4] = 1
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end    
+            })
+
+            EventTab:AddButton({
+                Name = "Buy reset stat [75 candies]",
+                Callback = function()
+                    local args = {
+                        [1] = "Candies",
+                        [2] = "Buy",
+                        [3] = 1,
+                        [4] = 2
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end    
+            })
+            
             local DebugTab = Window:MakeTab({
                 Name = "Debug",
                 Icon = "rbxassetid://4483345998",
