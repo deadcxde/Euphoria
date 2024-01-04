@@ -1305,7 +1305,9 @@ local status, err = pcall(function()
                     if _G.Kaitun or _G.AutoRejoinServer then
                         wait(0.5)
                         game:GetService("GuiService").ErrorMessageChanged:Connect(function()
-                            game:GetService("TeleportService"):Teleport(game.PlaceId)
+                            if not _G.Hopping then
+                                game:GetService("TeleportService"):Teleport(game.PlaceId)
+                            end
                         end)
                     end
                 end
@@ -1614,6 +1616,7 @@ local status, err = pcall(function()
                 while task.wait(.1) do
                     if _G.AntiCheat then
                         task.wait(1800)
+                        _G.Hopping = true
                         HopServer()
                     end
                 end
@@ -2004,6 +2007,7 @@ local status, err = pcall(function()
             Server:AddButton({
                 Name = "Hop Server",
                 Callback = function()
+                    _G.Hopping = true
                     HopServer()
                 end
             })          
@@ -2044,7 +2048,8 @@ local status, err = pcall(function()
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 end    
             })
-            
+    
+
             local DebugTab = Window:MakeTab({
                 Name = "Debug",
                 Icon = "rbxassetid://4483345998",
@@ -2124,6 +2129,7 @@ local status, err = pcall(function()
                     end
                     repeat wait() until isWorthFruitInInventory() == false
                     if _G.AutoHopServer then
+                        _G.Hopping = true
                         HopServer()
                     end
                 end)
