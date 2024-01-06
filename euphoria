@@ -915,7 +915,7 @@ local status, err = pcall(function()
             function EquipWeapon(Tool)
                 pcall(function()
                     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                        if v.ToolTip == Tool then 
+                        if string.find(v.ToolTip,Tool) then 
                             game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
                             return
                         end
