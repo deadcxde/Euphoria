@@ -425,7 +425,7 @@ local status, err = pcall(function()
                     elseif MyLevel == 625 or MyLevel <= 649 then -- Galley Pirate
                         NoNameQuest = false
                         Ms = "Galley Pirate"
-                        NameQuest = "FountaiNameQuest"
+                        NameQuest = "FountainQuest"
                         LevelQuest = 1
                         NameMon = "Galley Pirate"
                         CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
@@ -433,7 +433,7 @@ local status, err = pcall(function()
                     elseif MyLevel >= 650 then -- Galley Captain
                         NoNameQuest = false
                         Ms = "Galley Captain"
-                        NameQuest = "FountaiNameQuest"
+                        NameQuest = "FountainQuest"
                         LevelQuest = 2
                         NameMon = "Galley Captain"
                         CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
