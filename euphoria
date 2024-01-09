@@ -30,7 +30,7 @@ local status, err = pcall(function()
         if load_script == 1 then
             task = task or getrenv().task;
             fastSpawn,fastWait,delay = task.spawn,task.wait,task.delay
-            local NoNameQuest = false
+            local Nonquest = false
             
             if not _G.SelectWeapon then _G.SelectWeapon = "Melee" end
 
@@ -231,7 +231,7 @@ local status, err = pcall(function()
                 local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                 if first_sea then
                     if MyLevel == 1 or MyLevel <= 9 then -- Bandit
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Bandit"
                         NameQuest = "BanditQuest1"
                         LevelQuest = 1
@@ -239,7 +239,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(1059.37195, 15.4495068, 1550.4231, 0.939700544, -0, -0.341998369, 0, 1, -0, 0.341998369, 0, 0.939700544)
                         CFrameMon = CFrame.new(1353.44885, 3.40935516, 1376.92029, 0.776053488, -6.97791975e-08, 0.630666852, 6.99138596e-08, 1, 2.4612488e-08, -0.630666852, 2.49917598e-08, 0.776053488)
                     elseif MyLevel == 10 or MyLevel <= 14 then -- Monkey
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Monkey"
                         NameQuest = "JungleQuest"
                         LevelQuest = 1
@@ -247,7 +247,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
                         CFrameMon = CFrame.new(-1402.74609, 98.5633316, 90.6417007, 0.836947978, 0, 0.547282517, -0, 1, -0, -0.547282517, 0, 0.836947978)
                     elseif MyLevel == 15 or MyLevel <= 29 then -- Gorilla
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Gorilla"
                         NameQuest = "JungleQuest"
                         LevelQuest = 2
@@ -255,7 +255,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1598.08911, 35.5501175, 153.377838, 0, 0, 1, 0, 1, -0, -1, 0, 0)
                         CFrameMon = CFrame.new(-1267.89001, 66.2034225, -531.818115, -0.813996196, -5.25169774e-08, -0.580869019, -5.58769671e-08, 1, -1.21082593e-08, 0.580869019, 2.26011476e-08, -0.813996196)
                     elseif MyLevel >= 30 and MyLevel <= 40-1 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Pirate"
                         NameQuest = "BuggyQuest1"
                         LevelQuest = 1
@@ -263,7 +263,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
                         CFrameMon = CFrame.new(-1169.5365, 5.09531212, 3933.84082, -0.971822679, -3.73200315e-09, 0.235713184, -4.16762763e-10, 1, 1.41145424e-08, -0.235713184, 1.3618596e-08, -0.971822679)
                     elseif MyLevel >= 40 and MyLevel <= 60-1 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Brute"
                         NameQuest = "BuggyQuest1"
                         LevelQuest = 2
@@ -271,7 +271,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1141.07483, 4.10001802, 3831.5498, 0.965929627, -0, -0.258804798, 0, 1, -0, 0.258804798, 0, 0.965929627)
                         CFrameMon = CFrame.new(-1165.09985, 15.1531372, 4363.51514, -0.962800264, 1.17564889e-06, 0.270213336, 2.60172015e-07, 1, -3.4237969e-06, -0.270213336, -3.22613073e-06, -0.962800264)
                     elseif MyLevel >= 60 and MyLevel <= 75-1 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Desert Bandit"
                         NameQuest = "DesertQuest"
                         LevelQuest = 1
@@ -279,7 +279,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
                         CFrameMon = CFrame.new(932.788818, 6.8503746, 4488.24609, -0.998625934, 3.08948351e-08, 0.0524050146, 2.79967303e-08, 1, -5.60361286e-08, -0.0524050146, -5.44919629e-08, -0.998625934)
                     elseif MyLevel >= 75 and MyLevel <= 90-1 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Desert Officer"
                         NameQuest = "DesertQuest"
                         LevelQuest = 2
@@ -287,7 +287,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(894.488647, 5.14000702, 4392.43359, 0.819155693, -0, -0.573571265, 0, 1, -0, 0.573571265, 0, 0.819155693)
                         CFrameMon = CFrame.new(1617.07886, 1.5542295, 4295.54932, -0.997540116, -2.26287735e-08, -0.070099175, -1.69377223e-08, 1, -8.17798806e-08, 0.070099175, -8.03913949e-08, -0.997540116)
                     elseif MyLevel == 90 or MyLevel <= 99 then -- Snow Bandits
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Snow Bandit"
                         NameQuest = "SnowQuest"
                         LevelQuest = 1
@@ -295,7 +295,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(1389.74451, 86.6520844, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
                         CFrameMon = CFrame.new(1412.92346, 55.3503647, -1260.62036, -0.246266365, -0.0169920288, -0.969053388, 0.000432241941, 0.999844253, -0.0176417865, 0.969202161, -0.00476344163, -0.246220857)
                     elseif MyLevel == 100 or MyLevel <= 119 then -- Snowman
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Snowman"
                         NameQuest = "SnowQuest"
                         LevelQuest = 2
@@ -303,7 +303,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(1389.74451, 86.6520844, -1298.90796, -0.342042685, 0, 0.939684391, 0, 1, 0, -0.939684391, 0, -0.342042685)
                         CFrameMon = CFrame.new(1376.86401, 97.2779999, -1396.93115, -0.986755967, 7.71178321e-08, -0.162211925, 7.71531674e-08, 1, 6.08143536e-09, 0.162211925, -6.51427134e-09, -0.986755967)
                     elseif MyLevel == 120 or MyLevel <= 149 then -- Chief Petty Officer
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Chief Petty Officer"
                         NameQuest = "MarineQuest2"
                         LevelQuest = 1
@@ -311,7 +311,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-5039.58643, 27.3500385, 4324.68018, 0, 0, -1, 0, 1, 0, 1, 0, 0)
                         CFrameMon = CFrame.new(-4882.8623, 22.6520386, 4255.53516, 0.273695946, -5.40380647e-08, -0.96181643, 4.37720793e-08, 1, -4.37274998e-08, 0.96181643, -3.01326679e-08, 0.273695946)
                     elseif MyLevel == 150 or MyLevel <= 174 then -- Sky Bandit
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Sky Bandit"
                         NameQuest = "SkyQuest"
                         LevelQuest = 1
@@ -319,7 +319,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
                         CFrameMon = CFrame.new(-4959.51367, 365.39267, -2974.56812, 0.964867651, 7.74418396e-08, 0.262737453, -6.95931988e-08, 1, -3.91783708e-08, -0.262737453, 1.95171506e-08, 0.964867651)
                     elseif MyLevel == 175 or MyLevel <= 189 then -- Dark Master
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Dark Master"
                         NameQuest = "SkyQuest"
                         LevelQuest = 2
@@ -327,7 +327,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-4839.53027, 716.368591, -2619.44165, 0.866007268, 0, 0.500031412, 0, 1, 0, -0.500031412, 0, 0.866007268)
                         CFrameMon = CFrame.new(-5079.98096, 376.477356, -2194.17139, 0.465965867, -3.69776352e-08, 0.884802461, 3.40249851e-09, 1, 4.00000886e-08, -0.884802461, -1.56281423e-08, 0.465965867)
                     elseif MyLevel == 190 or MyLevel <= 209 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Prisoner"
                         LevelQuest = 1
                         NameQuest = "PrisonerQuest"
@@ -335,7 +335,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
                         CFrameMon = CFrame.new(5433.39307, 88.678093, 514.986877, 0.879988372, 0, -0.474995494, 0, 1, 0, 0.474995494, 0, 0.879988372)
                     elseif MyLevel == 210 or MyLevel <= 249 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Dangerous Prisoner"
                         LevelQuest = 2
                         NameQuest = "PrisonerQuest"
@@ -343,7 +343,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(5308.93115, 1.65517521, 475.120514, -0.0894274712, -5.00292918e-09, -0.995993316, 1.60817859e-09, 1, -5.16744869e-09, 0.995993316, -2.06384709e-09, -0.0894274712)
                         CFrameMon = CFrame.new(5433.39307, 88.678093, 514.986877, 0.879988372, 0, -0.474995494, 0, 1, 0, 0.474995494, 0, 0.879988372)
                     elseif MyLevel == 250 or MyLevel <= 274 then -- Toga Warrior
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Toga Warrior"
                         NameQuest = "ColosseumQuest"
                         LevelQuest = 1
@@ -351,7 +351,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
                         CFrameMon = CFrame.new(-1779.97583, 44.6077499, -2736.35474, 0.984437346, 4.10396339e-08, 0.175734788, -3.62286876e-08, 1, -3.05844168e-08, -0.175734788, 2.3741821e-08, 0.984437346)
                     elseif MyLevel == 275 or MyLevel <= 299 then -- Gladiato
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Gladiator"
                         NameQuest = "ColosseumQuest"
                         LevelQuest = 2
@@ -359,7 +359,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-1576.11743, 7.38933945, -2983.30762, 0.576966345, 1.22114863e-09, 0.816767931, -3.58496594e-10, 1, -1.24185606e-09, -0.816767931, 4.2370063e-10, 0.576966345)
                         CFrameMon = CFrame.new(-1274.75903, 58.1895943, -3188.16309, 0.464524001, 6.21005611e-08, 0.885560572, -4.80449414e-09, 1, -6.76054768e-08, -0.885560572, 2.71497012e-08, 0.464524001)
                     elseif MyLevel == 300 or MyLevel <= 329 then -- Military Soldier
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Military Soldier"
                         NameQuest = "MagmaQuest"
                         LevelQuest = 1
@@ -367,7 +367,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
                         CFrameMon = CFrame.new(-5363.01123, 41.5056877, 8548.47266, -0.578253984, -3.29503091e-10, 0.815856814, 9.11209668e-08, 1, 6.498761e-08, -0.815856814, 1.11920997e-07, -0.578253984)
                     elseif MyLevel == 330 or MyLevel <= 374 then -- Military Spy
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Military Spy"
                         NameQuest = "MagmaQuest"
                         LevelQuest = 2
@@ -375,7 +375,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-5316.55859, 12.2370615, 8517.2998, 0.588437557, -1.37880001e-08, -0.808542669, -2.10116209e-08, 1, -3.23446478e-08, 0.808542669, 3.60215964e-08, 0.588437557)
                         CFrameMon = CFrame.new(-5787.99023, 120.864456, 8762.25293, -0.188358366, -1.84706277e-08, 0.982100308, -1.23782129e-07, 1, -4.93306951e-09, -0.982100308, -1.22495649e-07, -0.188358366)
                     elseif MyLevel == 375 or MyLevel <= 399 then -- Fishman Warrior
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Fishman Warrior"
                         NameQuest = "FishmanQuest"
                         LevelQuest = 1
@@ -383,7 +383,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
                         CFrameMon = CFrame.new(60946.6094, 48.6735229, 1525.91687, -0.0817126185, 8.90751153e-08, 0.996655822, 2.00889794e-08, 1, -8.77269599e-08, -0.996655822, 1.28533992e-08, -0.0817126185)
                     elseif MyLevel == 400 or MyLevel <= 449 then -- Fishman Commando
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Fishman Commando"
                         NameQuest = "FishmanQuest"
                         LevelQuest = 2
@@ -391,7 +391,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(61122.5625, 18.4716396, 1568.16504)
                         CFrameMon = CFrame.new(61928.8867, 18.4828186, 1458.55127)
                     elseif MyLevel == 450 or MyLevel <= 474 then
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "God's Guard"
                         NameQuest = "SkyExp1Quest"
                         LevelQuest = 1
@@ -399,7 +399,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-4721.71436, 845.277161, -1954.20105)
                         CFrameMon = CFrame.new(-4716.95703, 853.089722, -1933.925427)
                     elseif MyLevel == 475 or MyLevel <= 524 then 
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Shanda"
                         NameQuest = "SkyExp1Quest"
                         LevelQuest = 2
@@ -407,7 +407,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-7859.09814, 5544.19043, -381.476196, -0.422592998, 0, 0.906319618, 0, 1, 0, -0.906319618, 0, -0.422592998)
                         CFrameMon = CFrame.new(-7904.57373, 5584.37646, -459.62973, 0.65171206, 5.11171692e-08, 0.758466363, -4.76232476e-09, 1, -6.33034247e-08, -0.758466363, 3.76435416e-08, 0.65171206)
                     elseif MyLevel == 525 or MyLevel <= 549 then -- Royal Squad
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Royal Squad"
                         NameQuest = "SkyExp2Quest"
                         LevelQuest = 1
@@ -415,7 +415,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
                         CFrameMon = CFrame.new(-7555.04199, 5606.90479, -1303.24744, -0.896107852, -9.6057462e-10, -0.443836004, -4.24974544e-09, 1, 6.41599973e-09, 0.443836004, 7.63560326e-09, -0.896107852)
                     elseif MyLevel == 550 or MyLevel <= 624 then -- Royal Soldier
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Royal Soldier"
                         NameQuest = "SkyExp2Quest"
                         LevelQuest = 2
@@ -423,7 +423,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(-7906.81592, 5634.6626, -1411.99194, 0, 0, -1, 0, 1, 0, 1, 0, 0)
                         CFrameMon = CFrame.new(-7837.31152, 5649.65186, -1791.08582, -0.716008604, 0.0104285581, -0.698013008, 5.02521061e-06, 0.99988848, 0.0149335321, 0.69809103, 0.0106890313, -0.715928733)
                     elseif MyLevel == 625 or MyLevel <= 649 then -- Galley Pirate
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Galley Pirate"
                         NameQuest = "FountainQuest"
                         LevelQuest = 1
@@ -431,7 +431,7 @@ local status, err = pcall(function()
                         CFrameQuest = CFrame.new(5259.81982, 37.3500175, 4050.0293, 0.087131381, 0, 0.996196866, 0, 1, 0, -0.996196866, 0, 0.087131381)
                         CFrameMon = CFrame.new(5569.80518, 38.5269432, 3849.01196, 0.896460414, 3.98027495e-08, 0.443124533, -1.34262139e-08, 1, -6.26611296e-08, -0.443124533, 5.02237434e-08, 0.896460414)
                     elseif MyLevel >= 650 then -- Galley Captain
-                        NoNameQuest = false
+                        Nonquest = false
                         Ms = "Galley Captain"
                         NameQuest = "FountainQuest"
                         LevelQuest = 2
@@ -441,7 +441,7 @@ local status, err = pcall(function()
                     end
                 end
                 if second_sea then
-                    NoNameQuest = false
+                    Nonquest = false
                     if MyLevel == 700 or MyLevel <= 724 then -- Raider
                         Ms = "Raider"
                         NameQuest = "Area1Quest"
@@ -500,14 +500,14 @@ local status, err = pcall(function()
                         CFrameMon = CFrame.new(-6030.32031, 0.4377408, -1313.5564, -0.856965423, 3.9138893e-08, -0.515373945, -1.12178942e-08, 1, 9.45958547e-08, 0.515373945, 8.68467822e-08, -0.856965423)
                     elseif MyLevel == 1000 or MyLevel <= 1049 then -- Snow Trooper **
                         Ms = "Snow Trooper"
-                        NameQuest = "SnowMountaiNameQuest"
+                        NameQuest = "SnowMountainQuest"
                         LevelQuest = 1
                         NameMon = "Snow Trooper"
                         CFrameQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
                         CFrameMon = CFrame.new(621.003418, 391.361053, -5335.43604, 0.481644779, 0, 0.876366913, 0, 1, 0, -0.876366913, 0, 0.481644779)
                     elseif MyLevel == 1050 or MyLevel <= 1099 then -- Winter Warrior
                         Ms = "Winter Warrior"
-                        NameQuest = "SnowMountaiNameQuest"
+                        NameQuest = "SnowMountainQuest"
                         LevelQuest = 2
                         NameMon = "Winter Warrior"
                         CFrameQuest = CFrame.new(609.858826, 400.119904, -5372.25928, -0.374604106, 0, 0.92718488, 0, 1, 0, -0.92718488, 0, -0.374604106)
@@ -584,14 +584,14 @@ local status, err = pcall(function()
                         CFrameMon = CFrame.new(5513.36865, 60.546711, -6809.94971, -0.958693981, -1.65617333e-08, 0.284439981, -4.07668654e-09, 1, 4.44854642e-08, -0.284439981, 4.14883701e-08, -0.958693981)
                     elseif MyLevel == 1425 or MyLevel <= 1449 then -- Sea Soldier
                         Ms = "Sea Soldier"
-                        NameQuest = "ForgotteNameQuest"
+                        NameQuest = "ForgottenQuest"
                         LevelQuest = 1
                         NameMon = "Sea Soldier"
                         CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
                         CFrameMon = CFrame.new(-3115.78223, 63.8785706, -9808.38574, -0.913427353, 3.11199457e-08, 0.407000452, 7.79564235e-09, 1, -5.89660658e-08, -0.407000452, -5.06883708e-08, -0.913427353)
                     elseif MyLevel >= 1450 then -- Water Fighter
                         Ms = "Water Fighter"
-                        NameQuest = "ForgotteNameQuest"
+                        NameQuest = "ForgottenQuest"
                         LevelQuest = 2
                         NameMon = "Water Fighter"
                         CFrameQuest = CFrame.new(-3054.44458, 235.544281, -10142.8193, 0.990270376, -0, -0.13915664, 0, 1, -0, 0.13915664, 0, 0.990270376)
@@ -781,34 +781,6 @@ local status, err = pcall(function()
                         NameMon = "Head Baker"
                         CFrameQuest = CFrame.new(-1928.31763, 37.7296638, -12840.626)
                         CFrameMon = CFrame.new(-2288.795166015625, 106.9419174194336, -12811.111328125)
-                    elseif Level == 2300 or Level <= 2324 then
-                        Ms = "Cocoa Warrior [Lv. 2300]"
-                        CFrameMon = CFrame.new(43.3896598815918, 56.341636657714844, -12324.78515625)
-                        LevelQuest = 1
-                        NameQuest = "ChocQuest1"
-                        NameMon = "Cocoa Warrior"
-                        CFrameQuest = CFrame.new(231.88818359375, 24.769283294677734, -12202.1337890625)
-                    elseif Level == 2325 or Level <= 2349 then
-                        Ms = "Chocolate Bar Battler [Lv. 2325]"
-                        CFrameMon = CFrame.new(719.6046752929688, 69.9678955078125, -12597.25390625)
-                        LevelQuest = 2
-                        NameQuest = "ChocQuest1"
-                        NameMon = "Chocolate Bar Battler"
-                        CFrameQuest = CFrame.new(231.88818359375, 24.769283294677734, -12202.1337890625)
-                    elseif Level == 2350 or Level <= 2374 then
-                        Ms = "Sweet Thief [Lv. 2350]"
-                        CFrameMon = CFrame.new(155.99618530273438, 54.82904815673828, -12580.7265625)
-                        LevelQuest = 1
-                        NameQuest = "ChocQuest2"
-                        NameMon = "Sweet Thief"
-                        CFrameQuest = CFrame.new(151.1981201171875, 24.828855514526367, -12778.08984375)
-                    elseif Level >= 2375 then
-                        Ms = "Candy Rebel [Lv. 2375]"
-                        CFrameMon = CFrame.new(-7.535787105560303, 35.526527404785156, -12896.34375)
-                        LevelQuest = 2
-                        NameQuest = "ChocQuest2"
-                        NameMon = "Candy Rebel"
-                        CFrameQuest = CFrame.new(151.1981201171875, 24.828855514526367, -12778.08984375)
                     end
                 end
     
@@ -1036,7 +1008,7 @@ local status, err = pcall(function()
                                         if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                             repeat task.wait()
                                                 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, QuestCheck()[6]) then
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandoNameQuest")
+                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                 else
                                                     PosMon = v.HumanoidRootPart.CFrame
                                                     v.HumanoidRootPart.Size = Vector3.new(90,90,90)
@@ -1408,7 +1380,7 @@ local status, err = pcall(function()
                                             if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                                 repeat task.wait()
                                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest[6]) then
-                                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandoNameQuest")
+                                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                     else
                                                         status, err = pcall(function()
                                                             PosMon = v.HumanoidRootPart.CFrame
