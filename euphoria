@@ -1439,7 +1439,7 @@ local status, err = pcall(function()
                                                 repeat task.wait()
                                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest[6]) then
                                                         print("Quest: " .. game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text)
-                                                        print("Name: " .. QuestCheck()[6])
+                                                        print("Name: " .. Quest()[6])
                                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                     else
                                                         status, err = pcall(function()
