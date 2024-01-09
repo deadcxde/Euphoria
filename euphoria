@@ -2080,31 +2080,11 @@ local status, err = pcall(function()
             })
     
             EventTab:AddButton({
-                Name = "Buy 15 min exp [50 candies]",
+                Name = "Random Surprise [50 bones]",
                 Callback = function()
-                    local args = {
-                        [1] = "Candies",
-                        [2] = "Buy",
-                        [3] = 1,
-                        [4] = 1
-                    }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones","Buy",1,1)
                 end    
-            })
-
-            EventTab:AddButton({
-                Name = "Buy reset stat [75 candies]",
-                Callback = function()
-                    local args = {
-                        [1] = "Candies",
-                        [2] = "Buy",
-                        [3] = 1,
-                        [4] = 2
-                    }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                end    
-            })
-    
+            })    
 
             local DebugTab = Window:MakeTab({
                 Name = "Debug",
