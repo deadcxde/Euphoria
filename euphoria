@@ -377,7 +377,7 @@ local status, err = pcall(function()
                     elseif MyLevel == 375 or MyLevel <= 399 then -- Fishman Warrior
                         NoNameQuest = false
                         Ms = "Fishman Warrior"
-                        NameQuest = "FishmaNameQuest"
+                        NameQuest = "FishmanQuest"
                         LevelQuest = 1
                         NameMon = "Fishman Warrior"
                         CFrameQuest = CFrame.new(61122.5625, 18.4716396, 1568.16504, 0.893533468, 3.95251609e-09, 0.448996574, -2.34327455e-08, 1, 3.78297464e-08, -0.448996574, -4.43233645e-08, 0.893533468)
@@ -385,7 +385,7 @@ local status, err = pcall(function()
                     elseif MyLevel == 400 or MyLevel <= 449 then -- Fishman Commando
                         NoNameQuest = false
                         Ms = "Fishman Commando"
-                        NameQuest = "FishmaNameQuest"
+                        NameQuest = "FishmanQuest"
                         LevelQuest = 2
                         NameMon = "Fishman Commando"
                         CFrameQuest = CFrame.new(61122.5625, 18.4716396, 1568.16504)
@@ -615,28 +615,28 @@ local status, err = pcall(function()
                         CFrameMon = CFrame.new(81.164993286133, 43.755737304688, 5724.7021484375)
                     elseif MyLevel >= 1575 and MyLevel <= 1599 then -- Dragon Crew Warrior
                         Ms = "Dragon Crew Warrior"
-                        NameQuest = "AmazoNameQuest"
+                        NameQuest = "AmazonQuest"
                         LevelQuest = 1
                         NameMon = "Dragon Crew Warrior"
                         CFrameQuest = CFrame.new(5832.83594, 51.6806107, -1101.51563, 0.898790359, -0, -0.438378751, 0, 1, -0, 0.438378751, 0, 0.898790359)
                         CFrameMon = CFrame.new(6241.9951171875, 51.522083282471, -1243.9771728516)
                     elseif MyLevel >= 1600 and MyLevel <= 1624 then -- Dragon Crew Archer
                         Ms = "Dragon Crew Archer"
-                        NameQuest = "AmazoNameQuest"
+                        NameQuest = "AmazonQuest"
                         LevelQuest = 2
                         NameMon = "Dragon Crew Archer"
                         CFrameQuest = CFrame.new(5832.83594, 51.6806107, -1101.51563, 0.898790359, -0, -0.438378751, 0, 1, -0, 0.438378751, 0, 0.898790359)
                         CFrameMon = CFrame.new(6488.9155273438, 383.38375854492, -110.66246032715)
                     elseif MyLevel >= 1625 and MyLevel <= 1649 then -- Female Islander
                         Ms = "Female Islander"
-                        NameQuest = "AmazoNameQuest2"
+                        NameQuest = "AmazonQuest2"
                         LevelQuest = 1
                         NameMon = "Female Islander"
                         CFrameQuest = CFrame.new(5448.86133, 601.516174, 751.130676, 0, 0, 1, 0, 1, -0, -1, 0, 0)
                         CFrameMon = CFrame.new(4770.4990234375, 758.95520019531, 1069.8680419922)
                     elseif MyLevel >= 1650 and MyLevel <= 1699 then -- Giant Islander
                         Ms = "Giant Islander"
-                        NameQuest = "AmazoNameQuest2"
+                        NameQuest = "AmazonQuest2"
                         LevelQuest = 2
                         NameMon = "Giant Islander"
                         CFrameQuest = CFrame.new(5448.86133, 601.516174, 751.130676, 0, 0, 1, 0, 1, -0, -1, 0, 0)
@@ -1072,7 +1072,7 @@ local status, err = pcall(function()
                                 toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
                             else
                                 if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                    if QuestCheck()[4] == 'FishmaNameQuest' then
+                                    if QuestCheck()[4] == 'FishmanQuest' then
                                         RequestEntrance(QuestCheck()[2])
                                     end
                                     Bypass(QuestCheck()[2])
@@ -1390,7 +1390,7 @@ local status, err = pcall(function()
                                 end
                             else
                                 if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                    if Quest[4] == 'FishmaNameQuest' then
+                                    if Quest[4] == 'FishmanQuest' then
                                         RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
                                     elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
                                         if Quest[4] == 'SkyExp1Quest' and Quest[1] == 1 then
@@ -1475,7 +1475,7 @@ local status, err = pcall(function()
                                         --     toTarget(Quest[7] * CFrame.new(0,30,20))
                                         -- else
                                         if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                            if Quest[4] == 'FishmaNameQuest' then
+                                            if Quest[4] == 'FishmanQuest' then
                                                 RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
                                             elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
                                                 RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
@@ -1497,7 +1497,7 @@ local status, err = pcall(function()
                                 end 
                             elseif second_sea or third_sea then
                                 if (Quest[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                    if Quest[4] == 'FishmaNameQuest' then
+                                    if Quest[4] == 'FishmanQuest' then
                                         RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
                                     elseif Quest[4] == 'SkyExp1Quest' or Quest[4] == 'SkyExp2Quest' then 
                                         RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
