@@ -828,7 +828,7 @@ local status, err = pcall(function()
                         CFrameMon = CFrame.new(-16191.3447, 21.656559, 968.527344)
                         LevelQuest = 1
                         NameQuest = "TikiQuest2"
-                        NameMon = "Sun-kissed"
+                        NameMon = "kissed"
                         CFrameQuest = CFrame.new(-16539.3359, 55.6565514, 1050.70544)
                     elseif MyLevel >= 2525 then
                         Ms = "Isle Champion"
@@ -1439,7 +1439,7 @@ local status, err = pcall(function()
                                                 repeat task.wait()
                                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest[6]) then
                                                         print("Quest: " .. game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text)
-                                                        print("Name: " .. Quest()[6])
+                                                        print("Name: " .. Quest[6])
                                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                     else
                                                         status, err = pcall(function()
