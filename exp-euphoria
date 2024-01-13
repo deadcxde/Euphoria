@@ -942,7 +942,10 @@ local status, err = pcall(function()
                     pcall(function()
                         if _G.Auto_Farm and BringMobFarm then
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= 400 then
+                                if first_sea then range = 400 end
+                                if second_sea then range = 200 end
+                                if first_sea then range = 400 end
+                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= range then
                                     if InMyNetWork(v.HumanoidRootPart) then
                                         v.HumanoidRootPart.CFrame = PosMon
                                         v.Humanoid.JumpPower = 0
