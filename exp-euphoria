@@ -1935,7 +1935,7 @@ local status, err = pcall(function()
             local libUrl = "https://raw.githubusercontent.com/deadcxde/euphoria/main/lib/ui.lua"
             local Library = loadstring(game:HttpGet(libUrl))()
             local Window = Library.CreateLib("Euphoria - made with hate", "DarkTheme")
-            local MainTab = Window:NewTab("Main")
+            
             
 
             local DefaultSettings = {
@@ -1958,7 +1958,7 @@ local status, err = pcall(function()
 
 
             _G.Auto_Farm = false
-
+            local MainTab = Window:NewTab("Main")
             local MainFarmSection = MainTab:NewSection("Farm")
 
             MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", function(state)
@@ -2034,7 +2034,7 @@ local status, err = pcall(function()
             end)
 
             local FruitTab = Window:NewTab("Fruit")
-            local FruitSection = StatsTab:NewSection("Fruit")
+            local FruitSection = FruitTab:NewSection("Fruit")
             FruitSection:NewButton("Open Fruit Shop", "Open Fruit Shop", function()
                 local args = {
                     [1] = "GetFruits"
@@ -2046,7 +2046,7 @@ local status, err = pcall(function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin" , "Buy")
             end)
             local MiscTab = Window:NewTab("Misc")
-            local MiscSection = StatsTab:NewSection("Misc")
+            local MiscSection = MiscTab:NewSection("Misc")
             fu = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
                 _G.AntiAFK = value
             end)
@@ -2057,7 +2057,7 @@ local status, err = pcall(function()
             fu:UpdateToggle()
 
             local ServerTab = Window:NewTab("Server")
-            local ServerSection = StatsTab:NewSection("Server")
+            local ServerSection = ServerTab:NewSection("Server")
             ServerSection:NewButton("Rejoin Server", "Rejoin Server", function()
                 local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) 
             end)
