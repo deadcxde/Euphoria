@@ -32,7 +32,7 @@ local status, err = pcall(function()
             fastSpawn,fastWait,delay = task.spawn,task.wait,task.delay
             local Nonquest = false
     
-            _G.SelectWeapon = "Melee"
+            _G.SelectWeapon = _G.SelectWeapon or "Melee"
             _G.EuphoriaLoaded = 1
             wait(1)
             Notification("Euphoria Loaded Successfully")
