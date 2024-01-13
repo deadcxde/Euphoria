@@ -1932,66 +1932,53 @@ local status, err = pcall(function()
                 end
             end
 
+            local libUrl = "https://raw.githubusercontent.com/deadcxde/euphoria/main/lib/ui.lua"
+            local Library = loadstring(game:HttpGet(libUrl))()
+            local Window = Library.CreateLib("Euphoria - made with hate", "DarkTheme")
+            local MainTab = Window:NewTab("Main")
+            
+
+            local DefaultSettings = {
+                ["lastjobid"] = "", 
+                ["uibutton"] = Enum.KeyCode.RightShift
+            }
+
+            local SettingsFile = "EuphoriaUI.json"
+            function LoadSettings()
+                local status, err = pcall(function()
+                    Settings = game:GetService('HttpService'):JSONDecode(readfile(SettingsFile))
+                end)
+                if not err then return Settings else return false end
+            end
+
+            function WriteSettings()
+                writefile(SettingsFile, game:GetService('HttpService'):JSONEncode(getgenv().Settings))
+                print(game:GetService('HttpService'):JSONEncode(getgenv().Settings))
+            end
 
 
-
-            local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-            local Window = OrionLib:MakeWindow({Name = "Euphoria 0_o", HidePremium = false, SaveConfig = true, ConfigFolder = "euphoriacfg"})
-            local Main = Window:MakeTab({
-                Name = "Main",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
             _G.Auto_Farm = false
-    
-    
-            local AutoFarmSection = Main:AddSection({
-                Name = "Farm"
-            })
-            Main:AddToggle({
-                Name = "Auto Farm",
-                Default = false,
-                Callback = function(value)
-                    _G.Auto_Farm = value
-                    Auto_Farm_Level = value
-                end,
-                Save = true
-            })
-            Main:AddToggle({
-                Name = "Auto Farm Player",
-                Default = false,
-                Callback = function(value)
-                    _G.AutoFarmPlayer = value
-                end,
-                Save = true
-            })
-            Main:AddDropdown({
-                Name = "Select Weapon",
-                Default = 'Melee',
-                Options = {"Melee","Sword","Fruit"},
-                Callback = function(value)
-                    _G.SelectWeapon = value
-                end
-            })
-            Main:AddToggle({
-                Name = "Fast Attack",
-                Default = true,
-                Callback = function(value)
-                    _G.FastAttack = value
-                end,
-                Save = true
-            })
-            Main:AddToggle({
-                Name = "Fast Tween",
-                Default = true,
-                Callback = function(value)
-                    _G.FastTween = value
-                end,
-                Save = true
-            })
-            Main:AddButton({
-                Name = "Redeem All Codes",
-                Callback = function()
+
+            local MainFarmSection = MainTab:NewSection("Farm")
+
+            MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", false, function(state)
+                _G.Auto_Farm = state
+                Auto_Farm_Level = state
+            end)
+            MainFarmSection:NewToggle("Auto Farm Player", "Auto Farm Player", false, function(state)
+                _G.AutoFarmPlayer = state
+            end)
+            _G.SelectWeapon = _G.SelectWeapon or "Melee"
+            MainFarmSection:NewDropdown("Select Weapon", "Select Weapon", {"Melee", "Sword", "Fruit"}, function(currentOption)
+                _G.SelectWeapon = currentOption
+            end)
+            MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", true, function(state)
+                _G.FastAttack = state
+            end)
+            MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", true, function(state)
+                _G.FastTween = state
+            end)
+            MainFarmSection:NewButton("Redeem All Codes", "Redeem All Codes", function()
                     local redeem = function(code)
                         local args = {
                             [1] = code
@@ -2022,189 +2009,168 @@ local status, err = pcall(function()
                     redeem("Axiore")
                     redeem("TantaiGaming")               
                 end
-            })
-    
+            )
+            local StatsTab = Window:NewTab("Stats")
+            local StatsSection = StatsTab:NewSection("Stats")
             -- СТАТЫ
-            local Stats = Window:MakeTab({
-                Name = "Stats",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
-            Stats:AddToggle({
-                Name = "Melee",
-                Default = false,
-                Callback = function(value)
-                    _G.LearnMelee = value
-                end,
-                Save = true
-            })
-            Stats:AddToggle({
-                Name = "Defense",
-                Default = false,
-                Callback = function(value)
-                    _G.LearnDefense = value
-                end,
-                Save = true
-            })
-            Stats:AddToggle({
-                Name = "Sword",
-                Default = false,
-                Callback = function(value)
-                    _G.LearnSword = value
-                end,
-                Save = true
-            })
-            Stats:AddToggle({
-                Name = "Gun",
-                Default = false,
-                Callback = function(value)
-                    _G.LearnGun = value
-                end,
-                Save = true
-            })
-            Stats:AddToggle({
-                Name = "Fruit",
-                Default = false,
-                Callback = function(value)
-                    _G.LearnFruit = value
-                end,
-                Save = true
-            })
-            StatSlider = Stats:AddSlider({
-                Name = "Learn Rate",
-                Min = 1,
-                Max = 30,
-                Default = 1,
-                Color = Color3.fromRGB(255,255,255),
-                Increment = 1,
-                ValueName = "points",
-                Callback = function(Value)
-                    _G.LearnRate = Value
-                end    
-            })
-    
-            -- ФРУКТ МЕНЮ
-            local Fruit = Window:MakeTab({
-                Name = "Fruit",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
-            Fruit:AddButton({
-                Name = "Open Fruit Shop",
-                Callback = function()
-                    local args = {
-                        [1] = "GetFruits"
-                    }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                    game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
+            StatsSection:NewToggle("Melee", "Melee", false, function(state)
+                _G.LearnMelee = state
+            end)
+            StatsSection:NewToggle("Defense", "Defense", false, function(state)
+                _G.LearnDefense = state
+            end)
+            StatsSection:NewToggle("Sword", "Sword", false, function(state)
+                _G.LearnSword = state
+            end)
+            StatsSection:NewToggle("Gun", "Gun", false, function(state)
+                _G.LearnGun = state
+            end)
+            StatsSection:NewToggle("Fruit", "Fruit", false, function(state)
+                _G.LearnFruit = state
+            end)
+            StatsSection:NewSlider("Learn Rate", "Learn Rate", 1, 30, function(s) -- 500 (MaxValue) | 0 (MinValue)
+                _G.LearnRate = s
+            end)
+
+            local FruitTab = Window:NewTab("Fruit")
+            local FruitSection = StatsTab:NewSection("Fruit")
+            FruitSection:NewButton("Open Fruit Shop", "Open Fruit Shop", function()
+                local args = {
+                    [1] = "GetFruits"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
+            end)
+            FruitSection:NewButton("Random Fruit", "Random Fruit", function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin" , "Buy")
+            end)
+            local MiscTab = Window:NewTab("Misc")
+            local MiscSection = StatsTab:NewSection("Misc")
+            MiscSection:NewToggle("Anti AFK", "Anti AFK", true, function(state)
+                _G.AntiAFK = value
+            end)
+            MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", true, function(state)
+                _G.AntiCheat = value
+            end)
+            local ServerTab = Window:NewTab("Server")
+            local ServerSection = StatsTab:NewSection("Server")
+            ServerSection:NewButton("Rejoin Server", "Rejoin Server", function()
+                local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) 
+            end)
+            ServerSection:NewButton("Hop Server", "Hop Server", function()
+                HopServer()
+            end)
+            ServerSection:NewLabel(" ")
+            local lj = getgenv().Settings["lastjobid"] or " "
+            local lastJobId = ServerSection:NewLabel("Last JobID: " .. lj)
+            ServerSection:NewTextBox("Job ID", "Job ID", function(jobid)
+                _G.JobID = jobid
+            end)
+            ServerSection:NewButton("Hop server to JobID", "TP to another server by JobID", function()
+                getgenv().Settings["lastjobid"] = _G.JobID
+                WriteSettings()
+                game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, _G.JobID)
+            end)
+            ServerSection:NewButton("Hop to last JobID", "TP to another server by JobID", function()
+                if getgenv().Settings["lastjobid"] then
+                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, getgenv().Settings["lastjobid"])
                 end
-            })
-    
-            local Misc = Window:MakeTab({
-                Name = "Misc",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
-            Misc:AddToggle({
-                Name = "Anti AFK",
-                Default = true,
-                Callback = function(value)
-                    _G.AntiAFK = value
-                end,
-                Save = true
-            })
-            Misc:AddToggle({
-                Name = "Bypass Anti Cheat",
-                Default = true,
-                Callback = function(value)
-                    _G.AntiCheat = value
-                end,
-                Save = true
-            })
-            -- СЕРВЕР МЕНЮ
-            local Server = Window:MakeTab({
-                Name = "Server",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
-            Server:AddButton({
-                Name = "Rejoin Server",
-                Callback = function()
-                    local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) 
+            end)
+            ServerSection:NewButton("Copy my JobID", "Copy to clipboard JobID", function()
+                setclipboard(game.JobId)
+            end)
+
+            function findKeyCode(keyNum)
+                for i,v in pairs(Enum.KeyCode:GetEnumItems()) do
+                    if v.Value == keyNum then
+                        return v
+                    end
                 end
-            })
-            Server:AddButton({
-                Name = "Hop Server",
-                Callback = function()
-                    HopServer()
-                end
-            })          
+                return Enum.KeyCode.RightShift
+            end
             
-            -- ДЕБАГ МЕНЮ
-            local DebugTab = Window:MakeTab({
-                Name = "Debug",
-                Icon = "rbxassetid://4483345998",
-                PremiumOnly = false
-            })
-    
-            local DebugSection = DebugTab:AddSection({
-                Name = "Debug"
-            })
-    
-            DebugTab:AddButton({
-                Name = "IY ADMIN",
-                Callback = function()
-                        loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+            local uiTab = Window:NewTab("UI Settings")
+            local uiSection = uiTab:NewSection("UI Settings")
+            uiSection:NewKeybind("Show/Hide UI (Default: RShift)", "Shows and Hide UI", findKeyCode(getgenv().Settings["uibutton"]), function(key)
+                Library:ToggleUI()
+                _G.LastKey = key
+                print(_G.LastKey)
+            end)
+            spawn(
+                function()
+                    while wait() do
+                        if _G.LastKey.Value ~= getgenv().Settings["uibutton"] and _G.LastKey ~= nil then
+                            print("Changed to")
+                            print(_G.LastKey)
+                            print("=========")
+                            getgenv().Settings["uibutton"] = _G.LastKey.Value
+                            wait(1)
+                            WriteSettings()
+                        end
+                        wait(2)
+                    end
+                end
+            )
+            
+            local debugTab = Window:NewTab("Debug Menu")
+            local debugSection = debugTab:NewSection("Debug")
+            debugSection:NewButton("Copy CFrame", "Copy to clipboard position", function()
+                setclipboard(tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame))
+            end)
+            debugSection:NewButton("Copy Vector3", "Copy to clipboard position", function()
+                setclipboard("Vector3.new(" .. tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position) .. ")")
+            end)
+            debugSection:NewLabel(" ")
+            debugSection:NewButton(
+                "IY ADMIN",
+                "IY ADMIN",
+                function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
                 end    
-            })
-    
-            DebugTab:AddButton({
-                Name = "CMD-X",
-                Callback = function()
-                        loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source",true))()
+            )
+            debugSection:NewButton(
+                "CMD-X",
+                "CMD-X",
+                function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source"))()
                 end    
-            })
-    
-            local Section = DebugTab:AddSection({
-                Name = "DEX"
-            })
-    
-            DebugTab:AddButton({
-                Name = "dark dex",
-                Callback = function()
-                        loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+            )
+            debugSection:NewButton(
+                "DEX",
+                "dark dex",
+                function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
                 end    
-            })
-    
-            local Section = DebugTab:AddSection({
-                Name = "Spy"
-            })
-    
-            DebugTab:AddButton({
-                Name = "Simple Spy",
-                Callback = function()
-                        loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
+            )
+            debugSection:NewButton(
+                "Simple Spy",
+                "Simple Spy",
+                function()
+                    loadstring(game:HttpGet("https://raw.githubusercontent.com/exxtremestuffs/SimpleSpySource/master/SimpleSpy.lua"))()
                 end    
-            })
+            )
             
             if _G.Kaitun or _G.AutoJoinTeam then
-                repeat wait()
-                    if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
-                        if _G.Team == "Pirate" then
-                            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
-                                v.Function()
-                            end
-                        elseif _G.Team == "Marine" then
-                            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do                                                                                                
-                                v.Function()
-                            end
-                        else
-                            for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
-                                v.Function()
+                st, er = pcall(function()
+                    repeat wait()
+                        if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main").ChooseTeam.Visible == true then
+                            if _G.Team == "Pirate" then
+                                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
+                                    v.Function()
+                                end
+                            elseif _G.Team == "Marine" then
+                                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.TextButton.Activated)) do                                                                                                
+                                    v.Function()
+                                end
+                            else
+                                for i, v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.TextButton.Activated)) do                                                                                                
+                                    v.Function()
+                                end
                             end
                         end
-                    end
-                until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded() 
+                    until game.Players.LocalPlayer.Team ~= nil and game:IsLoaded() 
+                end)
+                if er then print(er) end
             end
 
             if _G.AutoFarmFruit then
