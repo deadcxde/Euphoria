@@ -943,7 +943,13 @@ local status, err = pcall(function()
                         if _G.Auto_Farm and BringMobFarm then
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
                                 if first_sea then range = 400 end
-                                if second_sea then range = 200 end
+                                if second_sea then
+                                    if GetIsLand(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) == "Ship" then
+                                        range = 50 
+                                    else
+                                        range = 400
+                                    end 
+                                end
                                 if first_sea then range = 400 end
                                 if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= range then
                                     if InMyNetWork(v.HumanoidRootPart) then
