@@ -1953,6 +1953,15 @@ local status, err = pcall(function()
                 writefile(SettingsFile, game:GetService('HttpService'):JSONEncode(getgenv().Settings))
                 print(game:GetService('HttpService'):JSONEncode(getgenv().Settings))
             end
+            
+            getgenv().Settings = DefaultSettings
+            settings = LoadSettings()
+            if settings then
+                for i,v in pairs(settings) do
+                    getgenv().Settings[i] = v
+                end 
+            end
+            WriteSettings()
 
 
             _G.Auto_Farm = false
