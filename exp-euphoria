@@ -1511,12 +1511,19 @@ local status, err = pcall(function()
                                     end
                                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                                         if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                            if Quest.QuestName == 'FishmanQuest' then
-                                                RequestEntrance(Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-                                            elseif Quest.QuestName == 'SkyExp1Quest' or Quest.QuestName == 'SkyExp2Quest' then 
-                                                RequestEntrance(Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875))
-                                            else
-                                                Bypass(Quest.QuestGiverPosition)
+                                            if getDistance(Quest.QuestGiverPosition) > 8000 then
+                                                useNearestEntrance(Quest.QuestGiverPosition)
+                                                wait(.2)
+                                                if getDistance(Quest.QuestGiverPosition) > 10000 then
+                                                    Bypass(Quest.QuestGiverPosition)
+                                                    wait(.2)
+                                                    if getDistance(Quest.QuestGiverPosition) > 3000 then
+                                                        repeat wait()
+                                                            tf = toTarget(Quest.QuestGiverPosition)
+                                                        until getDistance(Quest.QuestGiverPosition) < 500
+                                                        tf:Stop()
+                                                    end
+                                                end
                                             end
                                         else
                                             repeat wait() toTarget(Quest.QuestGiverPosition) until (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 60
@@ -1532,9 +1539,83 @@ local status, err = pcall(function()
                                     end
                                 end 
                             end
+                        elseif second_sea then
+                            if QuestC.Visible == true then
+                                if getDistance(Quest.QuestGiverPosition) > 8000 then
+                                    useNearestEntrance(Quest.QuestGiverPosition)
+                                    wait(.2)
+                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
+                                        Bypass(Quest.QuestGiverPosition)
+                                        wait(.2)
+                                        if getDistance(Quest.QuestGiverPosition) > 3000 then
+                                            repeat wait()
+                                                tf = toTarget(Quest.QuestGiverPosition)
+                                            until getDistance(Quest.QuestGiverPosition) < 500
+                                            tf:Stop()
+                                        end
+                                    end
+                                end
+                                if game:GetService("Workspace").Enemies:FindFirstChild(Quest.NPCName) then
+                                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                        if v.Name == Quest.NPCName then
+                                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                                repeat task.wait()
+                                                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.NPCName) then
+                                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                                    else
+                                                        status, err = pcall(function()
+                                                            PosMon = v.HumanoidRootPart.CFrame
+                                                            v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                                            v.HumanoidRootPart.CanCollide = false
+                                                            v.Humanoid.WalkSpeed = 0
+                                                            v.Head.CanCollide = false
+                                                            BringMobFarm = true
+                                                            EquipWeapon(_G.SelectWeapon)
+                                                            v.HumanoidRootPart.Transparency = 1
+                                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                                                        end)
+                                                        if err then print(err) end
+                                                    end
+                                                until not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                            end
+                                        end
+                                    end
+                                else
+                                    toTarget(Quest.NPCPosition * CFrame.new(0,30,5))
+                                    if (Quest.NPCPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
+                                        wait(0.5)
+                                    end
+                                end
+                            else
+                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                                    if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
+                                        if getDistance(Quest.QuestGiverPosition) > 8000 then
+                                            useNearestEntrance(Quest.QuestGiverPosition)
+                                            wait(.2)
+                                            if getDistance(Quest.QuestGiverPosition) > 10000 then
+                                                Bypass(Quest.QuestGiverPosition)
+                                                wait(.2)
+                                                if getDistance(Quest.QuestGiverPosition) > 3000 then
+                                                    repeat wait()
+                                                        tf = toTarget(Quest.QuestGiverPosition)
+                                                    until getDistance(Quest.QuestGiverPosition) < 500
+                                                    tf:Stop()
+                                                end
+                                            end
+                                        end
+                                    else
+                                        repeat wait() toTarget(Quest.QuestGiverPosition) until (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 60
+                                    end
+                                    if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 40 then
+                                        BringMobFarm = true
+                                        wait(0.2)
+                                        game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", Quest.QuestName, Quest.QuestLevel) wait(0.5)
+                                        toTarget(Quest.NPCPosition * CFrame.new(0,30,20))
+                                    end
+                                end
+                            end
                         end
-                    end
-                    
+                    end 
                 end
             end)
 
