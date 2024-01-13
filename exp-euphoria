@@ -1961,21 +1961,22 @@ local status, err = pcall(function()
 
             local MainFarmSection = MainTab:NewSection("Farm")
 
-            MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", false, function(state)
+            MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", function(state)
                 _G.Auto_Farm = state
                 Auto_Farm_Level = state
             end)
-            MainFarmSection:NewToggle("Auto Farm Player", "Auto Farm Player", false, function(state)
+            MainFarmSection:NewToggle("Auto Farm Player", "Auto Farm Player", function(state)
                 _G.AutoFarmPlayer = state
             end)
             _G.SelectWeapon = _G.SelectWeapon or "Melee"
             MainFarmSection:NewDropdown("Select Weapon", "Select Weapon", {"Melee", "Sword", "Fruit"}, function(currentOption)
                 _G.SelectWeapon = currentOption
             end)
-            MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", true, function(state)
+            MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", function(state)
                 _G.FastAttack = state
             end)
-            MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", true, function(state)
+
+            MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", function(state)
                 _G.FastTween = state
             end)
             MainFarmSection:NewButton("Redeem All Codes", "Redeem All Codes", function()
@@ -2013,19 +2014,19 @@ local status, err = pcall(function()
             local StatsTab = Window:NewTab("Stats")
             local StatsSection = StatsTab:NewSection("Stats")
             -- СТАТЫ
-            StatsSection:NewToggle("Melee", "Melee", false, function(state)
+            StatsSection:NewToggle("Melee", "Melee", function(state)
                 _G.LearnMelee = state
             end)
-            StatsSection:NewToggle("Defense", "Defense", false, function(state)
+            StatsSection:NewToggle("Defense", "Defense", function(state)
                 _G.LearnDefense = state
             end)
-            StatsSection:NewToggle("Sword", "Sword", false, function(state)
+            StatsSection:NewToggle("Sword", "Sword", function(state)
                 _G.LearnSword = state
             end)
-            StatsSection:NewToggle("Gun", "Gun", false, function(state)
+            StatsSection:NewToggle("Gun", "Gun", function(state)
                 _G.LearnGun = state
             end)
-            StatsSection:NewToggle("Fruit", "Fruit", false, function(state)
+            StatsSection:NewToggle("Fruit", "Fruit", function(state)
                 _G.LearnFruit = state
             end)
             StatsSection:NewSlider("Learn Rate", "Learn Rate", 1, 30, function(s) -- 500 (MaxValue) | 0 (MinValue)
@@ -2046,12 +2047,15 @@ local status, err = pcall(function()
             end)
             local MiscTab = Window:NewTab("Misc")
             local MiscSection = StatsTab:NewSection("Misc")
-            MiscSection:NewToggle("Anti AFK", "Anti AFK", true, function(state)
+            fu = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
                 _G.AntiAFK = value
             end)
-            MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", true, function(state)
+            fu:UpdateToggle()
+            fu = MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", function(state)
                 _G.AntiCheat = value
             end)
+            fu:UpdateToggle()
+
             local ServerTab = Window:NewTab("Server")
             local ServerSection = StatsTab:NewSection("Server")
             ServerSection:NewButton("Rejoin Server", "Rejoin Server", function()
