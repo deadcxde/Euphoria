@@ -1488,7 +1488,6 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 local opened = false
                 local DropYSize = 33
 
-
                 local dropFrame = Instance.new("Frame")
                 local dropOpen = Instance.new("TextButton")
                 local listImg = Instance.new("ImageLabel")
