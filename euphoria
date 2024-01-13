@@ -1448,7 +1448,7 @@ local status, err = pcall(function()
                                                     tf = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                                 end
                                             end
-                                        until not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                        until not v or not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         _G.KillingPlayer = false
                                     end
                                 else
