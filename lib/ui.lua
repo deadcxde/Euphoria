@@ -985,7 +985,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 end)()
             end 
 
-                function Elements:NewToggle(tname, nTip, callback)
+                function Elements:NewToggle(tname, nTip, default, callback)
                     local TogFunction = {}
                     tname = tname or "Toggle"
                     nTip = nTip or "Prints Current Toggle State"
@@ -1234,7 +1234,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     return TogFunction
             end
 
-            function Elements:NewSlider(slidInf, slidTip, maxvalue, minvalue, callback)
+            function Elements:NewSlider(slidInf, slidTip, minvalue, maxvalue, callback)
                 slidInf = slidInf or "Slider"
                 slidTip = slidTip or "Slider tip here"
                 maxvalue = maxvalue or 500
@@ -1776,7 +1776,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                             c:Destroy()         
                         else
                             for i,v in next, infoContainer:GetChildren() do
-                                Utility:TweenObject(v, {Position = UDim2.new(0,0,2,0)}, 0.2)
+                                Utility:TweenObject(Fv, {Position = UDim2.new(0,0,2,0)}, 0.2)
                                 focusing = false
                             end
                             Utility:TweenObject(blurFrame, {BackgroundTransparency = 1}, 0.2)
