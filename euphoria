@@ -1401,18 +1401,16 @@ local status, err = pcall(function()
                                     for i, plr in pairs(game:GetService("Players"):GetChildren()) do
                                         -- Сокращение дистанции до игрока
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
-                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 8000 then
-                                                useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
+                                            useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
+                                            wait(.2)
+                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 4000 then
+                                                Bypass(plr.Character.HumanoidRootPart.CFrame)
                                                 wait(.2)
-                                                if getDistance(plr.Character.HumanoidRootPart.CFrame) > 10000 then
-                                                    Bypass(plr.Character.HumanoidRootPart.CFrame)
-                                                    wait(.2)
-                                                    if getDistance(plr.Character.HumanoidRootPart.CFrame) > 3000 then
-                                                        repeat wait()
-                                                            tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
-                                                        until getDistance(plr.Character.HumanoidRootPart.CFrame) < 500
-                                                        tf:Stop()
-                                                    end
+                                                if getDistance(plr.Character.HumanoidRootPart.CFrame) > 3000 then
+                                                    repeat wait()
+                                                        tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
+                                                    until getDistance(plr.Character.HumanoidRootPart.CFrame) < 500
+                                                    tf:Stop()
                                                 end
                                             end
                                         end
@@ -1448,24 +1446,24 @@ local status, err = pcall(function()
                                                     tf = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                                 end
                                             end
-                                        until not v or not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                        until not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
                                         _G.KillingPlayer = false
                                     end
                                 else
-                                    if getDistance(Quest.QuestGiverPosition) > 8000 then
-                                        useNearestEntrance(Quest.QuestGiverPosition)
+
+                                    useNearestEntrance(Quest.QuestGiverPosition)
+                                    wait(.2)
+                                    if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                        Bypass(Quest.QuestGiverPosition)
                                         wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                            Bypass(Quest.QuestGiverPosition)
-                                            wait(.2)
-                                            if getDistance(Quest.QuestGiverPosition) > 3000 then
-                                                repeat wait()
-                                                    tf = toTarget(Quest.QuestGiverPosition)
-                                                until getDistance(Quest.QuestGiverPosition) < 500
-                                                tf:Stop()
-                                            end
+                                        if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                            repeat wait()
+                                                tf = toTarget(Quest.QuestGiverPosition)
+                                            until getDistance(Quest.QuestGiverPosition) < 10
+                                            tf:Stop()
                                         end
                                     end
+
                                     if game:GetService("Workspace").Enemies:FindFirstChild(Quest.NPCName) then
                                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                             if v.Name == Quest.NPCName then
@@ -1519,18 +1517,16 @@ local status, err = pcall(function()
                                     end
                                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                                         if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                            if getDistance(Quest.QuestGiverPosition) > 8000 then
-                                                useNearestEntrance(Quest.QuestGiverPosition)
+                                            useNearestEntrance(Quest.QuestGiverPosition)
+                                            wait(.2)
+                                            if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                                Bypass(Quest.QuestGiverPosition)
                                                 wait(.2)
-                                                if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                                    Bypass(Quest.QuestGiverPosition)
-                                                    wait(.2)
-                                                    if getDistance(Quest.QuestGiverPosition) > 3000 then
-                                                        repeat wait()
-                                                            tf = toTarget(Quest.QuestGiverPosition)
-                                                        until getDistance(Quest.QuestGiverPosition) < 500
-                                                        tf:Stop()
-                                                    end
+                                                if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                                    repeat wait()
+                                                        tf = toTarget(Quest.QuestGiverPosition)
+                                                    until getDistance(Quest.QuestGiverPosition) < 10
+                                                    tf:Stop()
                                                 end
                                             end
                                         else
@@ -1549,18 +1545,16 @@ local status, err = pcall(function()
                             end
                         elseif second_sea or third_sea then
                             if QuestC.Visible == true then
-                                if getDistance(Quest.QuestGiverPosition) > 8000 then
-                                    useNearestEntrance(Quest.QuestGiverPosition)
+                                useNearestEntrance(Quest.QuestGiverPosition)
+                                wait(.2)
+                                if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                    Bypass(Quest.QuestGiverPosition)
                                     wait(.2)
-                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                        Bypass(Quest.QuestGiverPosition)
-                                        wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 3000 then
-                                            repeat wait()
-                                                tf = toTarget(Quest.QuestGiverPosition)
-                                            until getDistance(Quest.QuestGiverPosition) < 500
-                                            tf:Stop()
-                                        end
+                                    if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                        repeat wait()
+                                            tf = toTarget(Quest.QuestGiverPosition)
+                                        until getDistance(Quest.QuestGiverPosition) < 10
+                                        tf:Stop()
                                     end
                                 end
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Quest.NPCName) then
@@ -1597,18 +1591,16 @@ local status, err = pcall(function()
                             else
                                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                                     if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                        if getDistance(Quest.QuestGiverPosition) > 8000 then
-                                            useNearestEntrance(Quest.QuestGiverPosition)
+                                        useNearestEntrance(Quest.QuestGiverPosition)
+                                        wait(.2)
+                                        if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                            Bypass(Quest.QuestGiverPosition)
                                             wait(.2)
-                                            if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                                Bypass(Quest.QuestGiverPosition)
-                                                wait(.2)
-                                                if getDistance(Quest.QuestGiverPosition) > 3000 then
-                                                    repeat wait()
-                                                        tf = toTarget(Quest.QuestGiverPosition)
-                                                    until getDistance(Quest.QuestGiverPosition) < 500
-                                                    tf:Stop()
-                                                end
+                                            if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                                repeat wait()
+                                                    tf = toTarget(Quest.QuestGiverPosition)
+                                                until getDistance(Quest.QuestGiverPosition) < 10
+                                                tf:Stop()
                                             end
                                         end
                                     else
