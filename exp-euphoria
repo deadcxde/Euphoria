@@ -1936,8 +1936,6 @@ local status, err = pcall(function()
             local Library = loadstring(game:HttpGet(libUrl))()
             local Window = Library.CreateLib("Euphoria - made with hate", "DarkTheme")
             
-            
-
             local DefaultSettings = {
                 ["lastjobid"] = "", 
                 ["uibutton"] = Enum.KeyCode.RightShift
@@ -1972,13 +1970,14 @@ local status, err = pcall(function()
             MainFarmSection:NewDropdown("Select Weapon", "Select Weapon", {"Melee", "Sword", "Fruit"}, function(currentOption)
                 _G.SelectWeapon = currentOption
             end)
-            MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", function(state)
+            fu = MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", function(state)
                 _G.FastAttack = state
             end)
-
-            MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", function(state)
+            fu:UpdateToggle(nil, true)
+            fu = MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", function(state)
                 _G.FastTween = state
             end)
+            fu:UpdateToggle(nil, true)
             MainFarmSection:NewButton("Redeem All Codes", "Redeem All Codes", function()
                     local redeem = function(code)
                         local args = {
@@ -2050,11 +2049,11 @@ local status, err = pcall(function()
             fu = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
                 _G.AntiAFK = value
             end)
-            fu:UpdateToggle()
+            fu:UpdateToggle(nil, true)
             fu = MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", function(state)
                 _G.AntiCheat = value
             end)
-            fu:UpdateToggle()
+            fu:UpdateToggle(nil, true)
 
             local ServerTab = Window:NewTab("Server")
             local ServerSection = ServerTab:NewSection("Server")
