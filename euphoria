@@ -1672,8 +1672,7 @@ local status, err = pcall(function()
                 while task.wait(.1) do
                     if _G.AntiCheat then
                         task.wait(1800)
-                        _G.Hopping = true
-                        HopServer()
+                        local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) 
                     end
                 end
             end)()
