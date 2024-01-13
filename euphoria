@@ -842,6 +842,7 @@ local status, err = pcall(function()
                     QuestLevel = LevelQuest,
                     QuestGiverPosition = CFrameQuest,
                     NPCName = Ms,
+                    QuestNPCName = NameMon,
                     QuestName = NameQuest,
                     MyLevel = MyLevel,
                     NPCPosition = CFrameMon
@@ -1450,7 +1451,6 @@ local status, err = pcall(function()
                                         _G.KillingPlayer = false
                                     end
                                 else
-
                                     useNearestEntrance(Quest.QuestGiverPosition)
                                     wait(.2)
                                     if getDistance(Quest.QuestGiverPosition) > 2000 then
@@ -1469,7 +1469,7 @@ local status, err = pcall(function()
                                             if v.Name == Quest.NPCName then
                                                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                                     repeat task.wait()
-                                                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.NPCName) then
+                                                        if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
                                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                                         else
                                                             status, err = pcall(function()
