@@ -1253,7 +1253,7 @@ local status, err = pcall(function()
             
             local function isPlayerHunterQuest(Quest) 
                 for i,v in pairs(game:GetService("Players"):GetChildren()) do
-                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, v.Name) then
+                    if string.find(Quest.Container.QuestTitle.Title.Text, v.Name) then
                         return true
                     end
                 end
@@ -1403,17 +1403,17 @@ local status, err = pcall(function()
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                             useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
                                             wait(.2)
-                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 4000 then
+                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 600 then
                                                 Bypass(plr.Character.HumanoidRootPart.CFrame)
                                                 wait(.2)
-                                                if getDistance(plr.Character.HumanoidRootPart.CFrame) > 3000 then
-                                                    repeat wait()
-                                                        tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
-                                                    until getDistance(plr.Character.HumanoidRootPart.CFrame) < 500
-                                                    tf:Stop()
-                                                end
                                             end
-                                        end
+                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 300 then
+                                                repeat wait()
+                                                    tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
+                                                until getDistance(plr.Character.HumanoidRootPart.CFrame) < 50
+                                                tf:Stop()
+                                            end
+                                        else pcall(function() tf:Stop() end) end
                                         repeat task.wait()
                                             _G.KillingPlayer = true
                                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
@@ -1433,7 +1433,7 @@ local status, err = pcall(function()
                                             
                                             if v then
                                                 if v:FindFirstChild("HumanoidRootPart") then
-                                                    if getDistance(v.HumanoidRootPart.CFrame) <= 50 then
+                                                    if getDistance(v.HumanoidRootPart.CFrame) <= 15 then
                                                         game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
                                                         game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
                                                         game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
@@ -1741,7 +1741,7 @@ local status, err = pcall(function()
                 while task.wait(.1) do
                     if _G.AntiCheat then
                         task.wait(1800)
-                        game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId)
+                        while task.wait() do local ts = game:GetService("TeleportService") local p = game.Players.LocalPlayer ts:Teleport(game.PlaceId, p) end
                     end
                 end
             end)()
@@ -2114,7 +2114,7 @@ local status, err = pcall(function()
             spawn(
                 function()
                     while wait() do
-                        if _G.LastKey.Value ~= getgenv().Settings["uibutton"] and _G.LastKey ~= nil then
+                        if _G.LastKey ~= nil and _G.LastKey.Value ~= getgenv().Settings["uibutton"] then
                             print("Changed to")
                             print(_G.LastKey)
                             print("=========")
