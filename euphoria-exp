@@ -1341,16 +1341,16 @@ local status, err = pcall(function()
                                         end
                                     end
                                     if not target then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") end
-                                    useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
+                                    useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
                                     task.wait(2)
-                                    if getDistance(plr.Character.HumanoidRootPart.CFrame) > 600 then
-                                        Bypass(plr.Character.HumanoidRootPart.CFrame)
+                                    if getDistance(target.Character.HumanoidRootPart.CFrame) > 600 then
+                                        Bypass(target.Character.HumanoidRootPart.CFrame)
                                         task.wait(5)
                                     end
-                                    if getDistance(plr.Character.HumanoidRootPart.CFrame) > 300 then
+                                    if getDistance(target.Character.HumanoidRootPart.CFrame) > 300 then
                                         repeat task.wait()
-                                            toTarget(plr.Character.HumanoidRootPart.CFrame)
-                                        until getDistance(plr.Character.HumanoidRootPart.CFrame) < 50
+                                            toTarget(target.Character.HumanoidRootPart.CFrame)
+                                        until getDistance(target.Character.HumanoidRootPart.CFrame) < 50
                                     end
                                     repeat task.wait()
                                         _G.KillingPlayer = true
@@ -1366,24 +1366,24 @@ local status, err = pcall(function()
                                                 task.wait(.1)
                                             until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                         end
-                                        v = plr.Character
+                                        char = target.Character
                                         
-                                        if v then
-                                            if v:FindFirstChild("HumanoidRootPart") then
-                                                if getDistance(v.HumanoidRootPart.CFrame) <= 15 then
+                                        if char then
+                                            if char:FindFirstChild("HumanoidRootPart") then
+                                                if getDistance(char.HumanoidRootPart.CFrame) <= 15 then
                                                     game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
                                                     game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
                                                     game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
                                                     game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
                                                 end
-                                                PosMon = v.HumanoidRootPart.CFrame
+                                                PosMon = char.HumanoidRootPart.CFrame
                                                 BringMobFarm = false
                                                 EquipWeapon(_G.SelectWeapon)
-                                                v.HumanoidRootPart.Transparency = 1
+                                                char.HumanoidRootPart.Transparency = 1
                                                 toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                             end
                                         end
-                                    until not v or not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                    until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart")
                                     _G.KillingPlayer = false
                                 else
                                     useNearestEntrance(Quest.QuestGiverPosition)
@@ -1395,7 +1395,6 @@ local status, err = pcall(function()
                                             repeat wait()
                                                 tf = toTarget(Quest.QuestGiverPosition)
                                             until getDistance(Quest.QuestGiverPosition) < 10
-                                            tf:Stop()
                                         end
                                     end
 
@@ -1461,7 +1460,6 @@ local status, err = pcall(function()
                                                     repeat wait()
                                                         tf = toTarget(Quest.QuestGiverPosition)
                                                     until getDistance(Quest.QuestGiverPosition) < 10
-                                                    tf:Stop()
                                                 end
                                             end
                                         else
@@ -1489,7 +1487,6 @@ local status, err = pcall(function()
                                         repeat wait()
                                             tf = toTarget(Quest.QuestGiverPosition)
                                         until getDistance(Quest.QuestGiverPosition) < 10
-                                        tf:Stop()
                                     end
                                 end
                                 if game:GetService("Workspace").Enemies:FindFirstChild(Quest.NPCName) then
@@ -1535,7 +1532,6 @@ local status, err = pcall(function()
                                                 repeat wait()
                                                     tf = toTarget(Quest.QuestGiverPosition)
                                                 until getDistance(Quest.QuestGiverPosition) < 10
-                                                tf:Stop()
                                             end
                                         end
                                     else
