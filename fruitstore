@@ -1,116 +1,112 @@
-status, err = pcall(function()
-    if not game:IsLoaded() then game.Loaded:Wait() end
-    repeat wait() until game:FindFirstChild("ReplicatedStorage")
-    valued_fruits = {
-        "Dragon-Dragon",
-        "Spirit-Spirit",
-        "Venom-Venom",
-        "Dough-Dough",
-        "Buddha-Buddha",
-        "Kitsune-Kitsune",
-        "Sound-Sound",
-        "Portal-Portal",
-        "Rumble-Rumble",
-        "Blizzard-Blizzard",
-        "Mammoth-Mammoth",
-        "T-Rex-T-Rex",
-        "Shadow-Shadow",
-        "Control-Control",
-        "Leopard-Leopard"
-    }
-    fruits_before = {}
-    function isAlive()
-        for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-            if v.ToolTip == 'Melee' then 
-                return true
-            end
-        end
-        if fruit == nil then
-            for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-                pcall(function()
-                    if v.ToolTip == 'Melee' then 
-                        return true
-                    end
-                end)
-            end
-        end
-        return false
-    end
-    repeat wait(5) until isAlive()
-    for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) doэ
-        table.insert(fruits_before, v.Name)
-    end
-    
-    function table_length(tbl)
-        local count = 0
-        for k, v in pairs(tbl) do
-            count = count + 1
-        end
-        return count
-    end
-    
-    _G.WebhookURLStore = "https://discord.com/api/webhooks/1196883162857484348/IYIe-7uihqewSUchi_TY8V_2hjVS75liTXrigEW-mpExC9LMDSTkeSRHqG8IJlL_8n-2"
-    
-    local function send_webhook(fruits)
-        local plr = game.Players.LocalPlayer
-        local Embed = {
-            ["title"] = "Fruit stored " .. plr.Name,
-            ["description"] = "This account has stored next fruits: ```" .. fruits .. "```",
-            ["type"] = "rich",
-            ["color"] = tonumber(0xffff00),
-            ["footer"] = {
-                ["text"] = "fruit store",
-            }
-        };
-        http.request {
-            Url = _G.WebhookURLStore;
-            Method = 'POST';
-            Headers = {
-                ['Content-Type'] = 'application/json';
-            };
-            Body = game:GetService'HttpService':JSONEncode({content = "@here", embeds = {Embed};});
-        };
-    end
-    
-    function assert_with_before()
-        new_fruits = {}
-        for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
-            alrHave = 0
-            fruitName = v.Name
-            for _, frname in pairs(fruits_before) do
-                if frname == fruitName then 
-                    alrHave = 1
-                end
-            end
-            if alrHave == 0 then
-                table.insert(new_fruits, fruitName)
-                table.insert(fruits_before, fruitName)
-            end
-        end
-        if table_length(new_fruits) > 0 then
-            fruit_message = ""
-            for i, frname in pairs(new_fruits) do
-                for n, valued in pairs(valued_fruits) do
-                    if frname == valued then
-                        fruit_message = fruit_message .. frname .. '\n'
-                    end
-                end
-            end
-            if fruit_message ~= "" then
-                send_webhook(fruit_message)
-            end
+if not game:IsLoaded() then game.Loaded:Wait() end
+repeat wait() until game:FindFirstChild("ReplicatedStorage")
+valued_fruits = {
+    "Dragon-Dragon",
+    "Spirit-Spirit",
+    "Venom-Venom",
+    "Dough-Dough",
+    "Buddha-Buddha",
+    "Kitsune-Kitsune",
+    "Sound-Sound",
+    "Portal-Portal",
+    "Rumble-Rumble",
+    "Blizzard-Blizzard",
+    "Mammoth-Mammoth",
+    "T-Rex-T-Rex",
+    "Shadow-Shadow",
+    "Control-Control",
+    "Leopard-Leopard"
+}
+fruits_before = {}
+function isAlive()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        if v.ToolTip == 'Melee' then 
+            return true
         end
     end
-    
-    task.spawn(function() 
-        while task.wait() do
+    if fruit == nil then
+        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
             pcall(function()
-                assert_with_before()
+                if v.ToolTip == 'Melee' then 
+                    return true
+                end
             end)
-            task.wait(5)
         end
-    end)
-      
+    end
+    return false
+end
+repeat wait(5) until isAlive()
+for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
+    table.insert(fruits_before, v.Name)
+end
 
+function table_length(tbl)
+    local count = 0
+    for k, v in pairs(tbl) do
+        count = count + 1
+    end
+    return count
+end
+
+_G.WebhookURLStore = "https://discord.com/api/webhooks/1196883162857484348/IYIe-7uihqewSUchi_TY8V_2hjVS75liTXrigEW-mpExC9LMDSTkeSRHqG8IJlL_8n-2"
+
+local function send_webhook(fruits)
+    local plr = game.Players.LocalPlayer
+    local Embed = {
+        ["title"] = "Fruit stored " .. plr.Name,
+        ["description"] = "This account has stored next fruits: ```" .. fruits .. "```",
+        ["type"] = "rich",
+        ["color"] = tonumber(0xffff00),
+        ["footer"] = {
+            ["text"] = "fruit store",
+        }
+    };
+    http.request {
+        Url = _G.WebhookURLStore;
+        Method = 'POST';
+        Headers = {
+            ['Content-Type'] = 'application/json';
+        };
+        Body = game:GetService'HttpService':JSONEncode({content = "@here", embeds = {Embed};});
+    };
+end
+
+function assert_with_before()
+    new_fruits = {}
+    for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
+        alrHave = 0
+        fruitName = v.Name
+        for _, frname in pairs(fruits_before) do
+            if frname == fruitName then 
+                alrHave = 1
+            end
+        end
+        if alrHave == 0 then
+            table.insert(new_fruits, fruitName)
+            table.insert(fruits_before, fruitName)
+        end
+    end
+    if table_length(new_fruits) > 0 then
+        fruit_message = ""
+        for i, frname in pairs(new_fruits) do
+            for n, valued in pairs(valued_fruits) do
+                if frname == valued then
+                    fruit_message = fruit_message .. frname .. '\n'
+                end
+            end
+        end
+        if fruit_message ~= "" then
+            send_webhook(fruit_message)
+        end
+    end
+end
+
+task.spawn(function() 
+    while task.wait() do
+        pcall(function()
+            assert_with_before()
+        end)
+        task.wait(5)
+    end
 end)
-if err then print(err) end
+print("webhook ready")
