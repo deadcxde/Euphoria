@@ -1412,7 +1412,6 @@ local status, err = pcall(function()
                                                 repeat wait()
                                                     tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
                                                 until getDistance(plr.Character.HumanoidRootPart.CFrame) < 50
-                                                tf:Stop()
                                             end
                                         else pcall(function() tf:Stop() end) end
                                         repeat task.wait()
