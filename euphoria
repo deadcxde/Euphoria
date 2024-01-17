@@ -2000,7 +2000,17 @@ local status, err = pcall(function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Check")
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", SelectedChip)
             end)
-            
+            RaidSection:NewButton("Start Left Side Raid", "Start Left Side Raid", function()
+                if second_sea then
+                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon1.Button.Main.ClickDetector)
+                end
+            end)
+            RaidSection:NewButton("Start Right Side Raid", "Start Right Side Raid", function()
+                if second_sea then
+                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                end
+            end)
+            RaidSection:NewLabel(" ")
             RaidSection:NewButton("Tween to raid room", "Tween to raid room", function()
                 if second_sea then
                     cf = CFrame.new(-6451.38721, 249.528275, -4494.57324, -0.642593145, 2.36225439e-09, 0.766207576, 1.03323057e-08, 1, 5.58231772e-09, -0.766207576, 1.15038503e-08, -0.642593145)
