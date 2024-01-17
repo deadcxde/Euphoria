@@ -1286,11 +1286,15 @@ local status, err = pcall(function()
             function useNearestEntrance(targetCFrame)
                 local entrancesFirstSea = {Vector3.new(61164.19921875, 7.326029300689697, 1856.9254150390625), Vector3.new(-4607.82275390625, 874.3905029296875, -1667.556884765625), Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875)}
                 local entrancesSecondSea = {Vector3.new(-287.952209, 306.130615, 605.197021), Vector3.new(-6498.72119, 83.1870193, -134.912308), Vector3.new(919.299927, 125.057106, 32888.207)}
+                local entrancesThirdSea = {Vector3.new(-5058.77490234375, 314.5155029296875, -3155.88330078125), Vector3.new(5756.83740234375, 610.4240112304688, -253.9253692626953), Vector3.new(-12463.8740234375, 374.9144592285156, -7523.77392578125), Vector3.new(28282.5703125, 14896.8505859375, 105.1042709350586), Vector3.new(-11993.580078125, 334.7812805175781, -8844.1826171875), Vector3.new(5314.58203125, 25.419387817382812, -125.94227600097656)}
                 if first_sea then
                     entrances = entrancesFirstSea
                 end
                 if second_sea then
                     entrances = entrancesSecondSea
+                end
+                if third_sea then
+                    entrances = entrancesThirdSea
                 end
                 local playerToTargetDistance = (targetCFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude
                 local distance = math.huge
