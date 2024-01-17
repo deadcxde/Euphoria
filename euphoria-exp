@@ -1062,77 +1062,6 @@ local status, err = pcall(function()
 
             spawn(function()
                 while wait() do 
-                    local MyLevel = game.Players.LocalPlayer.Data.Level.Value
-                    local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
-                    if _G.Auto_Farm then
-                        if QuestC.Visible == true then
-                            if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                Bypass(QuestCheck()[2])
-                            end
-                            if game:GetService("Workspace").Enemies:FindFirstChild(QuestCheck()[3]) then
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v.Name == QuestCheck()[3] then
-                                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                            repeat task.wait()
-                                                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, QuestCheck()[6]) then
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
-                                                else
-                                                    PosMon = v.HumanoidRootPart.CFrame
-                                                    v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                                    v.HumanoidRootPart.CanCollide = false
-                                                    v.Humanoid.WalkSpeed = 0
-                                                    v.Head.CanCollide = false
-                                                    BringMobFarm = true
-                                                    EquipWeapon(_G.SelectWeapon)
-                                                    v.HumanoidRootPart.Transparency = 1
-                                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
-                                                end
-                                            until not _G.Auto_Farm or not v.Parent or v.Humanoid.Health <= 0 or QuestC.Visible == false or not v:FindFirstChild("HumanoidRootPart")
-                                        end
-                                    end
-                                end
-                            else
-                                toTarget(QuestCheck()[7] * CFrame.new(0,30,5))
-                                if (QuestCheck()[7].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
-                                    if SetCFrame == nil or SetCFrame == '' then
-                                        SetCFrame = 1
-                                        print(SetCFrame)
-                                    end
-                                    SetCFrame = SetCFrame + 1
-            
-                                    print(SetCFrame)
-                                    wait(0.5)
-                                end
-                            end
-                        else
-                            wait(0.5)
-                            if game:GetService("Players").LocalPlayer.Data.LastSpawnPoint.Value == tostring(GetIsLand(QuestCheck()[7])) then
-                                game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
-                                toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
-                            else
-                                if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
-                                    if QuestCheck()[4] == 'FishmanQuest' then
-                                        RequestEntrance(QuestCheck()[2])
-                                    end
-                                    Bypass(QuestCheck()[2])
-                                else
-                                    repeat wait() toTarget(QuestCheck()[2]) until (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.StartFarm
-                                end
-                                repeat wait() toTarget(QuestCheck()[2]) until (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 20 or not _G.StartFarm
-                                if (QuestCheck()[2].Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 1 then
-                                    BringMobFarm = true
-                                    wait(0.2)
-                                    game:GetService('ReplicatedStorage').Remotes.CommF_:InvokeServer("StartQuest", QuestCheck()[4], QuestCheck()[1]) wait(0.5)
-                                    toTarget(QuestCheck()[7] * CFrame.new(0,30,20))
-                                end
-                            end
-                        end
-                    end
-                end
-            end)
-
-            spawn(function()
-                while wait() do 
                     if _G.Auto_Farm or _G.AutoFarmPlayer or _G.Kaitun then
                         if syn then
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
@@ -1388,6 +1317,11 @@ local status, err = pcall(function()
                     end
                 end
             end
+            
+            function StopTween()
+                NoClip = false
+                toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+            end
 
             task.spawn(function()
                 while task.wait() do
@@ -1399,56 +1333,58 @@ local status, err = pcall(function()
                         if first_sea then
                             if QuestC.Visible == true then
                                 if isPlayerHunterQuest(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest) then
+                                    target = nil
                                     for i, plr in pairs(game:GetService("Players"):GetChildren()) do
-                                        -- Сокращение дистанции до игрока
+                                        if target then break end
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
-                                            useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
-                                            task.wait(2)
-                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 600 then
-                                                Bypass(plr.Character.HumanoidRootPart.CFrame)
-                                                task.wait(.2)
-                                            end
-                                            if getDistance(plr.Character.HumanoidRootPart.CFrame) > 300 then
-                                                repeat wait()
-                                                    tf = toTarget(plr.Character.HumanoidRootPart.CFrame)
-                                                until getDistance(plr.Character.HumanoidRootPart.CFrame) < 50
-                                            end
-                                        else pcall(function() tf:Stop() end) end
-                                        repeat task.wait()
-                                            _G.KillingPlayer = true
-                                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                                                repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
-                                                local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
-                                                repeat task.wait()
-                                                    if tf then tf:Stop() end
-                                                    local args = {
-                                                        [1] = "EnablePvp"
-                                                    }
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                                    toTarget(respPos)
-                                                    task.wait(.1)
-                                                until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
-                                            end
-                                            v = plr.Character
-                                            
-                                            if v then
-                                                if v:FindFirstChild("HumanoidRootPart") then
-                                                    if getDistance(v.HumanoidRootPart.CFrame) <= 15 then
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
-                                                        game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
-                                                    end
-                                                    PosMon = v.HumanoidRootPart.CFrame
-                                                    BringMobFarm = false
-                                                    EquipWeapon(_G.SelectWeapon)
-                                                    v.HumanoidRootPart.Transparency = 1
-                                                    tf = toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
-                                                end
-                                            end
-                                        until not v or not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
-                                        _G.KillingPlayer = false
+                                            target = plr
+                                        end
                                     end
+                                    if not target then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") end
+                                    useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
+                                    task.wait(2)
+                                    if getDistance(plr.Character.HumanoidRootPart.CFrame) > 600 then
+                                        Bypass(plr.Character.HumanoidRootPart.CFrame)
+                                        task.wait(5)
+                                    end
+                                    if getDistance(plr.Character.HumanoidRootPart.CFrame) > 300 then
+                                        repeat task.wait()
+                                            toTarget(plr.Character.HumanoidRootPart.CFrame)
+                                        until getDistance(plr.Character.HumanoidRootPart.CFrame) < 50
+                                    end
+                                    repeat task.wait()
+                                        _G.KillingPlayer = true
+                                        if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                                            repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
+                                            local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+                                            repeat task.wait()
+                                                local args = {
+                                                    [1] = "EnablePvp"
+                                                }
+                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                                toTarget(respPos)
+                                                task.wait(.1)
+                                            until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
+                                        end
+                                        v = plr.Character
+                                        
+                                        if v then
+                                            if v:FindFirstChild("HumanoidRootPart") then
+                                                if getDistance(v.HumanoidRootPart.CFrame) <= 15 then
+                                                    game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
+                                                    game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
+                                                    game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
+                                                    game:service('VirtualInputManager'):SendKeyEvent(false, "X", false, game)
+                                                end
+                                                PosMon = v.HumanoidRootPart.CFrame
+                                                BringMobFarm = false
+                                                EquipWeapon(_G.SelectWeapon)
+                                                v.HumanoidRootPart.Transparency = 1
+                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                            end
+                                        end
+                                    until not v or not v:FindFirstChild("Parent") or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
+                                    _G.KillingPlayer = false
                                 else
                                     useNearestEntrance(Quest.QuestGiverPosition)
                                     wait(.2)
