@@ -19,7 +19,10 @@ valued_fruits = {
 }
 fruits_before = {}
 function isAlive()
-    if not game:GetService("Players"):FindFirstChild("LocalPlayer") then return false end
+    st, err = pcall(function()
+        game:GetService("Players").LocalPlayer.Backpack
+    end)
+    if err then print(err) return false end
     if not game:GetService("Players").LocalPlayer:FindFirstChild("Backpack") then return false end
     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         if v.ToolTip == 'Melee' then 
@@ -37,7 +40,7 @@ function isAlive()
     end
     return false
 end
-repeat wait(5) until isAlive()
+repeat wait(5) print("Not alive") until isAlive()
 for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
     table.insert(fruits_before, v.Name)
 end
