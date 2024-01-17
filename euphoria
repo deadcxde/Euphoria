@@ -2025,34 +2025,20 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if getgenv().Settings["autonextisland"] then
+                            islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
                             if game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == true then
-                                for i,v in pairs(game.Workspace._WorldOrigin.Locations:GetChildren()) do
-                                    if v.Name == ("Island 5") then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
-                                            toPoint(v.CFrame)
-                                            break
-                                        end
-                                    elseif v.Name == ("Island 4") then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
-                                            toPoint(v.CFrame)
-                                            break
-                                        end
-                                    elseif v.Name == ("Island 3") then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
-                                            toPoint(v.CFrame)
-                                            break
-                                        end
-                                    elseif v.Name == ("Island 2") then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
-                                            toPoint(v.CFrame)
-                                            break
-                                        end
-                                    elseif v.Name == ("Island 1") then
-                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
-                                            toPoint(v.CFrame)
-                                            break
+                                found = false
+                                for i,islandName in pairs(islands) do
+                                    for i,v in pairs(game.Workspace._WorldOrigin.Locations:GetChildren()) do
+                                        if v.Name == islandName then
+                                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude <= 5000 then
+                                                toPoint(v.CFrame)
+                                                found = true
+                                                break
+                                            end
                                         end
                                     end
+                                    if found then break end
                                 end
                             end
                         end
