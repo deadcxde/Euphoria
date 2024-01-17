@@ -23,7 +23,6 @@ function isAlive()
         game:GetService("Players").LocalPlayer.Backpack
     end)
     if err then print(err) return false end
-    if not game:GetService("Players").LocalPlayer:FindFirstChild("Backpack") then return false end
     for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
         if v.ToolTip == 'Melee' then 
             return true
