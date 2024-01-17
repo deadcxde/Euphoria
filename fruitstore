@@ -94,6 +94,27 @@ local function send_webhook_debug(fruits)
     };
 end
 
+local function send_webhook_ready()
+    local plr = game.Players.LocalPlayer
+    local Embed = {
+        ["title"] = "WebHook is ready!" .. plr.Name,
+        ["description"] = "",
+        ["type"] = "rich",
+        ["color"] = tonumber(0xffff00),
+        ["footer"] = {
+            ["text"] = "fruit store",
+        }
+    };
+    http.request {
+        Url = _G.WebhookURLStore;
+        Method = 'POST';
+        Headers = {
+            ['Content-Type'] = 'application/json';
+        };
+        Body = game:GetService'HttpService':JSONEncode({content = "@here", embeds = {Embed};});
+    };
+end
+
 
 function assert_with_before()
     new_fruits = {}
