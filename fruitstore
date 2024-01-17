@@ -26,7 +26,7 @@ status, error = pcall(function()
         if err then print(err) return false end
         for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
             if v.ToolTip == 'Melee' then 
-                return true
+                return true 
             end
         end
         for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
@@ -135,12 +135,14 @@ status, error = pcall(function()
         if table_length(new_fruits) > 0 then
             fruit_message = ""
             for i, frname in pairs(new_fruits) do
-                fruit_message = fruit_message .. frname .. '\n'
+                for n, value in pairs(valued_fruits) do
+                    if frname == value then
+                        fruit_message = fruit_message .. frname .. '\n'
+                    end
+                end
             end
             if fruit_message ~= "" then
                 send_webhook(fruit_message)
-            else
-                send_webhook_debug(fruit_message)
             end
         end
     end
@@ -153,8 +155,5 @@ status, error = pcall(function()
             task.wait(5)
         end
     end)
-    print("webhook ready")
-    pcall(function()
-        send_webhook_ready()
-    end)
+    print("ready")
 end)
