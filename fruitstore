@@ -153,3 +153,6 @@ task.spawn(function()
     end
 end)
 print("webhook ready")
+pcall(function()
+send_webhook_ready()
+end)
