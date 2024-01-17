@@ -2002,12 +2002,26 @@ local status, err = pcall(function()
             end)
             RaidSection:NewButton("Start Left Side Raid", "Start Left Side Raid", function()
                 if second_sea then
-                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon1.Button.Main.ClickDetector)
+                    buttonPos = Vector3.new(-6488.0185546875, 248.6365203857422, -4527.62158203125)
+                    for i, child in pairs(game:GetService("Workspace").Map.CircleIsland:GetChildren()) do
+                        if child.Name == "RaidSummon2" then
+                            if (child.Button:GetPivot().Position - buttonPos).Magnitude < 15 then
+                                fireclickdetector(child.Button.Main.ClickDetector) 
+                            end
+                        end
+                    end
                 end
             end)
             RaidSection:NewButton("Start Right Side Raid", "Start Right Side Raid", function()
                 if second_sea then
-                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                    buttonPos = Vector3.new(-6465.17138671875, 248.6365203857422, -4452.00048828125)
+                    for i, child in pairs(game:GetService("Workspace").Map.CircleIsland:GetChildren()) do
+                        if child.Name == "RaidSummon2" then
+                            if (child.Button:GetPivot().Position - buttonPos).Magnitude < 15 then
+                                fireclickdetector(child.Button.Main.ClickDetector) 
+                            end
+                        end
+                    end
                 end
             end)
             RaidSection:NewLabel(" ")
