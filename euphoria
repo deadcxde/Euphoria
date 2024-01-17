@@ -863,13 +863,13 @@ local status, err = pcall(function()
             local function tweenToPointAdvanced(cframe)
                 useNearestEntrance(cframe)
                 wait(.2)
-                Distance = (Positions.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
                 if Distance < 25 then
                     Speed = 5000
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Positions
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
                 elseif Distance < 50 then
                     Speed = 2000
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Positions
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
                 elseif Distance < 150 then
                     Speed = 800
                 elseif Distance < 250 then
@@ -884,7 +884,7 @@ local status, err = pcall(function()
                 game:GetService("TweenService"):Create(
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
                     TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
-                    {CFrame = Positions}
+                    {CFrame = cframe}
                 ):Play()
             end
 
