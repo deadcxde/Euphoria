@@ -1284,38 +1284,30 @@ local status, err = pcall(function()
             
             -- rewrite autoleveling
             function useNearestEntrance(targetCFrame)
-                local entrancesFirstSea = {Vector3.new(61163.8515625, 11.6796875, 1819.7841796875), Vector3.new(-4607.82275390625, 874.3905029296875, -1667.556884765625), Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875)}
+                local entrancesFirstSea = {Vector3.new(61164.19921875, 7.326029300689697, 1856.9254150390625), Vector3.new(-4607.82275390625, 874.3905029296875, -1667.556884765625), Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875)}
                 local entrancesSecondSea = {Vector3.new(-287.952209, 306.130615, 605.197021), Vector3.new(-6498.72119, 83.1870193, -134.912308), Vector3.new(919.299927, 125.057106, 32888.207)}
                 if first_sea then
-                    local playerToTargetDistance = (targetCFrame.Position - plr.Character.HumanoidRootPart.CFrame.Position).Magnitude
-                    local distance = math.huge
-                    local needEntrance = Vector3.new(0,0,0)
-                    for i, entrance in pairs(entrancesFirstSea) do
-                        if (targetCFrame.Position - entrance).Magnitude < distance and (targetCFrame.Position - entrance).Magnitude < playerToTargetDistance then
-                            needEntrance = entrance
-                        end
-                    end
-                    if needEntrance ~= Vector3.new(0,0,0) then 
-                        RequestEntrance(needEntrance)
-                    else 
-                        return false 
-                    end
+                    entrances = entrancesFirstSea
                 end
                 if second_sea then
-                    local playerToTargetDistance = (targetCFrame.Position - plr.Character.HumanoidRootPart.CFrame.Position).Magnitude
-                    local distance = math.huge
-                    local needEntrance = Vector3.new(0,0,0)
-                    for i, entrance in pairs(entrancesSecondSea) do
-                        if (targetCFrame.Position - entrance).Magnitude < distance and (targetCFrame.Position - entrance).Magnitude < playerToTargetDistance then
-                            needEntrance = entrance
-                        end
-                    end
-                    if needEntrance ~= Vector3.new(0,0,0) then 
-                        RequestEntrance(needEntrance)
-                    else 
-                        return false 
+                    entrances = entrancesSecondSea
+                end
+                local playerToTargetDistance = (targetCFrame.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position).Magnitude
+                local distance = math.huge
+                local needEntrance = Vector3.new(0,0,0)
+                for i, entrance in pairs(entrances) do
+                    entranceToTargetDistance = (entrance - targetCFrame.Position).Magnitude
+                    if entranceToTargetDistance < playerToTargetDistance and entranceToTargetDistance < distance then
+                        distance = entranceToTargetDistance
+                        needEntrance = entrance
                     end
                 end
+                if needEntrance ~= Vector3.new(0,0,0) then 
+                    RequestEntrance(needEntrance)
+                else 
+                    return false 
+                end
+                return false
             end
             
             function StopTween()
@@ -1341,18 +1333,20 @@ local status, err = pcall(function()
                                         end
                                     end
                                     if not target then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") end
-                                    useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
-                                    task.wait(2)
-                                    if getDistance(target.Character.HumanoidRootPart.CFrame) > 600 then
-                                        Bypass(target.Character.HumanoidRootPart.CFrame)
-                                        task.wait(5)
-                                    end
-                                    if getDistance(target.Character.HumanoidRootPart.CFrame) > 300 then
-                                        repeat task.wait()
-                                            toTarget(target.Character.HumanoidRootPart.CFrame)
-                                        until getDistance(target.Character.HumanoidRootPart.CFrame) < 50
-                                    end
+                                    
                                     repeat task.wait()
+                                        useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
+                                        task.wait(.5)
+                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 1000 then
+                                            Bypass(target.Character.HumanoidRootPart.CFrame)
+                                            task.wait(1)
+                                        end
+                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 300 then
+                                            repeat task.wait()
+                                                toTarget(target.Character.HumanoidRootPart.CFrame)
+                                            until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500
+                                            StopTween()
+                                        end
                                         _G.KillingPlayer = true
                                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                             repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
@@ -1380,20 +1374,23 @@ local status, err = pcall(function()
                                                 BringMobFarm = false
                                                 EquipWeapon(_G.SelectWeapon)
                                                 char.HumanoidRootPart.Transparency = 1
-                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
+                                                toTarget(char.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                             end
                                         end
                                     until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart")
                                     _G.KillingPlayer = false
                                 else
+                                    if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
+                                    end
                                     useNearestEntrance(Quest.QuestGiverPosition)
-                                    wait(.2)
+                                    task.wait(.2)
                                     if getDistance(Quest.QuestGiverPosition) > 2000 then
                                         Bypass(Quest.QuestGiverPosition)
-                                        wait(.2)
+                                        task.wait(.2)
                                         if getDistance(Quest.QuestGiverPosition) > 2000 then
                                             repeat wait()
-                                                tf = toTarget(Quest.QuestGiverPosition)
+                                                toTarget(Quest.QuestGiverPosition)
                                             until getDistance(Quest.QuestGiverPosition) < 10
                                         end
                                     end
@@ -1452,12 +1449,12 @@ local status, err = pcall(function()
                                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
                                         if (Quest.QuestGiverPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >= 3000 then
                                             useNearestEntrance(Quest.QuestGiverPosition)
-                                            wait(.2)
+                                            task.wait(.2)
                                             if getDistance(Quest.QuestGiverPosition) > 2000 then
                                                 Bypass(Quest.QuestGiverPosition)
-                                                wait(.2)
+                                                task.wait(.2)
                                                 if getDistance(Quest.QuestGiverPosition) > 2000 then
-                                                    repeat wait()
+                                                    repeat task.wait()
                                                         tf = toTarget(Quest.QuestGiverPosition)
                                                     until getDistance(Quest.QuestGiverPosition) < 10
                                                 end
