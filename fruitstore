@@ -18,9 +18,26 @@ valued_fruits = {
     "Leopard-Leopard"
 }
 fruits_before = {}
-
-for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
-    for n, fruit in pairs(v) do if n == 'Name' then table.insert(fruits_before, fruit) end end 
+function isAlive()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+        if v.ToolTip == 'Melee' then 
+            return true
+        end
+    end
+    if fruit == nil then
+        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+            pcall(function()
+                if v.ToolTip == 'Melee' then 
+                    return true
+                end
+            end)
+        end
+    end
+    return false
+end
+repeat wait(5) until isAlive()
+for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) doэ
+    table.insert(fruits_before, v.Name)
 end
 
 function table_length(tbl)
@@ -31,7 +48,7 @@ function table_length(tbl)
     return count
 end
 
-_G.WebhookURL = "https://discord.com/api/webhooks/1196883162857484348/IYIe-7uihqewSUchi_TY8V_2hjVS75liTXrigEW-mpExC9LMDSTkeSRHqG8IJlL_8n-2"
+_G.WebhookURLStore = "https://discord.com/api/webhooks/1196883162857484348/IYIe-7uihqewSUchi_TY8V_2hjVS75liTXrigEW-mpExC9LMDSTkeSRHqG8IJlL_8n-2"
 
 local function send_webhook(fruits)
     local plr = game.Players.LocalPlayer
@@ -41,11 +58,11 @@ local function send_webhook(fruits)
         ["type"] = "rich",
         ["color"] = tonumber(0xffff00),
         ["footer"] = {
-            ["text"] = "chest farm bot",
+            ["text"] = "fruit store",
         }
     };
     http.request {
-        Url = _G.WebhookURL;
+        Url = _G.WebhookURLStore;
         Method = 'POST';
         Headers = {
             ['Content-Type'] = 'application/json';
@@ -57,21 +74,17 @@ end
 function assert_with_before()
     new_fruits = {}
     for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
-        for n, fruit in pairs(v) do 
-            alrHave = 0
-            if n == 'Name' then 
-                fruitName = fruit
-                for _, frname in pairs(fruits_before) do
-                    if frname == fruitName then 
-                        alrHave = 1
-                    end
-                end
-                if alrHave == 0 then
-                    table.insert(new_fruits, fruitName)
-                    table.insert(fruits_before, fruitName)
-                end
-            end 
-        end 
+        alrHave = 0
+        fruitName = v.Name
+        for _, frname in pairs(fruits_before) do
+            if frname == fruitName then 
+                alrHave = 1
+            end
+        end
+        if alrHave == 0 then
+            table.insert(new_fruits, fruitName)
+            table.insert(fruits_before, fruitName)
+        end
     end
     if table_length(new_fruits) > 0 then
         fruit_message = ""
@@ -96,3 +109,4 @@ task.spawn(function()
         task.wait(5)
     end
 end)
+  
