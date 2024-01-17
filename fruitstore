@@ -28,14 +28,12 @@ function isAlive()
             return true
         end
     end
-    if fruit == nil then
-        for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-            pcall(function()
-                if v.ToolTip == 'Melee' then 
-                    return true
-                end
-            end)
-        end
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        pcall(function()
+            if v.ToolTip == 'Melee' then 
+                return true
+            end
+        end)
     end
     return false
 end
