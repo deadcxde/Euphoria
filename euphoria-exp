@@ -1389,8 +1389,8 @@ local status, err = pcall(function()
                 end
             end
 
-            spawn(function()
-                while wait() do
+            task.spawn(function()
+                while task.wait() do
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                     local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
                     local Quest = QuestCheck()
@@ -1403,10 +1403,10 @@ local status, err = pcall(function()
                                         -- Сокращение дистанции до игрока
                                         if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
                                             useNearestEntrance(plr.Character.HumanoidRootPart.CFrame)
-                                            wait(.2)
+                                            task.wait(2)
                                             if getDistance(plr.Character.HumanoidRootPart.CFrame) > 600 then
                                                 Bypass(plr.Character.HumanoidRootPart.CFrame)
-                                                wait(.2)
+                                                task.wait(.2)
                                             end
                                             if getDistance(plr.Character.HumanoidRootPart.CFrame) > 300 then
                                                 repeat wait()
@@ -1417,16 +1417,16 @@ local status, err = pcall(function()
                                         repeat task.wait()
                                             _G.KillingPlayer = true
                                             if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
-                                                repeat wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
+                                                repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
                                                 local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
-                                                repeat wait()
+                                                repeat task.wait()
                                                     if tf then tf:Stop() end
                                                     local args = {
                                                         [1] = "EnablePvp"
                                                     }
                                                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                                     toTarget(respPos)
-                                                    wait(.1)
+                                                    task.wait(.1)
                                                 until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                             end
                                             v = plr.Character
