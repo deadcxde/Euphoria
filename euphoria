@@ -860,6 +860,32 @@ local status, err = pcall(function()
                 end
             end
             
+            local function toPoint(cframe)
+                Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if Distance < 25 then
+                    Speed = 5000
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
+                elseif Distance < 50 then
+                    Speed = 2000
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
+                elseif Distance < 150 then
+                    Speed = 800
+                elseif Distance < 250 then
+                    Speed = 600
+                elseif Distance < 500 then
+                    Speed = 400
+                elseif Distance < 750 then
+                    Speed = 300
+                elseif Distance >= 1000 then
+                    Speed = 290
+                end
+                game:GetService("TweenService"):Create(
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                    TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+                    {CFrame = cframe}
+                ):Play()
+            end
+
             local function tweenToPointAdvanced(cframe)
                 useNearestEntrance(cframe)
                 wait(.2)
@@ -1875,7 +1901,8 @@ local status, err = pcall(function()
             local DefaultSettings = {
                 ["lastjobid"] = "", 
                 ["uibutton"] = Enum.KeyCode.RightShift,
-                ["killaura"] = false
+                ["killaura"] = false,
+                ["autonextisland"] = false
             }
 
             local SettingsFile = "EuphoriaUI.json"
@@ -1961,7 +1988,7 @@ local status, err = pcall(function()
 
             -- killaura
             local KillauraRadius = 350
-            k = RaidSection:NewToggle("Killaura", "Killaura", function(state)
+            k = RaidSection:NewToggle("Killaura [ONLY WHILE RAID]", "Killaura", function(state)
                 getgenv().Settings["killaura"] = state
             end)
             if getgenv().Settings["killaura"] then k:UpdateToggle(nil, true) end
@@ -1969,17 +1996,19 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if getgenv().Settings["killaura"] then
-                            for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
-                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position - v.HumanoidRootPart.CFrame.Position).Magnitude < KillauraRadius then
-                                    pcall(function()
-                                        repeat task.wait()
-                                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                            v.Humanoid.Health = 0
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(100,100,100)
-                                            v.HumanoidRootPart.Transparency = 0.8
-                                        until not getgenv().Settings["killaura"] or not v.Parent or v.Humanoid.Health <= 0 or not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position - v.HumanoidRootPart.CFrame.Position).Magnitude > KillauraRadius
-                                    end)
+                            if game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == true then
+                                for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position - v.HumanoidRootPart.CFrame.Position).Magnitude < KillauraRadius then
+                                        pcall(function()
+                                            repeat task.wait()
+                                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                                v.Humanoid.Health = 0
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.HumanoidRootPart.Size = Vector3.new(100,100,100)
+                                                v.HumanoidRootPart.Transparency = 0.8
+                                            until not getgenv().Settings["killaura"] or not v.Parent or v.Humanoid.Health <= 0 or not game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") or (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position - v.HumanoidRootPart.CFrame.Position).Magnitude > KillauraRadius
+                                        end)
+                                    end
                                 end
                             end
                         end
@@ -1989,6 +2018,48 @@ local status, err = pcall(function()
             RaidSection:NewSlider("Killaura Radius", "Killaura", 1, 20, function(count)
                 KillauraRadius = count * 35
             end)
+            RaidSection:NewToggle("Auto Next Island [ONLY WHILE RAID]", "Auto Next Island", function(state)
+                getgenv().Settings["autonextisland"] = state
+            end)
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if getgenv().Settings["autonextisland"] then
+                            if game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == true then
+                                for i,v in pairs(game.Workspace._WorldOrigin.Locations:GetChildren()) do
+                                    if v.Name == ("Island 5") then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
+                                            toPoint(v.CFrame)
+                                            break
+                                        end
+                                    elseif v.Name == ("Island 4") then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
+                                            toPoint(v.CFrame)
+                                            break
+                                        end
+                                    elseif v.Name == ("Island 3") then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
+                                            toPoint(v.CFrame)
+                                            break
+                                        end
+                                    elseif v.Name == ("Island 2") then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
+                                            toPoint(v.CFrame)
+                                            break
+                                        end
+                                    elseif v.Name == ("Island 1") then
+                                        if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude / 10 <= 500 then
+                                            toPoint(v.CFrame)
+                                            break
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+
 
             SelectedChip = "Flame"
             chipRaidLabel = RaidSection:NewLabel("Selected Chip: " .. SelectedChip)
