@@ -1383,7 +1383,7 @@ local status, err = pcall(function()
                                         _G.KillingPlayer = true
                                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                             repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
                                             repeat task.wait()
                                                 toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                                             until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
