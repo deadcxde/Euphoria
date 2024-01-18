@@ -1383,7 +1383,7 @@ local status, err = pcall(function()
                                         if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
                                             repeat task.wait()
                                                 toTarget(target.Character.HumanoidRootPart.CFrame)
-                                            until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500
+                                            until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500 or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
                                             StopTween()
                                         end
                                         _G.KillingPlayer = true
