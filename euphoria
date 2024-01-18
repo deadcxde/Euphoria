@@ -1005,12 +1005,6 @@ local status, err = pcall(function()
                             return
                         end
                     end
-                    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                        if v.ToolTip == 'Melee' then
-                            game.Players.LocalPlayer.Character.Humanoid:EquipTool(v) 
-                            return
-                        end
-                    end
                 end)
             end
             function UnEquipWeapon(Weapon)
