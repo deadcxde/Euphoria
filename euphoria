@@ -2065,6 +2065,7 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if getgenv().Settings["autonextisland"] then
+                            NoClip = true
                             islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
                             if game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == true then
                                 found = false
@@ -2081,6 +2082,8 @@ local status, err = pcall(function()
                                     if found then break end
                                 end
                             end
+                        else
+                            NoClip = false
                         end
                     end)
                 end
