@@ -915,44 +915,30 @@ local status, err = pcall(function()
             end
 
 
-            local function toTarget(...)
-                local RealtargetPos = {...}
-                local targetPos = RealtargetPos[1]
-                local RealTarget
-                if type(targetPos) == "vector" then
-                    RealTarget = CFrame.new(targetPos)
-                elseif type(targetPos) == "userdata" then
-                    RealTarget = targetPos
-                elseif type(targetPos) == "number" then
-                    RealTarget = CFrame.new(unpack(RealtargetPos))
-                end
-            
-                if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health == 0 then if tween then tween:Cancel() end repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Health > 0; wait(0.2) end
-            
-                local tweenfunc = {}
-                local Distance = (RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude
-                if Distance < 1000 then
-                    Speed = 295
+            local function toTarget(cframe)
+                Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if Distance < 25 then
+                    Speed = 5000
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
+                elseif Distance < 50 then
+                    Speed = 2000
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
+                elseif Distance < 150 then
+                    Speed = 800
+                elseif Distance < 250 then
+                    Speed = 600
+                elseif Distance < 500 then
+                    Speed = 400
+                elseif Distance < 750 then
+                    Speed = 300
                 elseif Distance >= 1000 then
-                    Speed = 280
+                    Speed = 290
                 end
-                   
-                local tween_s = game:service"TweenService"
-                local info = TweenInfo.new((RealTarget.Position - game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").Position).Magnitude/Speed, Enum.EasingStyle.Linear)
-                local tweenw, err = pcall(function()
-                    tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = RealTarget})
-                    tween:Play()
-                end)
-            
-                function tweenfunc:Stop()
-                    tween:Cancel()
-                end 
-            
-                function tweenfunc:Wait()
-                    tween.Completed:Wait()
-                end 
-            
-                return tweenfunc
+                game:GetService("TweenService"):Create(
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                    TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+                    {CFrame = cframe}
+                ):Play()
             end
 
             function InMyNetWork(object)
@@ -1194,11 +1180,13 @@ local status, err = pcall(function()
                 end
                 local mobsKilled = 0
                 repeat wait()
-                    local args = {
-                        [1] = "EnablePvp"
-                    }
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
+                        if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter"), "We heard") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EnablePvp")
+                        end
+                    else
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
+                    end
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                     local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
 
@@ -1224,7 +1212,7 @@ local status, err = pcall(function()
                     else
                         toTarget(CFrameMon * CFrame.new(0,30,5))
                     end
-                until game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest == true or mobsKilled == 1
+                until QuestC.Visible == true or mobsKilled == 1
             end
             
             local function isPlayerHunterQuest(Quest) 
@@ -1388,11 +1376,11 @@ local status, err = pcall(function()
                                     repeat task.wait()
                                         useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
                                         task.wait(.5)
-                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 1000 then
+                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 10000 then
                                             Bypass(target.Character.HumanoidRootPart.CFrame)
-                                            task.wait(1)
+                                            task.wait(2)
                                         end
-                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 300 then
+                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
                                             repeat task.wait()
                                                 toTarget(target.Character.HumanoidRootPart.CFrame)
                                             until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500
@@ -1401,14 +1389,9 @@ local status, err = pcall(function()
                                         _G.KillingPlayer = true
                                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
                                             repeat task.wait() until game:GetService("Players").LocalPlayer.Character.Humanoid.Health > 0
-                                            local respPos = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                             repeat task.wait()
-                                                local args = {
-                                                    [1] = "EnablePvp"
-                                                }
-                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                                toTarget(respPos)
-                                                task.wait(.1)
+                                                toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                                             until game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == false
                                         end
                                         char = target.Character
@@ -1436,10 +1419,10 @@ local status, err = pcall(function()
                                     end
                                     useNearestEntrance(Quest.QuestGiverPosition)
                                     task.wait(.2)
-                                    if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
                                         Bypass(Quest.QuestGiverPosition)
                                         task.wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                        if getDistance(Quest.QuestGiverPosition) > 4000 then
                                             repeat wait()
                                                 toTarget(Quest.QuestGiverPosition)
                                             until getDistance(Quest.QuestGiverPosition) < 10
@@ -1503,12 +1486,12 @@ local status, err = pcall(function()
                                             questStarted = false
                                             useNearestEntrance(Quest.QuestGiverPosition)
                                             task.wait(.2)
-                                            if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                            if getDistance(Quest.QuestGiverPosition) > 10000 then
                                                 Bypass(Quest.QuestGiverPosition)
                                                 task.wait(.2)
-                                                if getDistance(Quest.QuestGiverPosition) > 2000 then
-                                                    repeat task.wait()
-                                                        tf = toTarget(Quest.QuestGiverPosition)
+                                                if getDistance(Quest.QuestGiverPosition) > 4000 then
+                                                    repeat wait()
+                                                        toTarget(Quest.QuestGiverPosition)
                                                     until getDistance(Quest.QuestGiverPosition) < 10
                                                 end
                                             end
@@ -1530,13 +1513,13 @@ local status, err = pcall(function()
                             if QuestC.Visible == true then
                                 if not questStarted then
                                     useNearestEntrance(Quest.QuestGiverPosition)
-                                    wait(.2)
-                                    if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                    task.wait(.2)
+                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
                                         Bypass(Quest.QuestGiverPosition)
-                                        wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 2000 then
+                                        task.wait(.2)
+                                        if getDistance(Quest.QuestGiverPosition) > 4000 then
                                             repeat wait()
-                                                tf = toTarget(Quest.QuestGiverPosition)
+                                                toTarget(Quest.QuestGiverPosition)
                                             until getDistance(Quest.QuestGiverPosition) < 10
                                         end
                                     end
