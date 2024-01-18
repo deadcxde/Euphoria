@@ -1409,15 +1409,15 @@ local status, err = pcall(function()
                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                     end
-                                    useNearestEntrance(Quest.QuestGiverPosition)
+                                    useNearestEntrance(Quest.NPCPosition)
                                     task.wait(.2)
-                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                        Bypass(Quest.QuestGiverPosition)
+                                    if getDistance(Quest.NPCPosition) > 10000 then
+                                        Bypass(Quest.NPCPosition)
                                         task.wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 4000 then
+                                        if getDistance(Quest.NPCPosition) > 4000 then
                                             repeat wait()
-                                                toTarget(Quest.QuestGiverPosition)
-                                            until getDistance(Quest.QuestGiverPosition) < 10
+                                                toTarget(Quest.NPCPosition)
+                                            until getDistance(Quest.NPCPosition) < 10
                                         end
                                     end
 
