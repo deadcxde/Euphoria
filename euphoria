@@ -1711,7 +1711,7 @@ local status, err = pcall(function()
                         print("Start bypass anticheat hop")
                     end
                 end
-            end)()
+            end)
     
             spawn(function()
                 while wait() do
