@@ -1362,6 +1362,7 @@ local status, err = pcall(function()
             
             function StopTween()
                 NoClip = false
+                StoppedTween = true
                 toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
             end
 
@@ -2065,9 +2066,9 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if getgenv().Settings["autonextisland"] then
-                            NoClip = true
                             islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
                             if game.Players.LocalPlayer.PlayerGui.Main.Timer.Visible == true then
+                                NoClip = true
                                 found = false
                                 for i,islandName in pairs(islands) do
                                     for i,v in pairs(game.Workspace._WorldOrigin.Locations:GetChildren()) do
@@ -2081,6 +2082,8 @@ local status, err = pcall(function()
                                     end
                                     if found then break end
                                 end
+                            else
+                                NoClip = false
                             end
                         else
                             NoClip = false
@@ -2128,7 +2131,12 @@ local status, err = pcall(function()
             RaidSection:NewButton("Tween to raid room", "Tween to raid room", function()
                 if second_sea then
                     cf = CFrame.new(-6451.38721, 249.528275, -4494.57324, -0.642593145, 2.36225439e-09, 0.766207576, 1.03323057e-08, 1, 5.58231772e-09, -0.766207576, 1.15038503e-08, -0.642593145)
-                    tweenToPointAdvanced(cf)
+                    StoppedTween = false
+                    repeat wait()
+                        NoClip = true
+                        tweenToPointAdvanced(cf)
+                    until (game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Position - cf.Position).Magnitude < 20 or StoppedTween
+                    NoClip = false
                 end
             end)
             
