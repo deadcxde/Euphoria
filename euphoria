@@ -1701,11 +1701,11 @@ local status, err = pcall(function()
                     end
                 end
             end)()
-    
-            coroutine.wrap(function()
-                while task.wait(.1) do
+            _G.AntiCheat = true
+            spawn(function()
+                while wait(.1) do
                     if _G.AntiCheat then
-                        task.wait(1800)
+                        wait(1800)
                         HopServer()
                     end
                 end
