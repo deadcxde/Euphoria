@@ -1705,8 +1705,10 @@ local status, err = pcall(function()
             spawn(function()
                 while wait(.1) do
                     if _G.AntiCheat then
+                        print("Bypass Anticheat timer started")
                         wait(1800)
                         HopServer()
+                        print("Start bypass anticheat hop")
                     end
                 end
             end)()
