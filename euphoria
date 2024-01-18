@@ -1369,6 +1369,7 @@ local status, err = pcall(function()
                                     
                                     repeat task.wait()
                                         useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
+                                        print("line 1372")
                                         task.wait(.5)
                                         if getDistance(target.Character.HumanoidRootPart.CFrame) > 10000 then
                                             Bypass(target.Character.HumanoidRootPart.CFrame)
@@ -1376,6 +1377,7 @@ local status, err = pcall(function()
                                         end
                                         if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
                                             repeat task.wait()
+                                                print("line 1379")
                                                 toTarget(target.Character.HumanoidRootPart.CFrame)
                                             until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500 or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
                                             StopTween()
@@ -1409,15 +1411,15 @@ local status, err = pcall(function()
                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                     end
-                                    useNearestEntrance(Quest.NPCPosition)
+                                    useNearestEntrance(Quest.QuestGiverPosition)
                                     task.wait(.2)
-                                    if getDistance(Quest.NPCPosition) > 10000 then
-                                        Bypass(Quest.NPCPosition)
+                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
+                                        Bypass(Quest.QuestGiverPosition)
                                         task.wait(.2)
-                                        if getDistance(Quest.NPCPosition) > 4000 then
+                                        if getDistance(Quest.QuestGiverPosition) > 4000 then
                                             repeat wait()
-                                                toTarget(Quest.NPCPosition)
-                                            until getDistance(Quest.NPCPosition) < 10
+                                                toTarget(Quest.QuestGiverPosition)
+                                            until getDistance(Quest.QuestGiverPosition) < 10
                                         end
                                     end
 
