@@ -1411,15 +1411,17 @@ local status, err = pcall(function()
                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
                                     end
-                                    useNearestEntrance(Quest.QuestGiverPosition)
-                                    task.wait(.2)
-                                    if getDistance(Quest.QuestGiverPosition) > 10000 then
-                                        Bypass(Quest.QuestGiverPosition)
+                                    if not questStarted then
+                                        useNearestEntrance(Quest.QuestGiverPosition)
                                         task.wait(.2)
-                                        if getDistance(Quest.QuestGiverPosition) > 4000 then
-                                            repeat wait()
-                                                toTarget(Quest.QuestGiverPosition)
-                                            until getDistance(Quest.QuestGiverPosition) < 10
+                                        if getDistance(Quest.QuestGiverPosition) > 10000 then
+                                            Bypass(Quest.QuestGiverPosition)
+                                            task.wait(.2)
+                                            if getDistance(Quest.QuestGiverPosition) > 4000 then
+                                                repeat wait()
+                                                    toTarget(Quest.QuestGiverPosition)
+                                                until getDistance(Quest.QuestGiverPosition) < 10
+                                            end
                                         end
                                     end
 
@@ -1450,6 +1452,7 @@ local status, err = pcall(function()
                                             end
                                         end
                                     else
+                                        useNearestEntrance(Quest.NPCPosition * CFrame.new(0,30,5))
                                         toTarget(Quest.NPCPosition * CFrame.new(0,30,5))
                                         if (Quest.NPCPosition.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 50 then
                                             wait(0.5)
@@ -1707,8 +1710,8 @@ local status, err = pcall(function()
                     if _G.AntiCheat then
                         print("Bypass Anticheat timer started")
                         wait(1800)
-                        HopServer()
                         print("Start bypass anticheat hop")
+                        HopServer()
                     end
                 end
             end)
