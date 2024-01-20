@@ -1366,21 +1366,23 @@ local status, err = pcall(function()
                                         end
                                     end
                                     if not target then game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") end
-                                    
+                                    done = false
                                     repeat task.wait()
-                                        useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
-                                        print("line 1372")
-                                        task.wait(.5)
-                                        if getDistance(target.Character.HumanoidRootPart.CFrame) > 10000 then
-                                            Bypass(target.Character.HumanoidRootPart.CFrame)
-                                            task.wait(2)
-                                        end
+                                        if not target.Character:FindFirstChild("HumanoidRootPart") then done = true end
                                         if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
-                                            repeat task.wait()
-                                                print("line 1379")
-                                                toTarget(target.Character.HumanoidRootPart.CFrame)
-                                            until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500 or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
-                                            StopTween()
+                                            useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
+                                            print("line 1372")
+                                            task.wait(.2)
+                                            if getDistance(target.Character.HumanoidRootPart.CFrame) > 10000 then
+                                                Bypass(target.Character.HumanoidRootPart.CFrame)
+                                            end
+                                            if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
+                                                repeat task.wait()
+                                                    print("line 1379")
+                                                    toTarget(target.Character.HumanoidRootPart.CFrame)
+                                                until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500 or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
+                                                StopTween()
+                                            end
                                         end
                                         _G.KillingPlayer = true
                                         if game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible == true then
@@ -1392,7 +1394,7 @@ local status, err = pcall(function()
                                         
                                         if char then
                                             if char:FindFirstChild("HumanoidRootPart") then
-                                                if getDistance(char.HumanoidRootPart.CFrame) <= 15 then
+                                                if getDistance(char.HumanoidRootPart.CFrame) <= 50 then
                                                     game:service('VirtualInputManager'):SendKeyEvent(true, "Z", false, game)
                                                     game:service('VirtualInputManager'):SendKeyEvent(false, "Z", false, game)
                                                     game:service('VirtualInputManager'):SendKeyEvent(true, "X", false, game)
@@ -1405,7 +1407,7 @@ local status, err = pcall(function()
                                                 toTarget(char.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                             end
                                         end
-                                    until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart")
+                                    until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart") or done == true
                                     _G.KillingPlayer = false
                                 else
                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
