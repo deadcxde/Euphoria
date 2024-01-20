@@ -1021,7 +1021,7 @@ local status, err = pcall(function()
                 wait(1.5)
                 _G.StopTween = true
                 _G.StertScript = false
-            
+                if not game.Players.LocalPlayer.Character:FindFirstChild("Head") then return end
                 game.Players.LocalPlayer.Character.Head:Destroy()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
                 wait(.2)
