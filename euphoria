@@ -1929,7 +1929,7 @@ local status, err = pcall(function()
                         h=(string.len(h)==1 and "0"..h or h)
                         m=(string.len(m)==1 and "0"..m or m)
                         s=(string.len(s)==1 and "0"..s or s)
-                        timerLabel:UpdateToggle("Online Time: "..h..":"..m..":"..s)
+                        timerLabel:UpdateLabel("Online Time: "..h..":"..m..":"..s)
                     end)
                 end
             end)
