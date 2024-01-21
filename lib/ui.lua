@@ -1033,7 +1033,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     toggleEnabled.Position = UDim2.new(0.0199999996, 0, 0.180000007, 0)
                     toggleEnabled.Size = UDim2.new(0, 21, 0, 21)
                     toggleEnabled.Image = "rbxassetid://3926309567"
-                    toggleEnabled.ImageColor3 = themeList.SchemeColor
+                    toggleEnabled.ImageColor3 = Color3.fromRGB(255, 255, 255)
                     toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
                     toggleEnabled.ImageRectSize = Vector2.new(48, 48)
                     toggleEnabled.ImageTransparency = 1.000
@@ -1184,7 +1184,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 toggleElement.BackgroundColor3 = themeList.ElementColor
                             end
                             toggleDisabled.ImageColor3 = themeList.SchemeColor
-                            toggleEnabled.ImageColor3 = Color3.fromRGB(themeList.SchemeColor.r + 20, themeList.SchemeColor.g + 20, themeList.SchemeColor.b + 20)
+                            toggleEnabled.ImageColor3 = Color3.fromRGB(255,255,255)
                             togName.TextColor3 = themeList.TextColor
                             viewInfo.ImageColor3 = themeList.SchemeColor
                             Sample.ImageColor3 = themeList.SchemeColor
