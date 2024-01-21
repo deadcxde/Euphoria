@@ -1068,7 +1068,7 @@ local status, err = pcall(function()
 
             spawn(function()
                 while wait() do 
-                    if _G.Auto_Farm or _G.AutoFarmPlayer or _G.Kaitun then
+                    if _G.Auto_Farm or _G.AutoFarmPlayer or _G.Kaitun or _G.AutoRengoku then
                         if syn then
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
