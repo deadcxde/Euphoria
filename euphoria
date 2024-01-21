@@ -1268,7 +1268,7 @@ local status, err = pcall(function()
                                 elseif game.Workspace.Enemies:FindFirstChild("Arctic Warrior") or game.Workspace.Enemies:FindFirstChild("Snow Lurker") then
                                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
                                         if v.Name == "Arctic Warrior" or v.Name == "Snow Lurker" then
-                                            if v:FindFirstChild("HumanoidRootPart") then
+                                            if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("Humanoid").Health > 0 then
                                                 repeat task.wait()
                                                     EquipWeapon(_G.SelectWeapon)
                                                     toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
