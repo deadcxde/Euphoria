@@ -1036,6 +1036,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     toggleEnabled.ImageColor3 = Color3.fromRGB(255, 255, 255)
                     toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
                     toggleEnabled.ImageRectSize = Vector2.new(48, 48)
+                    toggleEnabled.ImageTransparency = 1.000
 
                     togName.Name = "togName"
                     togName.Parent = toggleElement
@@ -1103,12 +1104,13 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     local img = toggleEnabled
                     local infBtn = viewInfo
 
-                                    updateSectionFrame()
-                UpdateSize()
+                    updateSectionFrame()
+                    UpdateSize()
 
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
-                            if toggled == true then
+                            if toggled == false then
+                                toggled = true
                                 game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 0
                                 }):Play()
@@ -1129,6 +1131,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()
                             else
+                                toggled = false
                                 game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 1
                                 }):Play()
@@ -1149,6 +1152,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()
                             end
+                            
                             pcall(callback, toggled)
                         else
                             for i,v in next, infoContainer:GetChildren() do
