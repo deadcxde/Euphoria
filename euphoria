@@ -950,41 +950,6 @@ local status, err = pcall(function()
                 end
             end)
     
-            spawn(function()
-                while task.wait() do
-                    pcall(function()
-                        if BringMobFarm then
-                            for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                if first_sea then range = 400 end
-                                if second_sea or third_sea then
-                                    if GetIsLand(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) == "Ship" then
-                                        range = 50 
-                                    else
-                                        range = 400
-                                    end 
-                                end
-                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= range then
-                                    if InMyNetWork(v.HumanoidRootPart) then
-                                        v.HumanoidRootPart.CFrame = PosMon
-                                        v.Humanoid.JumpPower = 0
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                        v.HumanoidRootPart.Transparency = 1
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Head.CanCollide = false
-                                        if v.Humanoid:FindFirstChild("Animator") then
-                                            v.Humanoid.Animator:Destroy()
-                                        end
-                                        v.Humanoid:ChangeState(11)
-                                        v.Humanoid:ChangeState(14)
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
-                                    end
-                                end
-                            end
-                        end
-                    end)
-                end
-            end)
             function EquipWeapon(Tool)
                 pcall(function()
                     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
@@ -1041,30 +1006,6 @@ local status, err = pcall(function()
                     wait(2)
                 end
             end)
-            spawn(function()
-                while wait() do
-                    if _G.AutoFarmPlayer then
-                        if not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter")
-                        else
-                            for i, plr in pairs(game:GetService("Players"):GetChildren()) do
-                                if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, plr.Name) then
-                                    repeat task.wait()
-                                        v = plr.Character
-                                        v.HumanoidRootPart.Size = Vector3.new(30,30,30)
-                                        PosMon = v.HumanoidRootPart.CFrame
-                                        EquipWeapon(_G.SelectWeapon)
-                                        BringMobFarm = false
-                                        v.HumanoidRootPart.Transparency = 1
-                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
-                                    until not _G.AutoFarmPlayer or not v.Parent or not v:FindFirstChild("Humanoid") or v.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not v:FindFirstChild("HumanoidRootPart")
-                                end 
-                            end
-                        end
-                    end
-                    wait(2)
-                end
-            end)
 
             spawn(function()
                 while wait() do 
@@ -1107,7 +1048,7 @@ local status, err = pcall(function()
             spawn(function()
                 while task.wait() do
                     pcall(function()
-                        if _G.Kaitun and BringMobFarm then
+                        if BringMobFarm then
                             if first_sea then range = 400 end
                                 if second_sea or third_sea then
                                     if GetIsLand(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) == "Ship" then
