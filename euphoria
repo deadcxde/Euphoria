@@ -1694,19 +1694,7 @@ local status, err = pcall(function()
                     end
                 end
             end)()
-            _G.AntiCheat = true
-            spawn(function()
-                
-                while wait(.1) do
-                    pcall(function()
-                        if _G.AntiCheat then
-                            if workspace.DistributedGameTime+0.5 > 1800 then
-                                HopServer()
-                            end
-                        end
-                    end)
-                end
-            end)
+            
     
             spawn(function()
                 while wait() do
@@ -2182,14 +2170,28 @@ local status, err = pcall(function()
             end)
             local MiscTab = Window:NewTab("Misc")
             local MiscSection = MiscTab:NewSection("Misc")
-            fu = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
+            afk = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
                 _G.AntiAFK = value
             end)
-            fu:UpdateToggle(nil, true)
-            fu = MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", function(state)
+            afk:UpdateToggle(nil, true)
+            
+            anticheat = MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", function(state)
                 _G.AntiCheat = value
             end)
-            fu:UpdateToggle(nil, true)
+            anticheat:UpdateToggle(nil, true)
+            _G.AntiCheat = true
+            spawn(function()
+                while wait(.1) do
+                    pcall(function()
+                        if _G.AntiCheat then
+                            if workspace.DistributedGameTime+0.5 > 1800 then
+                                print("TRYING HOP")
+                                HopServer()
+                            end
+                        end
+                    end)
+                end
+            end)
 
             local ServerTab = Window:NewTab("Server")
             local ServerSection = ServerTab:NewSection("Server")
