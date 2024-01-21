@@ -1302,8 +1302,8 @@ local status, err = pcall(function()
                     pcall(function()
                         if _G.AutoRengoku then
                             if not game.Players.LocalPlayer.Backpack:FindFirstChild("Hidden Key") then
-                                if game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then
-                                    v = game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]")
+                                if game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral") then
+                                    v = game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral")
                                     if v:FindFirstChild("HumanoidRootPart") then
                                         repeat task.wait()
                                             EquipWeapon(_G.SelectWeapon)
@@ -1317,9 +1317,9 @@ local status, err = pcall(function()
                                             RenPos = v.HumanoidRootPart.CFrame
                                         until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
                                     end
-                                elseif game.Workspace.Enemies:FindFirstChild("Arctic Warrior [Lv. 1350]") or game.Workspace.Enemies:FindFirstChild("Snow Lurker [Lv. 1375]") then
+                                elseif game.Workspace.Enemies:FindFirstChild("Arctic Warrior") or game.Workspace.Enemies:FindFirstChild("Snow Lurker") then
                                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                        if v.Name == "Arctic Warrior [Lv. 1350]" or v.Name == "Snow Lurker [Lv. 1375]" then
+                                        if v.Name == "Arctic Warrior" or v.Name == "Snow Lurker" then
                                             if v:FindFirstChild("HumanoidRootPart") then
                                                 repeat task.wait()
                                                     EquipWeapon(_G.SelectWeapon)
