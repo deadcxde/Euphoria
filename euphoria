@@ -1317,6 +1317,8 @@ local status, err = pcall(function()
                                             RenMon = v.Name
                                             RenPos = v.HumanoidRootPart.CFrame
                                         until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
+                                    else
+                                        toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                                     end
                                 elseif game.Workspace.Enemies:FindFirstChild("Arctic Warrior") or game.Workspace.Enemies:FindFirstChild("Snow Lurker") then
                                     for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
@@ -1334,6 +1336,8 @@ local status, err = pcall(function()
                                                     RenMon = v.Name
                                                     RenPos = v.HumanoidRootPart.CFrame
                                                 until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
+                                            else
+                                                toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                                             end
                                         end
                                     end
