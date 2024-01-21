@@ -1036,7 +1036,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     toggleEnabled.ImageColor3 = Color3.fromRGB(255, 255, 255)
                     toggleEnabled.ImageRectOffset = Vector2.new(784, 420)
                     toggleEnabled.ImageRectSize = Vector2.new(48, 48)
-                    toggleEnabled.ImageTransparency = 1.000
+                    toggleEnabled.ImageTransparency = 0.000
 
                     togName.Name = "togName"
                     togName.Parent = toggleElement
