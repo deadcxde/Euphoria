@@ -1110,7 +1110,6 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
                             if toggled == false then
-                                toggled = true
                                 game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 0
                                 }):Play()
@@ -1131,7 +1130,6 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()
                             else
-                                toggled = false
                                 game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 1
                                 }):Play()
@@ -1152,7 +1150,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 end
                                 c:Destroy()
                             end
-                            
+                            toggled = not toggled
                             pcall(callback, toggled)
                         else
                             for i,v in next, infoContainer:GetChildren() do
