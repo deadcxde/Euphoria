@@ -2033,7 +2033,7 @@ local status, err = pcall(function()
             )
             local ItemsTab = Window:NewTab("Items")
             local Sea2ItemsSection = ItemsTab:NewSection("Sea 2")
-            ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
+            Sea2ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
                 _G.AutoRengoku = state
             end)
             local RaidTab = Window:NewTab("Raid")
