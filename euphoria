@@ -2127,8 +2127,7 @@ local status, err = pcall(function()
                 teleportToThirdSea()
             end)
 
-            local StatsTab = Window:NewTab("Stats")
-            local StatsSection = StatsTab:NewSection("Stats")
+            local StatsSection = MainTab:NewSection("Stats")
             -- СТАТЫ
             StatsSection:NewToggle("Melee", "Melee", function(state)
                 _G.LearnMelee = state
@@ -2149,8 +2148,12 @@ local status, err = pcall(function()
                 _G.LearnRate = s
             end)
 
-            local FruitTab = Window:NewTab("Fruit")
-            local FruitSection = FruitTab:NewSection("Fruit")
+            local ShopTab = Window:NewTab("Shop")
+            local ShopSection = ShopTab:NewSection("Bones")
+            ShopSection:NewButton("Random Surprise [50 bones]", "Random Surprise", function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Buy", 1, 1)
+            end)
+            local FruitSection = ShopTab:NewSection("Fruit")
             FruitSection:NewButton("Open Fruit Shop", "Open Fruit Shop", function()
                 local args = {
                     [1] = "GetFruits"
@@ -2158,14 +2161,8 @@ local status, err = pcall(function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 game.Players.localPlayer.PlayerGui.Main.FruitShop.Visible = true
             end)
-            FruitSection:NewButton("Random Fruit", "Random Fruit", function()
+            FruitSection:NewButton("Buy Random Fruit", "Random Fruit", function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin" , "Buy")
-            end)
-
-            local ShopTab = Window:NewTab("Shop")
-            local ShopSection = ShopTab:NewSection("Shop")
-            ShopSection:NewButton("Random Surprise [50 bones]", "Random Surprise", function()
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Buy", 1, 1)
             end)
             local MiscTab = Window:NewTab("Misc")
             local MiscSection = MiscTab:NewSection("Misc")
