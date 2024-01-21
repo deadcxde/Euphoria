@@ -1696,12 +1696,15 @@ local status, err = pcall(function()
             end)()
             _G.AntiCheat = true
             spawn(function()
+                
                 while wait(.1) do
-                    if _G.AntiCheat then
-                        if workspace.DistributedGameTime+0.5 > 1800 then
-                            HopServer()
+                    pcall(function()
+                        if _G.AntiCheat then
+                            if workspace.DistributedGameTime+0.5 > 1800 then
+                                HopServer()
+                            end
                         end
-                    end
+                    end)
                 end
             end)
     
