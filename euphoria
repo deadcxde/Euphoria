@@ -1307,7 +1307,7 @@ local status, err = pcall(function()
                                     if v:FindFirstChild("HumanoidRootPart") then
                                         repeat task.wait()
                                             EquipWeapon(_G.SelectWeapon)
-                                            toTarget(v.HumanoidRootPart.CFrame)
+                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
                                             v.Humanoid.WalkSpeed = 0
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             v.Humanoid:ChangeState(14)
@@ -1322,8 +1322,8 @@ local status, err = pcall(function()
                                         if v.Name == "Arctic Warrior [Lv. 1350]" or v.Name == "Snow Lurker [Lv. 1375]" then
                                             if v:FindFirstChild("HumanoidRootPart") then
                                                 repeat task.wait()
-                                                    EquipTool(_G.SWeapon)
-                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(_G.Setting_table.X,_G.Setting_table.Y,_G.Setting_table.Z))
+                                                    EquipWeapon(_G.SelectWeapon)
+                                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                                     v.Humanoid:ChangeState(14)
@@ -1331,15 +1331,15 @@ local status, err = pcall(function()
                                                     v.Head.CanCollide = false
                                                     RenMon = v.Name
                                                     RenPos = v.HumanoidRootPart.CFrame
-                                                until not _G.Setting_table.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
+                                                until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
                                             end
                                         end
                                     end
                                 else
-                                    Tween(CFrame.new(5733.30615234375, 28.366647720336914, -6400.83837890625))
+                                    toPoint(CFrame.new(5733.30615234375, 28.366647720336914, -6400.83837890625))
                                 end
                             else
-                                Tween(CFrame.new(6571.9853515625, 297.16973876953125, -6965.3515625))
+                                toPoint(CFrame.new(6571.9853515625, 297.16973876953125, -6965.3515625))
                             end
                         end
                     end)
