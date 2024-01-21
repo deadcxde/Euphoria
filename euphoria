@@ -1698,10 +1698,9 @@ local status, err = pcall(function()
             spawn(function()
                 while wait(.1) do
                     if _G.AntiCheat then
-                        print("Bypass Anticheat timer started")
-                        wait(1800)
-                        print("Start bypass anticheat hop")
-                        HopServer()
+                        if workspace.DistributedGameTime+0.5 > 1800 then
+                            HopServer()
+                        end
                     end
                 end
             end)
@@ -1920,6 +1919,20 @@ local status, err = pcall(function()
             _G.Auto_Farm = false
             local MainTab = Window:NewTab("Main")
             local MainFarmSection = MainTab:NewSection("Farm")
+            chipRaidLabel = MainFarmSection:NewLabel(" ")
+            task.spawn(function()
+                while task.wait(1) do
+                    pcall(function()
+                        h=math.floor((math.floor(workspace.DistributedGameTime+0.5)/(60*60*1))%(24))
+                        m=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(60*1))%(60)
+                        s=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(1))%(60)
+                        h=(string.len(h)==1 and "0"..h or h)
+                        m=(string.len(m)==1 and "0"..m or m)
+                        s=(string.len(s)==1 and "0"..s or s)
+                        chipRaidLabel:UpdateToggle("Online Time: "..h..":"..m..":"..s)
+                    end)
+                end
+            end)
 
             MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", function(state)
                 _G.Auto_Farm = state
