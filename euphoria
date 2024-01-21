@@ -953,7 +953,7 @@ local status, err = pcall(function()
             spawn(function()
                 while task.wait() do
                     pcall(function()
-                        if _G.Auto_Farm and BringMobFarm then
+                        if BringMobFarm then
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
                                 if first_sea then range = 400 end
                                 if second_sea or third_sea then
@@ -1313,6 +1313,7 @@ local status, err = pcall(function()
                                             v.Humanoid:ChangeState(14)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.Head.CanCollide = false
+                                            BringMobFarm = false
                                             RenMon = v.Name
                                             RenPos = v.HumanoidRootPart.CFrame
                                         until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
@@ -1329,6 +1330,7 @@ local status, err = pcall(function()
                                                     v.Humanoid:ChangeState(14)
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false
+                                                    BringMobFarm = true
                                                     RenMon = v.Name
                                                     RenPos = v.HumanoidRootPart.CFrame
                                                 until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
