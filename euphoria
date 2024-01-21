@@ -917,6 +917,7 @@ local status, err = pcall(function()
 
             local function toTarget(cframe)
                 Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if Distance == nil then return end
                 if Distance < 25 then
                     Speed = 5000
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
