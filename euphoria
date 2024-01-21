@@ -1310,8 +1310,55 @@ local status, err = pcall(function()
 
             _G.KillingPlayer = false
 
-            
-            -- rewrite autoleveling
+            spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if _G.AutoRengoku then
+                            if not game.Players.LocalPlayer.Backpack:FindFirstChild("Hidden Key") then
+                                if game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]") then
+                                    v = game.Workspace.Enemies:FindFirstChild("Awakened Ice Admiral [Lv. 1400] [Boss]")
+                                    if v:FindFirstChild("HumanoidRootPart") then
+                                        repeat task.wait()
+                                            EquipWeapon(_G.SelectWeapon)
+                                            toTarget(v.HumanoidRootPart.CFrame)
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                            v.Humanoid:ChangeState(14)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Head.CanCollide = false
+                                            RenMon = v.Name
+                                            RenPos = v.HumanoidRootPart.CFrame
+                                        until not _G.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
+                                    end
+                                elseif game.Workspace.Enemies:FindFirstChild("Arctic Warrior [Lv. 1350]") or game.Workspace.Enemies:FindFirstChild("Snow Lurker [Lv. 1375]") then
+                                    for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+                                        if v.Name == "Arctic Warrior [Lv. 1350]" or v.Name == "Snow Lurker [Lv. 1375]" then
+                                            if v:FindFirstChild("HumanoidRootPart") then
+                                                repeat task.wait()
+                                                    EquipTool(_G.SWeapon)
+                                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(_G.Setting_table.X,_G.Setting_table.Y,_G.Setting_table.Z))
+                                                    v.Humanoid.WalkSpeed = 0
+                                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                                    v.Humanoid:ChangeState(14)
+                                                    v.HumanoidRootPart.CanCollide = false
+                                                    v.Head.CanCollide = false
+                                                    RenMon = v.Name
+                                                    RenPos = v.HumanoidRootPart.CFrame
+                                                until not _G.Setting_table.AutoRengoku or not v.Parent or v.Humanoid.Health <= 0
+                                            end
+                                        end
+                                    end
+                                else
+                                    Tween(CFrame.new(5733.30615234375, 28.366647720336914, -6400.83837890625))
+                                end
+                            else
+                                Tween(CFrame.new(6571.9853515625, 297.16973876953125, -6965.3515625))
+                            end
+                        end
+                    end)
+                end
+            end)
+           
             function useNearestEntrance(targetCFrame)
                 local entrancesFirstSea = {Vector3.new(61164.19921875, 7.326029300689697, 1856.9254150390625), Vector3.new(-4607.82275390625, 874.3905029296875, -1667.556884765625), Vector3.new(-7894.61767578125, 5547.1416015625, -380.29119873046875)}
                 local entrancesSecondSea = {Vector3.new(-287.952209, 306.130615, 605.197021), Vector3.new(-6498.72119, 83.1870193, -134.912308), Vector3.new(919.299927, 125.057106, 32888.207)}
@@ -1349,6 +1396,8 @@ local status, err = pcall(function()
                 toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
             end
 
+            -- KAITUN
+            -- ============================
             task.spawn(function()
                 while task.wait() do
                     local MyLevel = game.Players.LocalPlayer.Data.Level.Value
@@ -1938,18 +1987,15 @@ local status, err = pcall(function()
                 _G.Auto_Farm = state
                 Auto_Farm_Level = state
             end)
-            MainFarmSection:NewToggle("Auto Farm Player", "Auto Farm Player", function(state)
-                _G.AutoFarmPlayer = state
-            end)
             _G.SelectWeapon = _G.SelectWeapon or "Melee"
             MainFarmSection:NewDropdown("Select Weapon", "Select Weapon", {"Melee", "Sword", "Fruit"}, function(currentOption)
                 _G.SelectWeapon = currentOption
             end)
-            fu = MainFarmSection:NewToggle("Fast Attack", "Auto Farm Player", function(state)
+            fu = MainFarmSection:NewToggle("Fast Attack", "Fast Attack", function(state)
                 _G.FastAttack = state
             end)
             fu:UpdateToggle(nil, true)
-            fu = MainFarmSection:NewToggle("Fast Tween", "Auto Farm Player", function(state)
+            fu = MainFarmSection:NewToggle("Fast Tween", "Fast Tween", function(state)
                 _G.FastTween = state
             end)
             fu:UpdateToggle(nil, true)
@@ -1985,6 +2031,11 @@ local status, err = pcall(function()
                     redeem("TantaiGaming")               
                 end
             )
+            local ItemsTab = Window:NewTab("Items")
+            local Sea2ItemsSection = ItemsTab:NewSection("Sea 2")
+            ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
+                _G.AutoRengoku = state
+            end)
             local RaidTab = Window:NewTab("Raid")
             local RaidSection = RaidTab:NewSection("Raid")
             spawn(function()
