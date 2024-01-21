@@ -1919,7 +1919,7 @@ local status, err = pcall(function()
             _G.Auto_Farm = false
             local MainTab = Window:NewTab("Main")
             local MainFarmSection = MainTab:NewSection("Farm")
-            chipRaidLabel = MainFarmSection:NewLabel(" ")
+            timerLabel = MainFarmSection:NewLabel(" ")
             task.spawn(function()
                 while task.wait(1) do
                     pcall(function()
@@ -1929,7 +1929,7 @@ local status, err = pcall(function()
                         h=(string.len(h)==1 and "0"..h or h)
                         m=(string.len(m)==1 and "0"..m or m)
                         s=(string.len(s)==1 and "0"..s or s)
-                        chipRaidLabel:UpdateToggle("Online Time: "..h..":"..m..":"..s)
+                        timerLabel:UpdateToggle("Online Time: "..h..":"..m..":"..s)
                     end)
                 end
             end)
