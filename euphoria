@@ -1460,7 +1460,9 @@ local status, err = pcall(function()
                                         wait(.5)
                                     end
                                     if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                                        farmSkyGuards()
+                                        pcall(function()
+                                            farmSkyGuards()
+                                        end)
                                     end
                                 elseif MyLevel < 700 then
                                     if MyLevel < 690 then
