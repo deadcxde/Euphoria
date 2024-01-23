@@ -2208,9 +2208,8 @@ local status, err = pcall(function()
                             if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
                                 if not game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
                                     cheapest = getCheapestFruit()
-                                    print(cheapest)
                                     if cheapest ~= 0 then
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_.InvokeServer("LoadFruit", cheapest)
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LoadFruit", cheapest)
                                     end
                                 end
                             end
