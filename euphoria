@@ -1342,7 +1342,7 @@ local status, err = pcall(function()
                         local MyLevel = game.Players.LocalPlayer.Data.Level.Value
                         local QuestC = game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest
                         local Quest = QuestCheck()
-                        
+                            
                         if _G.Kaitun then
                             if first_sea then
                                 if QuestC.Visible == true then
@@ -2060,6 +2060,7 @@ local status, err = pcall(function()
                 end)
             end)
             -- killaura
+            SelectedChip = "Flame"
             local KillauraRadius = 350
             k = RaidSection:NewToggle("Killaura [ONLY WHILE RAID]", "Killaura", function(state)
                 getgenv().Settings["killaura"] = state
@@ -2123,9 +2124,108 @@ local status, err = pcall(function()
                     end)
                 end
             end)
+            RaidSection:NewToggle("Auto Start Raid", "Auto Start Raid", function(state)
+                getgenv().Settings["autostartraid"] = state
+            end)
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if getgenv().Settings["autostartraid"] then
+                            if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
+                                if game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
+                                    if second_sea then
+                                        buttonPos = Vector3.new(-6488.0185546875, 248.6365203857422, -4527.62158203125)
+                                        for i, child in pairs(game:GetService("Workspace").Map.CircleIsland:GetChildren()) do
+                                            if child.Name == "RaidSummon2" then
+                                                if (child.Button:GetPivot().Position - buttonPos).Magnitude < 15 then
+                                                    fireclickdetector(child.Button.Main.ClickDetector) 
+                                                end
+                                            end
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+            RaidSection:NewToggle("Auto Buy Chip", "Auto Buy Chip", function(state)
+                getgenv().Settings["autobuychip"] = state
+            end)
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if getgenv().Settings["autobuychip"] then
+                            if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
+                                task.wait(2)
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Check")
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", SelectedChip)
+                            end
+                        end
+                    end)
+                end
+            end)
+            RaidSection:NewToggle("Auto Trade Fruit < 1M", "Auto Trade Fruit < 1M", function(state)
+                getgenv().Settings["autotradejunk"] = state
+            end)
+            function getCheapestFruit()
+                fruits = {
+                    "Rocket-Rocket",
+                    "Spin-Spin",
+                    "Chop-Chop",
+                    "Spring-Spring",
+                    "Bomb-Bomb",
+                    "Smoke-Smoke",
+                    "Spike-Spike",
+                    "Flame-Flame",
+                    "Falcon-Falcon",
+                    "Ice-Ice",
+                    "Sand-Sand",
+                    "Dark-Dark",
+                    "Diamond-Diamond",
+                    "Light-Light",
+                    "Rubber-Rubber",
+                    "Barrier-Barrier",
+                    "Ghost-Ghost",
+                    "Magma-Magma"
+                }
+                myFruits = {}
+                for i,v in pairs(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("getInventoryFruits")) do
+                    table.insert(myFruits, v.Name)
+                end
+                for _, fr in pairs(fruits) do
+                    for _, f in pairs(myFruits) do
+                        if fr == f then return fr end
+                    end
+                end
+                return 0
+            end
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        task.wait(2)
+                        if getgenv().Settings["autotradejunk"] then
+                            if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
+                                if not game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
+                                    cheapest = getCheapestFruit()
+                                    if cheapest ~= 0 then
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_.InvokeServer("LoadFruit", cheapest)
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+            RaidSection:NewSlider("Max FRAG", "Max Fragments", 0, 20000, function(s) -- 500 (MaxValue) | 0 (MinValue)
+                getgenv().Settings["maxfrag"] = s
+            end)
+            RaidSection:NewToggle("Enable Max Fragments", "Enable Max Fragments", function(state)
+                getgenv().Settings["enabledmaxfrag"] = state
+            end)
 
 
-            SelectedChip = "Flame"
+            
             chipRaidLabel = RaidSection:NewLabel("Selected Chip: " .. SelectedChip)
             RaidSection:NewDropdown("Select Chip", "Select Chip", {"Flame","Ice","Dough","Buddha","Magma","Quake","Light","Dark","Spider","Rumble","Sand","Phoenix"}, function(chip)
                 SelectedChip = chip
@@ -2207,9 +2307,18 @@ local status, err = pcall(function()
             end)
 
             local ShopTab = Window:NewTab("Shop")
-            local ShopSection = ShopTab:NewSection("Bones")
-            ShopSection:NewButton("Random Surprise [50 bones]", "Random Surprise", function()
+            local BonesShopSection = ShopTab:NewSection("Bones")
+            BonesShopSection:NewButton("Random Surprise [50 bones]", "Random Surprise", function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Bones", "Buy", 1, 1)
+            end)
+            local FragmentsShopSection = ShopTab:NewSection("Fragments")
+            FragmentsShopSection:NewButton("Reset Stats [2500 FRAG]", "Reset Stats", function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+            end)
+            FragmentsShopSection:NewButton("Reroll Race [3000 FRAG]", "Reset Stats", function()
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","1")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Reroll","2")
             end)
             local FruitSection = ShopTab:NewSection("Fruit")
             FruitSection:NewButton("Open Fruit Shop", "Open Fruit Shop", function()
