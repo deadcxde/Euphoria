@@ -917,7 +917,7 @@ local status, err = pcall(function()
                     Speed = 600
                 elseif Distance < 500 then
                     Speed = 400
-                elseif Distance < 750 then
+                elseif Distance < 1000 then
                     Speed = 300
                 elseif Distance >= 1000 then
                     Speed = 290
