@@ -1978,6 +1978,55 @@ local status, err = pcall(function()
             Sea2ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
                 _G.AutoRengoku = state
             end)
+            local Sea3ItemsSection = ItemsTab:NewSection("Sea 3")
+            Sea3ItemsSection:NewButton("Turn On All Haki Plates [rip_indra]", "Turn On All Haki Plates [rip_indra]", function()
+                pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                wait()
+                for i,v in pairs(game.Workspace.Map["Boat Castle"].Summoner.Circle:GetChildren()) do 
+                    if v.Name == "Part" then 
+                        if v.Part.BrickColor ~= BrickColor.new("Lime green") then 
+                            if v.BrickColor == BrickColor.new("Oyster") then 
+                                for ci,cv in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("getColors")) do
+                                    if cv.HiddenName == 'Snow White' then 
+                                        if cv.Unlocked == true then
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Snow White")
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.TouchInterest.Parent, 1) 
+                                            wait()
+                                        end
+                                    end
+                                end
+                            end
+                            if v.BrickColor == BrickColor.new("Hot pink") then 
+                                for cv,cv in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("getColors")) do
+                                    if cv.HiddenName == 'Winter Sky' then 
+                                        if cv.Unlocked == true then
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Winter Sky")
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.TouchInterest.Parent, 1) 
+                                            wait()
+                                        end
+                                    end
+                                end
+                            end
+                            if v.BrickColor == BrickColor.new("Really red") then 
+                                for cv,cv in pairs(game.ReplicatedStorage.Remotes.CommF_:InvokeServer("getColors")) do
+                                    if cv.HiddenName == 'Pure Red' then 
+                                        if cv.Unlocked == true then
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("activateColor","Pure Red")
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.TouchInterest.Parent, 1) 
+                                            wait()
+                                        end
+                                    end
+                                end
+                            end
+                        end
+                    end 
+                end
+                wait()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+            end)
             local RaidTab = Window:NewTab("Raid")
             local RaidSection = RaidTab:NewSection("Raid")
             spawn(function()
