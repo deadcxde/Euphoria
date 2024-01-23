@@ -2061,7 +2061,7 @@ local status, err = pcall(function()
             end)
             -- killaura
             SelectedChip = "Flame"
-            local KillauraRadius = 350
+            local KillauraRadius = 700
             k = RaidSection:NewToggle("Killaura [ONLY WHILE RAID]", "Killaura", function(state)
                 getgenv().Settings["killaura"] = state
             end)
