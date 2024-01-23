@@ -2203,7 +2203,7 @@ local status, err = pcall(function()
             task.spawn(function()
                 while task.wait() do
                     pcall(function()
-                        task.wait(2)
+                        task.wait(5)
                         if getgenv().Settings["autotradejunk"] then
                             if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
                                 if not game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
