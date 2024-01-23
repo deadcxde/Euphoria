@@ -2095,6 +2095,19 @@ local status, err = pcall(function()
             RaidSection:NewToggle("Auto Next Island [ONLY WHILE RAID]", "Auto Next Island", function(state)
                 getgenv().Settings["autonextisland"] = state
             end)
+            function isIslandNearest()
+                islands = {"Island 5", "Island 4", "Island 3", "Island 2", "Island 1"}
+                for i,islandName in pairs(islands) do
+                    for i,v in pairs(game.Workspace._WorldOrigin.Locations:GetChildren()) do
+                        if v.Name == islandName then
+                            if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude <= 5000 then
+                                return true
+                            end
+                        end
+                    end
+                end
+                return false
+            end
             task.spawn(function()
                 while task.wait() do
                     pcall(function()
@@ -2132,7 +2145,7 @@ local status, err = pcall(function()
                     pcall(function()
                         if getgenv().Settings["autostartraid"] then
                             if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
-                                if game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
+                                if game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") and not isIslandNearest() then
                                     if second_sea then
                                         buttonPos = Vector3.new(-6488.0185546875, 248.6365203857422, -4527.62158203125)
                                         for i, child in pairs(game:GetService("Workspace").Map.CircleIsland:GetChildren()) do
