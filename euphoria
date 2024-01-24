@@ -1063,7 +1063,8 @@ local status, err = pcall(function()
                                 range = 750
                             end
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
-                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - PosMon.Position).magnitude <= range then
+                                if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= range then
+                                    PosMon = v.HumanoidRootPart.CFrame
                                     if InMyNetWork(v.HumanoidRootPart) then
                                         v.HumanoidRootPart.CFrame = PosMon
                                         v.Humanoid.JumpPower = 0
