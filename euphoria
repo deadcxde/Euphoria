@@ -2406,7 +2406,7 @@ local status, err = pcall(function()
             end)
             local TeleportToNPCSection = TeleportTab:NewSection("Teleport to NPC")
             TeleportToNPCSection:NewDropdown("Select NPC", "Select NPC", NPCNames or {}, function(currentOption)
-                _G.SelectedNPCPos = IslandPos[currentOption] or nil
+                _G.SelectedNPCPos = NPCPos[currentOption] or nil
             end)
             TeleportToNPCSection:NewToggle("Tween to NPC", "Tween to NPC", function(state)
                 _G.TweenToNPC = state
