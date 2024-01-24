@@ -2139,6 +2139,13 @@ local status, err = pcall(function()
                                     end   
                                 end
                             end
+                        else
+                            Auto_Quest_Yama_1 = false
+                            Auto_Quest_Yama_2 = false
+                            Auto_Quest_Yama_3 = false
+                            Auto_Quest_Tushita_1 = false
+                            Auto_Quest_Tushita_2 = false
+                            Auto_Quest_Tushita_3 = false
                         end
                     end)
                 end
