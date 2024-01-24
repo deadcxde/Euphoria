@@ -2402,6 +2402,7 @@ local status, err = pcall(function()
             end)
             TeleportToIslandSection:NewToggle("Tween to island", "Tween to island", function(state)
                 _G.TweenToIsland = state
+                if not state then NoClip = false end
             end)
             local TeleportToNPCSection = TeleportTab:NewSection("Teleport to NPC")
             TeleportToNPCSection:NewDropdown("Select NPC", "Select NPC", NPCNames or {}, function(currentOption)
@@ -2409,14 +2410,22 @@ local status, err = pcall(function()
             end)
             TeleportToNPCSection:NewToggle("Tween to NPC", "Tween to NPC", function(state)
                 _G.TweenToNPC = state
+                if not state then NoClip = false end
             end)
             task.spawn(function()
                 while task.wait() do
                     pcall(function()
                         if _G.TweenToIsland then
+                            if not _G.SelectedIslandPos or getDistance(_G.SelectedIslandPos) > 500 then
+                                NoClip = true
+                            else
+                                NoClip = false
+                            end
                             if _G.SelectedIslandPos then
                                 if _G.UseBypassTP then
-                                    Bypass(_G.SelectedIslandPos)
+                                    if getDistance(_G.SelectedIslandPos) > 10000 then
+                                        Bypass(_G.SelectedIslandPos)
+                                    end
                                 end
                                 tweenToPointAdvanced(_G.SelectedIslandPos)
                             end
@@ -2428,9 +2437,16 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if _G.TweenToNPC then
+                            if not _G.SelectedNPCPos or getDistance(_G.SelectedNPCPos) > 500 then
+                                NoClip = true
+                            else
+                                NoClip = false
+                            end
                             if _G.SelectedNPCPos then
                                 if _G.UseBypassTP then
-                                    Bypass(_G.SelectedNPCPos)
+                                    if getDistance(_G.SelectedNPCPos) > 10000 then
+                                        Bypass(_G.SelectedNPCPos)
+                                    end
                                 end
                                 tweenToPointAdvanced(_G.SelectedNPCPos)
                             end
