@@ -1917,7 +1917,18 @@ local status, err = pcall(function()
                 end 
             end
             WriteSettings()
-
+            
+            spawn(function()
+                while wait() do 
+                    pcall(function()
+                        if Auto_Cursed_Dual_Katana then 
+                            NoClip = true 
+                        else
+                            NoClip = false 
+                        end
+                    end)
+                end
+            end)
 
             _G.Auto_Farm = false
             local MainTab = Window:NewTab("Main")
