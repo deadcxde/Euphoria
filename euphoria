@@ -1359,7 +1359,6 @@ local status, err = pcall(function()
                                         repeat task.wait()
                                             if not target.Character:FindFirstChild("HumanoidRootPart") then done = true end
                                             if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
-                                                toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
                                                 useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
                                                 print("line 1372")
                                                 task.wait(.2)
