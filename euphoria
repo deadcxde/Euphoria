@@ -2922,25 +2922,16 @@ local status, err = pcall(function()
                     ["Cake Island"] = CFrame.new(-2131.6665, 69.9830399, -12273.0225, -0.977835476, -6.95206595e-08, -0.209374622, -5.05051609e-08, 1, -9.616695e-08, 0.209374622, -8.34609537e-08, -0.977835476),
                     ["Great Tree"] = CFrame.new(2940.33911, 2280.61816, -7197.37891, 0.871008873, 8.15059948e-08, -0.491267264, -6.67008138e-08, 1, 4.7650218e-08, 0.491267264, -8.73583428e-09, 0.871008873),
                 }
-                -- NPCPos = {
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                --     ["Sea Captain"] = CFrame.new(),
-                -- }
+                NPCPos = {
+                    ["Uzoth"] = CFrame.new(-9784.63281, 851.815735, 6668.09277, -0.0881351829, -1.32053213e-08, -0.996108532, 5.9710402e-08, 1, -1.85400566e-08, 0.996108532, -6.11120683e-08, -0.0881351829),
+                    ["Previous Hero"] = CFrame.new(CFrame.new(-10368, 332, -10128)),
+                    ["Sea 2 Fighting Styles"] = CFrame.new(-5035.29492, 314.515503, -3189.82471, 0.924805701, 0, 0.380439758, 0, 1, 0, -0.380439758, 0, 0.924805701),
+                    ["Mysterious Scientist"] = CFrame.new(-5016.1416, 314.818207, -2823.27783, -0.932020426, 0, -0.362405717, 0, 1, 0, 0.362405717, 0, -0.932020426),
+                    ["Butler"] = CFrame.new(-5129.07715, 315.415466, -3125.02295, 0.485516787, 0, -0.874227345, 0, 1, 0, 0.874227345, 0, 0.485516787),
+                    ["Elite Hunter"] = CFrame.new(-5431.4668, 313.768921, -2829.01245, -0.926955104, -1.04650994e-07, -0.375172317, -1.06914023e-07, 1, -1.47838799e-08, 0.375172317, 2.64071875e-08, -0.926955104),
+                    ["Player Hunter"] = CFrame.new(-5554.97119, 313.768921, -2839.86304, -0.74428612, -3.15137747e-08, 0.667860866, -4.87426739e-08, 1, -7.13430337e-09, -0.667860866, -3.78632876e-08, -0.74428612),
+                    ["Blox Fruit Gacha"] = CFrame.new(-12505.0684, 336.914368, -7454.92725, -0.903258443, -1.02848034e-07, -0.429096937, -1.10697549e-07, 1, -6.66409239e-09, 0.429096937, 4.14805825e-08, -0.903258443),
+                }
                 IslandNames = {
                     "Mansion",
                     "Hydra Island",
@@ -2953,25 +2944,16 @@ local status, err = pcall(function()
                     "Cake Island",
                     "Great Tree"
                 }
-                -- NPCNames = {
-                --     "Sea Captain",
-                --     "King Red Head",
-                --     "Arowe",
-                --     "Trevor",
-                --     "Alchemist",
-                --     "Bartilo",
-                --     "True Triple Katana Guy",
-                --     "Law Chip Guy",
-                --     "Mysterious Scientist",
-                --     "El Rodolfo",
-                --     "El Perro",
-                --     "El Admin",
-                --     "Experimic",
-                --     "Blox Fruit Gacha",
-                --     "Blox Fruit Dealer",
-                --     "Title/Color Specialist",
-                --     "Plokster"
-                -- }
+                NPCNames = {
+                    "Uzoth",
+                    "Previous Hero",
+                    "Sea 2 Fighting Styles",
+                    "Mysterious Scientist",
+                    "Butler",
+                    "Elite Hunter",
+                    "Player Hunter",
+                    "Blox Fruit Gacha"
+                }
             end
             _G.SelectedIslandPos = nil
             _G.SelectedNPCPos = nil
