@@ -1921,7 +1921,7 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do 
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana then 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones then 
                             NoClip = true 
                         else
                             NoClip = false 
