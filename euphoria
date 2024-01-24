@@ -2909,6 +2909,70 @@ local status, err = pcall(function()
                     "Plokster"
                 }
             end
+            if third_sea then
+                IslandPos = {
+                    ["Mansion"] = CFrame.new(-12550.6885, 337.168274, -7513.34277, 0.999895096, 0, 0.01448303, 0, 1, 0, -0.01448303, 0, 0.999895096),
+                    ["Hydra Island"] = CFrame.new(5256.84521, 601.603638, 616.78363, -0.999633908, -6.08200734e-09, -0.0270565897, -6.38501385e-09, 1, 1.11126006e-08, 0.0270565897, 1.12812888e-08, -0.999633908),
+                    ["Port Town"] = CFrame.new(-303.432922, 6.72993994, 5312.11426, 0.950251818, 0, -0.311482787, 0, 1, 0, 0.311482787, 0, 0.950251818),
+                    ["Haunted Castle"] = CFrame.new(-9500.35352, 142.104813, 5868.80713, -0.999827981, 1.17699637e-08, -0.0185488295, 1.23603714e-08, 1, -3.17152917e-08, 0.0185488295, -3.19391056e-08, -0.999827981),
+                    ["Castle on the Sea"] = CFrame.new(-5087.12158, 314.515503, -2978.61523, -0.40476504, 3.7508137e-08, 0.914420724, 1.00039621e-08, 1, -3.65902508e-08, -0.914420724, -5.66262415e-09, -0.40476504),
+                    ["Floating Turtle"] = CFrame.new(-10842.5586, 331.723206, -9248.37598, -0.184897989, 0, 0.982757747, 0, 1, 0, -0.982757747, 0, -0.184897989),
+                    ["Ice Cream Island"] = CFrame.new(-621.127686, 126.871155, -11040.8545, -0.503357649, -4.11361825e-08, -0.864078164, -2.85817112e-08, 1, -3.09571071e-08, 0.864078164, 9.11433595e-09, -0.503357649),
+                    ["Peanut Island"] = CFrame.new(-2181.91528, 88.2388306, -10513.2871, 0.115819328, 2.167112e-08, -0.993270278, 7.09502004e-08, 1, 3.00910266e-08, 0.993270278, -7.39578496e-08, 0.115819328),
+                    ["Cake Island"] = CFrame.new(-2131.6665, 69.9830399, -12273.0225, -0.977835476, -6.95206595e-08, -0.209374622, -5.05051609e-08, 1, -9.616695e-08, 0.209374622, -8.34609537e-08, -0.977835476),
+                    ["Great Tree"] = CFrame.new(2940.33911, 2280.61816, -7197.37891, 0.871008873, 8.15059948e-08, -0.491267264, -6.67008138e-08, 1, 4.7650218e-08, 0.491267264, -8.73583428e-09, 0.871008873),
+                }
+                -- NPCPos = {
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                --     ["Sea Captain"] = CFrame.new(),
+                -- }
+                IslandNames = {
+                    "Mansion",
+                    "Hydra Island",
+                    "Port Town",
+                    "Haunted Castle",
+                    "Castle on the Sea",
+                    "Floating Turtle",
+                    "Ice Cream Island",
+                    "Peanut Island",
+                    "Cake Island",
+                    "Great Tree"
+                }
+                -- NPCNames = {
+                --     "Sea Captain",
+                --     "King Red Head",
+                --     "Arowe",
+                --     "Trevor",
+                --     "Alchemist",
+                --     "Bartilo",
+                --     "True Triple Katana Guy",
+                --     "Law Chip Guy",
+                --     "Mysterious Scientist",
+                --     "El Rodolfo",
+                --     "El Perro",
+                --     "El Admin",
+                --     "Experimic",
+                --     "Blox Fruit Gacha",
+                --     "Blox Fruit Dealer",
+                --     "Title/Color Specialist",
+                --     "Plokster"
+                -- }
+            end
             _G.SelectedIslandPos = nil
             _G.SelectedNPCPos = nil
             _G.TweenToIsland = false
