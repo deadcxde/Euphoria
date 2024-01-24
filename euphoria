@@ -1915,7 +1915,7 @@ local status, err = pcall(function()
 
             _G.Auto_Farm = false
             local MainTab = Window:NewTab("Main")
-            local MainFarmSection = MainTab:NewSection("Farm")
+            local MainFarmSection = MainTab:NewSection("Farm settings")
             timerLabel = MainFarmSection:NewLabel(" ")
             task.spawn(function()
                 while task.wait(1) do
@@ -2033,7 +2033,7 @@ local status, err = pcall(function()
                 wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
             end)
-            Sea3ItemsSection:AddToggle("Auto Cursed Dual Katana", "Auto Cursed Dual Katana",function(value)
+            Sea3ItemsSection:NewToggle("Auto Cursed Dual Katana", "Auto Cursed Dual Katana", function(value)
                 Auto_Cursed_Dual_Katana = value
                 StopTween()
             end)
