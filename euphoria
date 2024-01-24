@@ -2018,13 +2018,12 @@ local status, err = pcall(function()
                                                 BringMobFarm = true
                                                 PosMonBone = v.HumanoidRootPart.CFrame
                                                 toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                                game:GetService("VirtualUser"):CaptureController()
-                                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                             until not _G.AutoBones or not v.Parent or v.Humanoid.Health <= 0
                                         end
                                     end
                                 end
                             else
+                                ringMobFarm = true
                                 toTarget(CFrame.new(-9506.234375, 172.130615234375, 6117.0771484375))
                                 for i,v in pairs(game:GetService("ReplicatedStorage"):GetChildren()) do 
                                     if v.Name == "Reborn Skeleton" then
