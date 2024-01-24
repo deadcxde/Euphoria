@@ -2402,7 +2402,11 @@ local status, err = pcall(function()
             end)
             TeleportToIslandSection:NewToggle("Tween to island", "Tween to island", function(state)
                 _G.TweenToIsland = state
-                if not state then NoClip = false end
+                if not state then 
+                    NoClip = false 
+                    StopTween()
+                end
+
             end)
             local TeleportToNPCSection = TeleportTab:NewSection("Teleport to NPC")
             TeleportToNPCSection:NewDropdown("Select NPC", "Select NPC", NPCNames or {}, function(currentOption)
@@ -2410,7 +2414,10 @@ local status, err = pcall(function()
             end)
             TeleportToNPCSection:NewToggle("Tween to NPC", "Tween to NPC", function(state)
                 _G.TweenToNPC = state
-                if not state then NoClip = false end
+                if not state then
+                    NoClip = false 
+                    StopTween()
+                end
             end)
             task.spawn(function()
                 while task.wait() do
