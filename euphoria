@@ -1334,6 +1334,13 @@ local status, err = pcall(function()
                 toTarget(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
             end
 
+            function GetMaterial(name)
+                for i,v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
+                    if v.Name == name then return v.Count end
+                end
+                return 0
+            end
+
             -- KAITUN
             -- ============================
             task.spawn(function()
