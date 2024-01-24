@@ -1980,11 +1980,11 @@ local status, err = pcall(function()
                 end
             )
             local FarmTab = Window:NewTab("Farm")
-            local Sea2ItemsSection = ItemsTab:NewSection("Sea 2 Items")
+            local Sea2ItemsSection = FarmTab:NewSection("Sea 2 Items")
             Sea2ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
                 _G.AutoRengoku = state
             end)
-            local Sea3ItemsSection = ItemsTab:NewSection("Sea 3 Items")
+            local Sea3ItemsSection = FarmTab:NewSection("Sea 3 Items")
             Sea3ItemsSection:NewButton("Turn On All Haki Plates [rip_indra]", "Turn On All Haki Plates [rip_indra]", function()
                 pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                 wait()
