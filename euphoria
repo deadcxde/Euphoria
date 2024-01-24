@@ -2302,7 +2302,7 @@ local status, err = pcall(function()
             
 
             local TeleportTab = Window:NewTab("Teleport")
-            local TeleportSection = TeleportTab:NewSection("Teleport")
+            local TeleportToSeaSection = TeleportTab:NewSection("Teleport to sea")
             TeleportSection:NewButton("Teleport to first sea", "Teleport to first sea", function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelMain")
             end)
@@ -2311,6 +2311,132 @@ local status, err = pcall(function()
             end)
             TeleportSection:NewButton("Teleport to third sea", "Teleport to third sea", function()
                 teleportToThirdSea()
+            end)
+            local TeleportSettingsSection = TeleportTab:NewSection("Teleport settings")
+            TeleportSettingsSection:NewToggle("Bypass Teleport", "Bypass Teleport", function(state)
+                _G.UseBypassTP = state
+            end)
+            if second_sea then
+                IslandPos = {
+                    ["Cafe"] = CFrame.new(-381.679047, 77.2203598, 260.130615, 0.998160779, 7.18165349e-09, -0.0606226437, -6.2934169e-09, 1, 1.48428274e-08, 0.0606226437, -1.44340042e-08, 0.998160779),
+                    ["Arowe place"] = CFrame.new(-2020.3894, 125.492752, -75.1585541, -0.186118439, -2.31245778e-08, -0.982527316, 1.71813463e-09, 1, -2.38612738e-08, 0.982527316, -6.1291372e-09, -0.186118439),
+                    ["Green Zone"] = CFrame.new(-2527.41235, 72.9661179, -3286.44238, 0.726720333, 2.1428963e-09, 0.686933458, -2.89159297e-09, 1, -6.04382031e-11, -0.686933458, -1.94241023e-09, 0.726720333),
+                    ["Hot and Cold"] = CFrame.new(-5772.93457, 20.2020435, -4955.99072, -0.190426946, 8.08608824e-09, 0.981701374, -3.21236437e-09, 1, -8.85993323e-09, -0.981701374, -4.84075269e-09, -0.190426946),
+                    ["Colosseum"] = CFrame.new(-1834.76782, 45.7947006, 1499.06641, -0.999703407, 6.79347281e-08, -0.0243541766, 6.99724936e-08, 1, -8.28199305e-08, 0.0243541766, -8.44994901e-08, -0.999703407),
+                    ["Cursed Ship"] = CFrame.new(923.941711, 125.057106, 32945.1016, -0.999903142, -6.41719495e-08, -0.0139173511, -6.55000747e-08, 1, 9.49734584e-08, 0.0139173511, 9.58758477e-08, -0.999903142),
+                    ["Zombie Island"] = CFrame.new(-5508.83838, 48.4801178, -921.756409, 0.645064175, 5.74061954e-09, -0.764128387, 7.40661577e-08, 1, 7.00380269e-08, 0.764128387, -1.01775072e-07, 0.645064175),
+                    ["Snow Mountain"] = CFrame.new(984.71875, 429.421875, -5224.56689, 0.410833359, -3.39381678e-08, 0.911710441, 2.1759778e-08, 1, 2.74193699e-08, -0.911710441, 8.57382432e-09, 0.410833359),
+                    ["Ice Castle"] = CFrame.new(6092.85791, 294.386688, -6687.76562, 0.552581847, -5.16517717e-09, -0.833458662, 1.64160396e-09, 1, -5.10889953e-09, 0.833458662, 1.45487611e-09, 0.552581847),
+                    ["Forgotten Island"] = CFrame.new(-3155.89551, 298.66449, -10544.9893, -0.998934627, 2.08474251e-08, -0.0461482927, 1.69908887e-08, 1, 8.39606216e-08, 0.0461482927, 8.30870661e-08, -0.998934627),
+                    ["Darkbeard Arena"] = CFrame.new(3738.17676, 14.6501837, -3449.45483, 0.807372749, 2.30504718e-08, -0.590041697, 9.58726787e-09, 1, 5.21843972e-08, 0.590041697, -4.77891504e-08, 0.807372749),
+                    ["Law Laboratory"] = CFrame.new(-5531.46436, 328.953278, -5939.38232, 0.99832046, 3.13601456e-09, 0.0579328425, -5.91816951e-09, 1, 4.78522182e-08, -0.0579328425, -4.81147033e-08, 0.99832046),
+                    ["Raid Room"] = CFrame.new(-6505.47021, 249.531616, -4480.81445, 0.190456197, -5.0886233e-09, -0.981695712, 2.66903371e-08, 1, -5.38176101e-12, 0.981695712, -2.62007642e-08, 0.190456197),
+                    ["Swan room"] = CFrame.new(2287.2063, 15.1520348, 837.542542, 0.997465432, 3.42148105e-08, -0.0711523443, -3.17858344e-08, 1, 3.52698919e-08, 0.0711523443, -3.29188623e-08, 0.997465432),
+                    ["Mansion"] = CFrame.new(-389.768494, 331.860565, 685.700256, 0.992786944, -4.46675372e-08, -0.119891919, 4.67511327e-08, 1, 1.45662709e-08, 0.119891919, -2.00662864e-08, 0.992786944),
+                    ["Start position"] = CFrame.new(-20.1357784, 19.2767277, 2828.39429, 0.998764515, 0, -0.0496935807, 0, 1, 0, 0.0496935807, 0, 0.998764515),
+                }
+                NPCPos = {
+                    ["Sea Captain"] = CFrame.new(91.8420105, 19.2767277, 2833.7854, 0.0328539163, 8.44573549e-08, -0.999460161, 4.0394589e-08, 1, 8.58308127e-08, 0.999460161, -4.31926601e-08, 0.0328539163),
+                    ["King Red Head"] = CFrame.new(-1927.43982, 12.8198519, 1738.24329, -0.975165844, -1.66522227e-08, 0.22147578, -3.06991677e-09, 1, 6.16705975e-08, -0.22147578, 5.94591505e-08, -0.975165844),
+                    ["Arowe"] = CFrame.new(-2020.3894, 125.492752, -75.1585541, -0.186118439, -2.31245778e-08, -0.982527316, 1.71813463e-09, 1, -2.38612738e-08, 0.982527316, -6.1291372e-09, -0.186118439),
+                    ["Trevor"] = CFrame.new(-336.726624, 331.860565, 646.967407, 0.304350466, 5.17507992e-08, -0.952560127, -5.24115045e-08, 1, 3.75822289e-08, 0.952560127, 3.84869381e-08, 0.304350466),
+                    ["Alchemist"] = CFrame.new(-2779.698, 72.9661179, -3574.21094, -0.738383949, -3.42040423e-08, -0.674380541, -2.87388247e-08, 1, -1.92528642e-08, 0.674380541, 5.1648974e-09, -0.738383949),
+                    ["Bartilo"] = CFrame.new(-459.294189, 73.0200729, 300.489349, 0.311311901, -8.80943176e-08, 0.950307786, 7.91016816e-08, 1, 6.67878552e-08, -0.950307786, 5.43790897e-08, 0.311311901),
+                    ["True Triple Katana Guy"] = CFrame.new(-2570.1438, 1623.62756, -3742.23755, 0.338274449, 6.07209785e-08, 0.94104749, 5.74162584e-08, 1, -8.51640607e-08, -0.94104749, 8.2840252e-08, 0.338274449),
+                    ["Law Chip Guy"] = CFrame.new(-4971.53271, 143.731888, -5390.03809, 0.529998064, -8.96415173e-08, 0.847998857, 4.93730319e-08, 1, 7.48514069e-08, -0.847998857, 2.19717267e-09, 0.529998064),
+                    ["Mysterious Scientist"] = CFrame.new(-6434.44141, 250.619507, -4500.30078, 0.74296844, 1.60236375e-08, -0.669326484, -9.17431109e-09, 1, 1.37562379e-08, 0.669326484, -4.07984135e-09, 0.74296844),
+                    ["El Rodolfo"] = CFrame.new(941.813538, 40.4428635, 32776.4297, -0.990710258, -3.78767453e-08, 0.135989532, -2.74683352e-08, 1, 7.84147218e-08, -0.135989532, 7.3950865e-08, -0.990710258),
+                    ["El Perro"] = CFrame.new(633.295593, 130.597015, 33220.1289, -0.999032795, 6.67597249e-08, 0.0439718179, 6.54874057e-08, 1, -3.03754852e-08, -0.0439718179, -2.74665055e-08, -0.999032795),
+                    ["El Admin"] = CFrame.new(1322.41309, 125.43914, 33136.4375, 0.714200675, 5.21663546e-10, -0.699940979, -1.14109902e-10, 1, 6.28861851e-10, 0.699940979, -3.6926337e-10, 0.714200675),
+                    ["Experimic"] = CFrame.new(916.359558, 129.555984, 33450.1914, -0.989536464, -4.57067495e-09, 0.144282907, -4.12639656e-09, 1, 3.37846595e-09, -0.144282907, 2.7477467e-09, -0.989536464),
+                    ["Blox Fruit Gacha"] = CFrame.new(-422.505066, 72.9597549, 388.921509, 0.999904692, -3.36936061e-08, -0.0138063869, 3.36184627e-08, 1, -5.67464209e-09, 0.0138063869, 5.20995158e-09, 0.999904692),
+                    ["Blox Fruit Dealer"] = CFrame.new(-449.981079, 73.0200729, 357.801483, -0.0330029204, 6.85504844e-08, 0.999455273, 1.72488139e-08, 1, -6.80182737e-08, -0.999455273, 1.49946153e-08, -0.0330029204),
+                    ["Title/Color Specialist"] = CFrame.new(-350.412598, 16.0200996, 307.551544, -0.0483315699, 4.33923759e-08, -0.998831332, 4.44134294e-08, 1, 4.12940615e-08, 0.998831332, -4.23657163e-08, -0.0483315699),
+                    ["Plokster"] = CFrame.new(-1889.18433, 88.3578491, -1905.7063, 0.831714571, -6.32608348e-08, 0.555203438, 8.577247e-08, 1, -1.45485135e-08, -0.555203438, 5.97213798e-08, 0.831714571),
+                }
+                IslandNames = {
+                    "Cafe",
+                    "Arowe place",
+                    "Green Zone",
+                    "Hot and Cold",
+                    "Colosseum",
+                    "Cursed Ship",
+                    "Zombie Island",
+                    "Snow Mountain",
+                    "Ice Castle",
+                    "Forgotten Island",
+                    "Darkbeard Arena",
+                    "Law Laboratory",
+                    "Raid Room",
+                    "Swan room",
+                    "Mansion",
+                    "Start position"
+                }
+                NPCNames = {
+                    "Sea Captain",
+                    "King Red Head",
+                    "Arowe",
+                    "Trevor",
+                    "Alchemist",
+                    "Bartilo",
+                    "True Triple Katana Guy",
+                    "Law Chip Guy",
+                    "Mysterious Scientist",
+                    "El Rodolfo",
+                    "El Perro",
+                    "El Admin",
+                    "Experimic",
+                    "Blox Fruit Gacha",
+                    "Blox Fruit Dealer",
+                    "Title/Color Specialist",
+                    "Plokster"
+                }
+            end
+            _G.SelectedIslandPos = nil
+            _G.SelectedNPCPos = nil
+            _G.TweenToIsland = false
+            _G.TweenToNPC = false
+            local TeleportToIslandSection = TeleportTab:NewSection("Teleport to island")
+            TeleportToIslandSection:NewDropdown("Select island", "Select island", IslandNames or {}, function(currentOption)
+                _G.SelectedIslandPos = IslandPos[currentOption] or nil
+            end)
+            TeleportToIslandSection:NewToggle("Tween to island", "Tween to island", function(state)
+                _G.TweenToIsland = state
+            end)
+            local TeleportToNPCSection = TeleportTab:NewSection("Teleport to NPC")
+            TeleportToIslandSection:NewDropdown("Select NPC", "Select NPC", NPCNames or {}, function(currentOption)
+                _G.SelectedNPCPos = IslandPos[currentOption] or nil
+            end)
+            TeleportToIslandSection:NewToggle("Tween to NPC", "Tween to NPC", function(state)
+                _G.TweenToNPC = state
+            end)
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if _G.TweenToIsland then
+                            if _G.SelectedIslandPos then
+                                if _G.UseBypassTP then
+                                    Bypass(_G.SelectedIslandPos)
+                                end
+                                tweenToPointAdvanced(_G.SelectedIslandPos)
+                            end
+                        end
+                    end)
+                end
+            end)
+            task.spawn(function()
+                while task.wait() do
+                    pcall(function()
+                        if _G.TweenToNPC then
+                            if _G.SelectedNPCPos then
+                                if _G.UseBypassTP then
+                                    Bypass(_G.SelectedNPCPos)
+                                end
+                                tweenToPointAdvanced(_G.SelectedNPCPos)
+                            end
+                        end
+                    end)
+                end
             end)
 
             local StatsSection = MainTab:NewSection("Stats")
