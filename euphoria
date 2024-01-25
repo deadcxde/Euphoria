@@ -1050,17 +1050,17 @@ local status, err = pcall(function()
                     pcall(function()
                         if BringMobFarm then
                             if first_sea then 
-                                range = 400 
+                                range = 300 
                             end
                             if second_sea then
                                 if GetIsLand(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) == "Ship" then
                                     range = 50 
                                 else
-                                    range = 450
+                                    range = 300
                                 end 
                             end
                             if third_sea then
-                                range = 750
+                                range = 300
                             end
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
                                 if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= range then
