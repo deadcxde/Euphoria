@@ -1060,7 +1060,11 @@ local status, err = pcall(function()
                                 end 
                             end
                             if third_sea then
-                                range = 300
+                                if _G.AutoBones then
+                                    range = 200
+                                else
+                                    range = 300
+                                end
                             end
                             for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
                                 if not string.find(v.Humanoid.DisplayName, "Boss") and (v.HumanoidRootPart.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= range then
