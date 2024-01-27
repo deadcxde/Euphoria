@@ -979,6 +979,7 @@ local status, err = pcall(function()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
                 wait(.2)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                 wait(.1)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Point * CFrame.new(0,50,0)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
@@ -2694,8 +2695,10 @@ local status, err = pcall(function()
                         if getgenv().Settings["autobuychip"] then
                             if not getgenv().Settings["enabledmaxfrag"] or game.Players.LocalPlayer.Data.Fragments.Value < getgenv().Settings["maxfrag"] then
                                 task.wait(2)
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Check")
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", SelectedChip)
+                                if getgenv().Settings["autobuychip"] then
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Check")
+                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", SelectedChip)
+                                end
                             end
                         end
                     end)
