@@ -1057,7 +1057,11 @@ local status, err = pcall(function()
                                 if GetIsLand(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame) == "Ship" then
                                     range = 50 
                                 else
-                                    range = 300
+                                    if _G.AutoRengoku then
+                                        range = 150
+                                    else
+                                        range = 300
+                                    end
                                 end 
                             end
                             if third_sea then
