@@ -1058,7 +1058,7 @@ local status, err = pcall(function()
                                     range = 50 
                                 else
                                     if _G.AutoRengoku then
-                                        range = 150
+                                        range = 200
                                     else
                                         range = 300
                                     end
@@ -2097,6 +2097,44 @@ local status, err = pcall(function()
                 end
                 wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+            end)
+            _G.AutoHolyTorch = false
+            Sea3ItemsSection:NewToggle("Auto Holy Torch", "Auto Holy Torch", function(state)
+                _G.AutoHolyTorch = state
+            end)
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.AutoHolyTorch then
+                            pos = CFrame.new(-10751.416, 412.229492, -9367.21094, 0.984613717, 6.26616341e-08, 0.174745172, -5.33007558e-08, 1, -5.82618647e-08, -0.174745172, 4.80513798e-08, 0.984613717)
+                            repeat wait()
+                                toPoint(pos)
+                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
+                            wait(1)
+                            pos = CFrame.new(-11671.3223, 331.748993, -9472.03027, 0.242941961, -1.09399236e-08, -0.970040798, -2.85362134e-08, 1, -1.84245526e-08, 0.970040798, 3.21573879e-08, 0.242941961)
+                            repeat wait()
+                                toPoint(pos)
+                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
+                            wait(1)
+                            pos = CFrame.new(-12131.1475, 519.475159, -10653.0312, 0.707040071, -3.3539596e-08, -0.707173467, -4.66550665e-09, 1, -5.20923074e-08, 0.707173467, 4.01306721e-08, 0.707040071)
+                            repeat wait()
+                                toPoint(pos)
+                            
+                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
+                            wait(1)
+                            pos = CFrame.new(-13339.1455, 486.406586, -6984.19189, 0.419805169, 2.25075372e-08, -0.907614231, 3.10196384e-08, 1, 3.9146304e-08, 0.907614231, -4.45876864e-08, 0.419805169)
+                            repeat wait()
+                                toPoint(pos)
+                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
+                            wait(1)
+                            pos = CFrame.new(-13486.1699, 332.403931, -7924.26953, -0.952564776, -2.89383362e-09, 0.304335922, -1.50361723e-09, 1, 4.80239359e-09, -0.304335922, 4.11698631e-09, -0.952564776)
+                            repeat wait()
+                                toPoint(pos)
+                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
+                            wait(1)
+                        end
+                    end) 
+                end
             end)
             Sea3ItemsSection:NewToggle("Auto Cursed Dual Katana", "Auto Cursed Dual Katana", function(value)
                 Auto_Cursed_Dual_Katana = value
