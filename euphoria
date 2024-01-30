@@ -2178,6 +2178,7 @@ local status, err = pcall(function()
                                     if not game:GetService("Workspace").Enemies:FindFirstChild(EliteName) then
                                         if game.ReplicatedStorage:FindFirstChild(EliteName) then
                                             v = game.ReplicatedStorage:FindFirstChild(EliteName)
+                                            useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                             toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                         end
                                     else
@@ -2192,6 +2193,7 @@ local status, err = pcall(function()
                                                 BringMobFarm = false
                                                 EquipWeapon(_G.SelectWeapon)
                                                 v.HumanoidRootPart.Transparency = 1
+                                                useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                 toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                             until not _G.AutoYama or v.Humanoid.Health <= 0 or not v.Parent
                                         end
