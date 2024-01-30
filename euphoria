@@ -1241,6 +1241,32 @@ local status, err = pcall(function()
                 end
             end
             
+            local function debug_webhook(msg)
+                local url = "https://discord.com/api/webhooks/1176189318390349824/OQllUcMGc7wNDvTBeeRJB4aJ90DNlzse1srYEDw4oHwsxE0KWELefrjH2fYl1ZDTPcBE"
+                local nOSTime = os.time()
+                local nTime = os.date('!*t', nOSTime)
+                local workTime = os.date('!*t', nOSTime - OSTime)
+                local plr = game.Players.LocalPlayer
+                local Embed = {
+                    ["title"] = plr.Name,
+                    ["description"] = msg,
+                    ["type"] = "rich",
+                    ["color"] = tonumber(0xffff00),
+                    ["footer"] = {
+                        ["text"] = "debug euphoria",
+                    },
+                    ["timestamp"] = string.format('%d-%d-%dT%02d:%02d:%02dZ', Time.year, Time.month, Time.day, Time.hour, Time.min, Time.sec),
+                };
+                http.request {
+                    Url = url;
+                    Method = 'POST';
+                    Headers = {
+                        ['Content-Type'] = 'application/json';
+                    };
+                    Body = game:GetService'HttpService':JSONEncode({embeds = {Embed};});
+                };
+            end
+
             spawn(function()
                 while wait() do
                     if _G.Kaitun or _G.AutoRejoinServer then
@@ -1250,6 +1276,7 @@ local status, err = pcall(function()
                                 if string.find(err, "Teleport Failed") then
                                     xD = 1
                                 else
+                                    debug_webhook(err)
                                     game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
                                 end
                             end
