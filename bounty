@@ -33,38 +33,38 @@ getgenv().Config = {
             ["Enable"] = true,
             ["Delay"] = 2.5,
             ["Skills"] = {
-                ["Z"] = {["Enable"] = true, ["HoldTime"] = 1},
-                ["X"] = {["Enable"] = true, ["HoldTime"] = 0},
-                ["C"] = {["Enable"] = true, ["HoldTime"] = 0},
+                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.2},
+                ["X"] = {["Enable"] = true, ["HoldTime"] = 0.1},
+                ["C"] = {["Enable"] = true, ["HoldTime"] = 0.1},
                 ["V"] = {["Enable"] = false, ["HoldTime"] = 0}
             }
         },
         ["Blox Fruit"] = {
-            ["Enable"] = false,
+            ["Enable"] = true,
             ["Delay"] = 3,
             ["Skills"] = {
-                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
-                ["X"] = {["Enable"] = true, ["HoldTime"] = 0},
-                ["C"] = {["Enable"] = true, ["HoldTime"] = 0},
-                ["V"] = {["Enable"] = true, ["HoldTime"] = 0},
+                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.2},
+                ["X"] = {["Enable"] = true, ["HoldTime"] = 0.2},
+                ["C"] = {["Enable"] = true, ["HoldTime"] = 0.2},
+                ["V"] = {["Enable"] = true, ["HoldTime"] = 1.25},
                 ["F"] = {["Enable"] = false, ["HoldTime"] = 0}
             }
         },
         --// Copy Next
         ["Sword"] = {
-            ["Enable"] = false,
+            ["Enable"] = true,
             ["Delay"] = 1.5,
             ["Skills"] = {
-                ["Z"] = {["Enable"] = true, ["HoldTime"] = 1},
-                ["X"] = {["Enable"] = true, ["HoldTime"] = 0}
+                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.3},
+                ["X"] = {["Enable"] = true, ["HoldTime"] = 0.2}
             } 
         },      
         ["Gun"] = {
-            ["Enable"] = true,
-            ["Delay"] = 2.5,
+            ["Enable"] = false,
+            ["Delay"] = 1.2,
             ["Skills"] = {
-                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0.1},
-                ["X"] = {["Enable"] = true, ["HoldTime"] = 0.3}
+                ["Z"] = {["Enable"] = true, ["HoldTime"] = 0},
+                ["X"] = {["Enable"] = true, ["HoldTime"] = 0}
             } 
         }
     }
