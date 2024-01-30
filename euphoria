@@ -1937,7 +1937,7 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do 
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch then 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama then 
                             NoClip = true 
                         else
                             NoClip = false 
@@ -2102,6 +2102,7 @@ local status, err = pcall(function()
             Sea3ItemsSection:NewToggle("Auto Holy Torch", "Auto Holy Torch", function(state)
                 _G.AutoHolyTorch = state
             end)
+
             spawn(function()
                 while wait() do
                     pcall(function()
@@ -2136,11 +2137,64 @@ local status, err = pcall(function()
                     end) 
                 end
             end)
-            Sea3ItemsSection:NewToggle("Auto Cursed Dual Katana", "Auto Cursed Dual Katana", function(value)
+
+            ay = Sea3ItemsSection:NewToggle("Auto Yama", "Auto Yama", function(state)
+                _G.AutoYama = state
+            end)
+            ayh = Sea3ItemsSection:NewToggle("Auto Yama Hop [Must have]", "Auto Yama", function(state)
+                _G.AutoYamaHop = state
+            end)
+
+            if _G.AutoYama then ay:UpdateToggle(nil, true) end
+            if _G.AutoYamaHop then ayh:UpdateToggle(nil, true) end
+
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.AutoYama and third_sea then
+                            if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") < 30 then
+                                if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
+                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                            if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
+                                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                                    repeat wait()
+                                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                                        v.HumanoidRootPart.CanCollide = false
+                                                        v.Humanoid.WalkSpeed = 0
+                                                        v.Head.CanCollide = false
+                                                        BringMobFarm = false
+                                                        EquipWeapon(_G.SelectWeapon)
+                                                        v.HumanoidRootPart.Transparency = 1
+                                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                                    until not _G.AutoYama or v.Humanoid.Health <= 0 or not v.Parent
+                                                end
+                                            end
+                                        end
+                                    end
+                                else
+                                    if _G.AutoYamaHop and game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("EliteHunter") == "I don't have anything for you right now. Come back later." then
+                                        HopServer()
+                                    else
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
+                                    end
+                                end
+                            else
+                                repeat wait(.1)
+                                    fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector)
+                                until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
+                            end
+                        end
+                    end)
+                end
+            end)
+
+
+
+            Sea3ItemsSection:NewToggle("Auto Cursed Dual Katana [not work rn]", "Auto Cursed Dual Katana", function(value)
                 Auto_Cursed_Dual_Katana = value
                 StopTween()
             end)
-            
             spawn(function()
                 while wait() do
                     pcall(function()
