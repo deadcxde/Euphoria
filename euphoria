@@ -3090,14 +3090,18 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if _G.TweenToIsland then
-                            if not _G.SelectedIslandPos or getDistance(_G.SelectedIslandPos) > 500 then
-                                NoClip = true
-                            else
+                            if not _G.SelectedIslandPos then 
                                 NoClip = false
+                            else
+                                if getDistance(_G.SelectedIslandPos) > 500 then
+                                    NoClip = true
+                                else
+                                    NoClip = false
+                                end
                             end
                             if _G.SelectedIslandPos then
                                 if _G.UseBypassTP then
-                                    if getDistance(_G.SelectedIslandPos) > 10000 then
+                                    if getDistance(_G.SelectedIslandPos) > 5000 then
                                         Bypass(_G.SelectedIslandPos)
                                     end
                                 end
@@ -3111,14 +3115,18 @@ local status, err = pcall(function()
                 while task.wait() do
                     pcall(function()
                         if _G.TweenToNPC then
-                            if not _G.SelectedNPCPos or getDistance(_G.SelectedNPCPos) > 500 then
-                                NoClip = true
-                            else
+                            if not _G.SelectedNPCPos then 
                                 NoClip = false
+                            else
+                                if getDistance(_G.SelectedNPCPos) > 500 then
+                                    NoClip = true
+                                else
+                                    NoClip = false
+                                end
                             end
                             if _G.SelectedNPCPos then
                                 if _G.UseBypassTP then
-                                    if getDistance(_G.SelectedNPCPos) > 10000 then
+                                    if getDistance(_G.SelectedNPCPos) > 5000 then
                                         Bypass(_G.SelectedNPCPos)
                                     end
                                 end
