@@ -1769,9 +1769,9 @@ local status, err = pcall(function()
                     if _G.AntiAFK then
                         game:GetService("Players").LocalPlayer.Idled:connect(function()
                         game:GetService("VirtualUser"):ClickButton2(Vector2.new())
-                            vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                            vu:Button2Down(Vector2.new(0,0),game.Workspace.CurrentCamera.CFrame)
                             wait(20)
-                            vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+                            vu:Button2Up(Vector2.new(0,0),game.Workspace.CurrentCamera.CFrame)
                     end)
                 end
             end)
