@@ -1246,10 +1246,12 @@ local status, err = pcall(function()
                     if _G.Kaitun or _G.AutoRejoinServer then
                         wait(0.5)
                         game:GetService("GuiService").ErrorMessageChanged:Connect(function(err)
-                            if string.find(err, "Teleport Failed") then
-                                xD = 1
-                            else
-                                game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+                            if string.len(err) > 3 then
+                                if string.find(err, "Teleport Failed") then
+                                    xD = 1
+                                else
+                                    game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
+                                end
                             end
                         end)
                     end
