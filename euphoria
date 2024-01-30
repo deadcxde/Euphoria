@@ -2154,22 +2154,30 @@ local status, err = pcall(function()
                         if _G.AutoYama and third_sea then
                             if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") < 30 then
                                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
-                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                            if v.Name == "Diablo" or v.Name == "Deandre" or v.Name == "Urban" then
-                                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                    repeat wait()
-                                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                                        v.HumanoidRootPart.CanCollide = false
-                                                        v.Humanoid.WalkSpeed = 0
-                                                        v.Head.CanCollide = false
-                                                        BringMobFarm = false
-                                                        EquipWeapon(_G.SelectWeapon)
-                                                        v.HumanoidRootPart.Transparency = 1
-                                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                                    until not _G.AutoYama or v.Humanoid.Health <= 0 or not v.Parent
-                                                end
-                                            end
+                                    if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") then
+                                        EliteName = "Diablo"
+                                    elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Deandre") then
+                                        EliteName = "Deandre"
+                                    elseif string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Urban") then
+                                        EliteName = "Urban"
+                                    end
+                                    if not game:GetService("Workspace").Enemies:FindFirstChild(EliteName) then
+                                        if game.ReplicatedStorage:FindFirstChild(EliteName) then
+                                            v = game.ReplicatedStorage:FindFirstChild(EliteName)
+                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                        end
+                                    else
+                                        v = game:GetService("Workspace").Enemies:FindFirstChild(EliteName)
+                                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                            repeat wait()
+                                                v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                                v.HumanoidRootPart.CanCollide = false
+                                                v.Humanoid.WalkSpeed = 0
+                                                v.Head.CanCollide = false
+                                                BringMobFarm = false
+                                                EquipWeapon(_G.SelectWeapon)
+                                                v.HumanoidRootPart.Transparency = 1
+                                            until not _G.AutoYama or v.Humanoid.Health <= 0 or not v.Parent
                                         end
                                     end
                                 else
