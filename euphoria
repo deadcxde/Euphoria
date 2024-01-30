@@ -2216,7 +2216,7 @@ local status, err = pcall(function()
             end)
 
 
-            yamaProgress = Sea3ItemsSection:NewLabel("")
+            Sea3ItemsSection:NewLabel("")
             Sea3ItemsSection:NewToggle("Auto Cursed Dual Katana [not work rn]", "Auto Cursed Dual Katana", function(value)
                 Auto_Cursed_Dual_Katana = value
                 StopTween()
