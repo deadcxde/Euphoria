@@ -1770,10 +1770,8 @@ local status, err = pcall(function()
                     wait(20)
                     if _G.AntiAFK then
                         local VirtualUser=game:service'VirtualUser'
-                        game:service('Players').LocalPlayer.Idled:connect(function()
                         VirtualUser:CaptureController()
                         VirtualUser:ClickButton2(Vector2.new())
-                        end)
                     end
                 end
             end)
