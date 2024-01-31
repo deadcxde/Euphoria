@@ -1268,16 +1268,7 @@ local status, err = pcall(function()
                     if _G.Kaitun or _G.AutoRejoinServer then
                         wait(0.5)
                         game:GetService("GuiService").ErrorMessageChanged:Connect(function(err)
-                            if string.len(err) > 3 then
-                                if string.find(err, "Teleport Failed") then
-                                    xD = 1
-                                else
-                                    pcall(function() debug_webhook(err) end)
-                                    while wait() do
-                                        game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
-                                    end
-                                end
-                            end
+                            game:GetService("TeleportService"):Teleport(game.PlaceId, game:GetService("Players").LocalPlayer)
                         end)
                     end
                 end
@@ -1764,15 +1755,13 @@ local status, err = pcall(function()
             end)
             
             spawn(function()
-                local vu = game:GetService("VirtualUser")
-                repeat wait() until game:IsLoaded() 
+                while wait() do
+                    wait(20)
                     if _G.AntiAFK then
-                        game:GetService("Players").LocalPlayer.Idled:connect(function()
-                        game:GetService("VirtualUser"):ClickButton2(Vector2.new())
-                            vu:Button2Down(Vector2.new(0,0),game.Workspace.CurrentCamera.CFrame)
-                            wait(20)
-                            vu:Button2Up(Vector2.new(0,0),game.Workspace.CurrentCamera.CFrame)
-                    end)
+                        local VirtualUser=game:service'VirtualUser'
+                        VirtualUser:CaptureController()
+                        VirtualUser:ClickButton2(Vector2.new())
+                    end
                 end
             end)
             
@@ -2154,7 +2143,7 @@ local status, err = pcall(function()
                             
                             until getDistance(pos) < 15 or not _G.AutoHolyTorch
                             wait(1)
-                            pos = CFrame.new(-13339.1455, 486.406586, -6984.19189, 0.419805169, 2.25075372e-08, -0.907614231, 3.10196384e-08, 1, 3.9146304e-08, 0.907614231, -4.45876864e-08, 0.419805169)
+                            pos = CFrame.new(-13335.6094, 485.255768, -6985.08008, 0.906433463, 6.72391565e-09, -0.422348619, 2.67380322e-08, 1, 7.33047543e-08, 0.422348619, -7.77386546e-08, 0.906433463)
                             repeat wait()
                                 toPoint(pos)
                             until getDistance(pos) < 15 or not _G.AutoHolyTorch
