@@ -1957,7 +1957,7 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do 
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama then 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoLongma then 
                             NoClip = true 
                         else
                             NoClip = false 
