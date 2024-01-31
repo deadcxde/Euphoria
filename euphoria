@@ -2118,72 +2118,87 @@ local status, err = pcall(function()
                 wait()
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
             end)
-            _G.AutoHolyTorch = false
-            Sea3ItemsSection:NewToggle("Auto Holy Torch", "Auto Holy Torch", function(state)
-                _G.AutoHolyTorch = state
-            end)
 
-            spawn(function()
-                while wait() do
-                    pcall(function()
-                        if _G.AutoHolyTorch then
-                            pos = CFrame.new(-10751.416, 412.229492, -9367.21094, 0.984613717, 6.26616341e-08, 0.174745172, -5.33007558e-08, 1, -5.82618647e-08, -0.174745172, 4.80513798e-08, 0.984613717)
-                            repeat wait()
-                                toPoint(pos)
-                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
-                            wait(1)
-                            pos = CFrame.new(-11671.3223, 331.748993, -9472.03027, 0.242941961, -1.09399236e-08, -0.970040798, -2.85362134e-08, 1, -1.84245526e-08, 0.970040798, 3.21573879e-08, 0.242941961)
-                            repeat wait()
-                                toPoint(pos)
-                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
-                            wait(1)
-                            pos = CFrame.new(-12131.1475, 519.475159, -10653.0312, 0.707040071, -3.3539596e-08, -0.707173467, -4.66550665e-09, 1, -5.20923074e-08, 0.707173467, 4.01306721e-08, 0.707040071)
-                            repeat wait()
-                                toPoint(pos)
-                            
-                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
-                            wait(1)
-                            pos = CFrame.new(-13335.6094, 485.255768, -6985.08008, 0.906433463, 6.72391565e-09, -0.422348619, 2.67380322e-08, 1, 7.33047543e-08, 0.422348619, -7.77386546e-08, 0.906433463)
-                            repeat wait()
-                                toPoint(pos)
-                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
-                            wait(1)
-                            pos = CFrame.new(-13487.9883, 339.479431, -7925.73877, -0.967818379, -1.85203811e-10, 0.251649618, 4.51458954e-10, 1, 2.47222354e-09, -0.251649618, 2.50627274e-09, -0.967818379)
-                            repeat wait()
-                                toPoint(pos)
-                            until getDistance(pos) < 15 or not _G.AutoHolyTorch
-                            wait(1)
+            Sea3ItemsSection:NewButton("Spawn rip_indra [ACTIVATE PLATES BEFORE]", "Spawn rip_indra", function()
+                
+                pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                wait()
+                counter = 0
+                for i,v in pairs(game.Workspace.Map["Boat Castle"].Summoner.Circle:GetChildren()) do 
+                    if v.Name == "Part" then 
+                        if v.Part.BrickColor == BrickColor.new("Lime green") then 
+                            counter = counter + 1
                         end
-                    end) 
+                    end 
                 end
+                if counter == 3 then
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map["Boat Castle"].Summoner.Detection.TouchInterest, 1) 
+                end
+
+                wait()
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
             end)
 
-            _G.AutoLongma = false
-            Sea3ItemsSection:NewToggle("Kill Longma [After Torch Quest]", "Kill Longma [After Torch Quest]", function(state)
-                _G.AutoLongma = state
+            function isWeaponInInventory(itemName)
+                if game.Players.LocalPlayer.Backpack:FindFirstChild(itemName) then return true end
+                if game.Players.LocalPlayer.Character:FindFirstChild(itemName) then return true end
+                for i, item in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventoryWeapons")) do 
+                    if item.Name == itemName then return true end
+                end
+                return false
+            end
+
+            function getTushitaProgress()
+                progress = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TushitaProgress")
+                if progress.KilledLongma then 
+                    return 100
+                end
+                if progress.OpenedDoor then
+                    return 50
+                else
+                    return 0
+                end
+            end
+            Sea3ItemsSection:NewLabel(" ")
+            _G.AutoTushita = false
+            Sea3ItemsSection:NewToggle("Auto Tushita [100% AUTO]", "Auto Tushita [100% AUTO]", function(state)
+                _G.AutoTushita = state
             end)
 
             spawn(function()
                 while wait() do
                     pcall(function()
-                        if _G.AutoLongma and third_sea then
-                            if not game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
-                                toPoint(CFrame.new(-10148.1641, 423.734192, -9543.64648, -0.93039453, -7.7153004e-09, -0.366559714, 1.02859437e-08, 1, -4.71554458e-08, 0.366559714, -4.76435815e-08, -0.93039453))
-                            else
-                                v = game:GetService("Workspace").Enemies:FindFirstChild("Longma")
-                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        v.Head.CanCollide = false
-                                        BringMobFarm = false
-                                        EquipWeapon(_G.SelectWeapon)
-                                        v.HumanoidRootPart.Transparency = 1
-                                        useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                    until not _G.AutoLongma or v.Humanoid.Health <= 0 or not v.Parent
+                        progress = getTushitaProgress()
+                        if progress ~= 100 and third_sea then
+                            if progress == 50 then
+                                if not game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+                                    toPoint(CFrame.new(-10148.1641, 423.734192, -9543.64648, -0.93039453, -7.7153004e-09, -0.366559714, 1.02859437e-08, 1, -4.71554458e-08, 0.366559714, -4.76435815e-08, -0.93039453))
+                                else
+                                    v = game:GetService("Workspace").Enemies:FindFirstChild("Longma")
+                                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                        repeat wait()
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                            v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.Humanoid.WalkSpeed = 0
+                                            v.Head.CanCollide = false
+                                            BringMobFarm = false
+                                            EquipWeapon(_G.SelectWeapon)
+                                            v.HumanoidRootPart.Transparency = 1
+                                            useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                        until not _G.AutoLongma or v.Humanoid.Health <= 0 or not v.Parent
+                                    end
+                                end
+                            elseif progress == 0 then
+                                if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
+                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1) 
+                                    wait(1)
+                                    for i,torch in pairs(game.Workspace.Map.Turtle.QuestTorches:GetChildren()) do
+                                        if torch:FindFirstChild("TouchInterest") then
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
+                                        end
+                                    end
                                 end
                             end
                         end
@@ -2202,7 +2217,7 @@ local status, err = pcall(function()
                     end)
                 end
             end)
-            
+
             ay = Sea3ItemsSection:NewToggle("Auto Yama", "Auto Yama", function(state)
                 _G.AutoYama = state
             end)
@@ -2216,7 +2231,7 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do
                     pcall(function()
-                        if _G.AutoYama and third_sea then
+                        if _G.AutoYama and third_sea and not isWeaponInInventory("Yama") then
                             if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") + game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter","Progress") < 30 then
                                 if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                                     if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text,"Diablo") then
@@ -2259,7 +2274,7 @@ local status, err = pcall(function()
                             else
                                 repeat wait(.1)
                                     fireclickdetector(game:GetService("Workspace").Map.Waterfall.SealedKatana.Handle.ClickDetector)
-                                until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Yama") or not _G.AutoYama
+                                until not isWeaponInInventory("Yama") or not _G.AutoYama
                             end
                         end
                     end)
