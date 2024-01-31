@@ -2148,7 +2148,7 @@ local status, err = pcall(function()
                                 toPoint(pos)
                             until getDistance(pos) < 15 or not _G.AutoHolyTorch
                             wait(1)
-                            pos = CFrame.new(-13486.1699, 332.403931, -7924.26953, -0.952564776, -2.89383362e-09, 0.304335922, -1.50361723e-09, 1, 4.80239359e-09, -0.304335922, 4.11698631e-09, -0.952564776)
+                            pos = CFrame.new(-13487.9883, 339.479431, -7925.73877, -0.967818379, -1.85203811e-10, 0.251649618, 4.51458954e-10, 1, 2.47222354e-09, -0.251649618, 2.50627274e-09, -0.967818379)
                             repeat wait()
                                 toPoint(pos)
                             until getDistance(pos) < 15 or not _G.AutoHolyTorch
