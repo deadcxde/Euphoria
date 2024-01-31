@@ -2191,11 +2191,16 @@ local status, err = pcall(function()
                                     end
                                 end
                             elseif progress == 0 then
+                                
                                 if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
+                                    print("Click Door Touchinterest")
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame
+                                    wait()
                                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1) 
                                     wait(1)
                                     for i,torch in pairs(game.Workspace.Map.Turtle.QuestTorches:GetChildren()) do
                                         if torch:FindFirstChild("TouchInterest") then
+                                            print("Click Torch TouchInterest")
                                             firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
                                         end
                                     end
