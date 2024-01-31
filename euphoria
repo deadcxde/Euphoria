@@ -2196,11 +2196,13 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do
                     pcall(function()
+                        wait(10)
                         count = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter","Progress") + game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PlayerHunter","Progress")
                         yamaProgress:UpdateLabel("⚔️ Yama Progress: " .. tostring(count))
                     end)
                 end
             end)
+            
             ay = Sea3ItemsSection:NewToggle("Auto Yama", "Auto Yama", function(state)
                 _G.AutoYama = state
             end)
