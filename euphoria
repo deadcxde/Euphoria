@@ -2157,6 +2157,39 @@ local status, err = pcall(function()
                     end) 
                 end
             end)
+
+            _G.AutoLongma = false
+            Sea3ItemsSection:NewToggle("Kill Longma [After Torch Quest]", "Kill Longma [After Torch Quest]", function(state)
+                _G.AutoLongma = state
+            end)
+
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.AutoLongma and third_sea then
+                            if not game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+                                toPoint(CFrame.new(-10148.1641, 423.734192, -9543.64648, -0.93039453, -7.7153004e-09, -0.366559714, 1.02859437e-08, 1, -4.71554458e-08, 0.366559714, -4.76435815e-08, -0.93039453))
+                            else
+                                v = game:GetService("Workspace").Enemies:FindFirstChild("Longma")
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        BringMobFarm = false
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.Transparency = 1
+                                        useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                    until not _G.AutoLongma or v.Humanoid.Health <= 0 or not v.Parent
+                                end
+                            end
+                        end
+                    end) 
+                end
+            end)
             
             Sea3ItemsSection:NewLabel("")
             yamaProgress = Sea3ItemsSection:NewLabel("")
