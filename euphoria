@@ -2194,15 +2194,21 @@ local status, err = pcall(function()
                                 elseif progress == 0 then
                                     
                                     if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
-                                        print("Click Door Touchinterest")
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame
-                                        wait()
-                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1) 
+                                        if not isWeaponInInventory("Holy Torch") then
+                                            repeat wait()
+                                                tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
+                                            until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1) 
+                                        end
                                         wait(1)
+                                        repeat wait()
+                                            tweenToPointAdvanced(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame)
+                                        until getDistance(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame) < 50
                                         for i,torch in pairs(game.Workspace.Map.Turtle.QuestTorches:GetChildren()) do
                                             if torch:FindFirstChild("TouchInterest") then
                                                 print("Click Torch TouchInterest")
                                                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
+                                                wait(1)
                                             end
                                         end
                                     end
