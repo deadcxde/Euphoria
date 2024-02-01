@@ -2132,6 +2132,8 @@ local status, err = pcall(function()
                     end 
                 end
                 if counter == 3 then
+                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map["Boat Castle"].Summoner.Detection.TouchInterest.Parent, 0) 
+                    wait()
                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map["Boat Castle"].Summoner.Detection.TouchInterest.Parent, 1) 
                 end
 
@@ -2198,7 +2200,9 @@ local status, err = pcall(function()
                                             repeat wait()
                                                 tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
                                             until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
-                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1) 
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
+                                            wait() 
+                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 0) 
                                         end
                                         wait(1)
                                         repeat wait()
@@ -2208,7 +2212,9 @@ local status, err = pcall(function()
                                             if torch:FindFirstChild("TouchInterest") then
                                                 print("Click Torch TouchInterest")
                                                 firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
-                                                wait(1)
+                                                wait()
+                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 0)
+                                                wait(2)
                                             end
                                         end
                                     end
