@@ -2071,6 +2071,7 @@ local status, err = pcall(function()
             Sea2ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
                 _G.AutoRengoku = state
             end)
+            Sea2ItemsSection:NewLabel(" ")
             Sea2ItemsSection:NewToggle("Auto Kill Order", "Auto Kill Order", function(state)
                 _G.AutoKillOrder = state
             end)
@@ -2086,7 +2087,7 @@ local status, err = pcall(function()
                 if autostartorder1 and state then autostartorder1:UpdateToggle(nil, false) end
                 _G.AutoStartOrderWithTeammates = state
             end)
-            Sea2ItemsSection:NewSlider("Min. Teammates for start", "Min. Teammates for start", 1, 4, function(count)
+            Sea2ItemsSection:NewSlider("Min. Teammates", "Min. Teammates for start", 1, 4, function(count)
                 _G.TeammatesForStart = count
             end)
 
