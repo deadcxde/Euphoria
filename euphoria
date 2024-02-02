@@ -2138,6 +2138,7 @@ local status, err = pcall(function()
                     pcall(function()
                         if _G.AutoStartOrder then
                             if isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                                print("Trying to start raid")
                                 fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector) 
                             end
                         elseif _G.AutoStartOrderWithTeammates then
@@ -2155,7 +2156,9 @@ local status, err = pcall(function()
                                 if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid4.Color.BrickColor == BrickColor.new("Lime green") then
                                     count = count + 1
                                 end
+                                print(count)
                                 if count >= _G.TeammatesForStart then 
+                                    print("Trying to start raid")
                                     fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector) 
                                 end
                             end
