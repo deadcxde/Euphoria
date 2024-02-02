@@ -1751,7 +1751,7 @@ local status, err = pcall(function()
                     if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
                     end
-                end
+                end 
             end)
             
             spawn(function()
@@ -2039,7 +2039,7 @@ local status, err = pcall(function()
                 _G.AutoBones = state
             end)
             spawn(function()
-                while wait() do 
+                while wait() do
                     if _G.AutoBones and third_sea then
                         pcall(function()
                             if game:GetService("Workspace").Enemies:FindFirstChild("Reborn Skeleton") or game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie") or game:GetService("Workspace").Enemies:FindFirstChild("Demonic Soul") or game:GetService("Workspace").Enemies:FindFirstChild("Posessed Mummy") then
@@ -2059,6 +2059,8 @@ local status, err = pcall(function()
                                         end
                                     end
                                 end
+                            else
+                                toPoint(CFrame.new(-9515.04199, 210.81572, 5788.22217, -1, 4.91895875e-08, 0.000170758853, 4.91951333e-08, 1, 3.24608713e-08, -0.000170758853, 3.24692699e-08, -1))
                             end
                         end)
                     end
@@ -2194,17 +2196,20 @@ local status, err = pcall(function()
                                         end
                                     end
                                 elseif progress == 0 then
-                                    
-                                    if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
+                                    if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
                                         if not isWeaponInInventory("Holy Torch") then
-                                            repeat wait()
-                                                tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
-                                            until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
-                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
-                                            wait() 
-                                            firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 0) 
+                                            if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
+                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
+                                                wait() 
+                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 0) 
+                                            else
+                                                repeat wait()
+                                                    tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
+                                                until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
+                                            end
                                         end
-                                        wait(1)
+                                    end
+                                    if isWeaponInInventory("Holy Torch") then
                                         repeat wait()
                                             tweenToPointAdvanced(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame)
                                         until getDistance(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame) < 50
