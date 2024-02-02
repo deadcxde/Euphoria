@@ -2066,11 +2066,103 @@ local status, err = pcall(function()
                     end
                 end
             end) 
-
+            
             local Sea2ItemsSection = FarmTab:NewSection("Sea 2 Items")
             Sea2ItemsSection:NewToggle("Auto Rengoku", "Auto Rengoku", function(state)
                 _G.AutoRengoku = state
             end)
+            Sea2ItemsSection:NewToggle("Auto Kill Order", "Auto Kill Order", function(state)
+                _G.AutoKillOrder = state
+            end)
+            Sea2ItemsSection:NewToggle("Auto Buy Chip for Order", "Auto Buy Chip for Order", function(state)
+                _G.AutoBuyOrderChip = state
+            end)
+            autostartorder1 = Sea2ItemsSection:NewToggle("Auto Start Order", "Auto Start Order", function(state)
+                if autostartorder2 and state then autostartorder2:UpdateToggle(nil, false) end
+                _G.AutoStartOrder = state
+            end)
+            _G.TeammatesForStart = 1
+            autostartorder2 = Sea2ItemsSection:NewToggle("Auto Start Order With Teammates", "Auto Start Order With Teammates", function(state)
+                if autostartorder1 and state then autostartorder1:UpdateToggle(nil, false) end
+                _G.AutoStartOrderWithTeammates = state
+            end)
+            Sea2ItemsSection:NewSlider("Min. Teammates for start", "Min. Teammates for start", 1, 4, function(count)
+                _G.TeammatesForStart = count
+            end)
+
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.AutoKillOrder then
+                            if game:GetService("Workspace").Enemies:FindFirstChild("Order") and game:GetService("Workspace").Enemies:FindFirstChild("Order"):FindFirstChild('Humanoid') and game:GetService("Workspace").Enemies:FindFirstChild("Order").Humanoid.Health > 0 then
+                                NoClip = true
+                                v = game:GetService("Workspace").Enemies:FindFirstChild("Order")
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                        v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        v.Head.CanCollide = false
+                                        BringMobFarm = false
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.Transparency = 1
+                                        useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                        toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                    until not _G.AutoKillOrder or v.Humanoid.Health <= 0 or not v.Parent
+                                end
+                            else
+                                NoClip = false
+                            end
+                        end
+                    end)
+                end
+            end)
+
+            spawn(function()
+                while wait() do
+                    wait(2)
+                    pcall(function()
+                        if _G.AutoBuyOrderChip then
+                            if not isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "Microchip", "2")
+                            end
+                        end
+                    end)
+                end
+            end)
+
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.AutoStartOrder then
+                            if isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                                fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main) 
+                            end
+                        elseif _G.AutoStartOrderWithTeammates then
+                            if isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
+                                count = 0
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid1.Color == BrickColor.new("Lime green") then
+                                    count = count + 1
+                                end
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid2.Color == BrickColor.new("Lime green") then
+                                    count = count + 1
+                                end
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid3.Color == BrickColor.new("Lime green") then
+                                    count = count + 1
+                                end
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid4.Color == BrickColor.new("Lime green") then
+                                    count = count + 1
+                                end
+                                if count >= _G.TeammatesForStart then 
+                                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main) 
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+
             local Sea3ItemsSection = FarmTab:NewSection("Sea 3 Items")
             Sea3ItemsSection:NewButton("Turn On All Haki Plates [rip_indra]", "Turn On All Haki Plates [rip_indra]", function()
                 pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
