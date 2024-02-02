@@ -2138,25 +2138,25 @@ local status, err = pcall(function()
                     pcall(function()
                         if _G.AutoStartOrder then
                             if isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
-                                fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main) 
+                                fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector) 
                             end
                         elseif _G.AutoStartOrderWithTeammates then
                             if isWeaponInInventory("Microchip") and not game:GetService("Workspace").Enemies:FindFirstChild("Order") then
                                 count = 0
-                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid1.Color == BrickColor.new("Lime green") then
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid1.Color.BrickColor == BrickColor.new("Lime green") then
                                     count = count + 1
                                 end
-                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid2.Color == BrickColor.new("Lime green") then
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid2.Color.BrickColor == BrickColor.new("Lime green") then
                                     count = count + 1
                                 end
-                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid3.Color == BrickColor.new("Lime green") then
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid3.Color.BrickColor == BrickColor.new("Lime green") then
                                     count = count + 1
                                 end
-                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid4.Color == BrickColor.new("Lime green") then
+                                if game:GetService("Workspace").Map.CircleIsland.RaidSummon.Raid4.Color.BrickColor == BrickColor.new("Lime green") then
                                     count = count + 1
                                 end
                                 if count >= _G.TeammatesForStart then 
-                                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main) 
+                                    fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon.Button.Main.ClickDetector) 
                                 end
                             end
                         end
