@@ -1010,7 +1010,7 @@ local status, err = pcall(function()
 
             spawn(function()
                 while wait() do 
-                    if _G.Auto_Farm or _G.AutoFarmPlayer or _G.Kaitun or _G.AutoRengoku then
+                    if _G.AutoFarmLevel or _G.AutoFarmPlayer or _G.Kaitun or _G.AutoRengoku then
                         if syn then
                             setfflag("HumanoidParallelRemoveNoPhysics", "False")
                             setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -1957,7 +1957,7 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do 
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoLongma then 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita then 
                             NoClip = true 
                         else
                             NoClip = false 
@@ -1966,7 +1966,7 @@ local status, err = pcall(function()
                 end
             end)
 
-            _G.Auto_Farm = false
+            _G.AutoFarmLevel = false
             local MainTab = Window:NewTab("Main")
             local MainFarmSection = MainTab:NewSection("Farm settings")
             timerLabel = MainFarmSection:NewLabel(" ")
@@ -1985,53 +1985,17 @@ local status, err = pcall(function()
             end)
 
             MainFarmSection:NewToggle("Auto Farm Level", "Auto Farm Level", function(state)
-                _G.Auto_Farm = state
-                Auto_Farm_Level = state
+                _G.AutoFarmLevel = state
             end)
+            kaitunToggle = MainFarmSection:NewToggle("Kaitun Mode", "Kaitun Mode", function(state)
+                _G.Kaitun = state
+            end)
+            if _G.Kaitun then kaitunToggle:UpdateToggle(nil, true) end
             _G.SelectWeapon = _G.SelectWeapon or "Melee"
             MainFarmSection:NewDropdown("Select Weapon", "Select Weapon", {"Melee", "Sword", "Fruit"}, function(currentOption)
                 _G.SelectWeapon = currentOption
             end)
-            fu = MainFarmSection:NewToggle("Fast Attack", "Fast Attack", function(state)
-                _G.FastAttack = state
-            end)
-            fu:UpdateToggle(nil, true)
-            fu = MainFarmSection:NewToggle("Fast Tween", "Fast Tween", function(state)
-                _G.FastTween = state
-            end)
-            fu:UpdateToggle(nil, true)
-            MainFarmSection:NewButton("Redeem All Codes", "Redeem All Codes", function()
-                    local redeem = function(code)
-                        local args = {
-                            [1] = code
-                        }
-                        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
-                    end
-                    redeem("SECRET_ADMIN")
-                    redeem("KITT_RESET")
-                    redeem("Sub2CaptainMaui")
-                    redeem("SUB2GAMERROBOT_RESET1")
-                    redeem("kittgaming")
-                    redeem("Sub2Fer999")
-                    redeem("Enyu_is_Pro")
-                    redeem("Magicbus")
-                    redeem("JCWK")
-                    redeem("Starcodeheo")
-                    redeem("Bluxxy")
-                    redeem("fudd10_v2")
-                    redeem("FUDD10")
-                    redeem("BIGNEWS")
-                    redeem("THEGREATACE")
-                    redeem("SUB2GAMERROBOT_EXP1")
-                    redeem("Sub2OfficialNoobie")
-                    redeem("StrawHatMaine")
-                    redeem("SUB2NOOBMASTER123")
-                    redeem("Sub2UncleKizaru")
-                    redeem("Sub2Daigrock")
-                    redeem("Axiore")
-                    redeem("TantaiGaming")               
-                end
-            )
+            
             local FarmTab = Window:NewTab("Farm")
             local FarmSection = FarmTab:NewSection("Farming")
             _G.AutoBones = false
@@ -2096,10 +2060,10 @@ local status, err = pcall(function()
                     pcall(function()
                         if _G.AutoKillOrder then
                             if game:GetService("Workspace").Enemies:FindFirstChild("Order") and game:GetService("Workspace").Enemies:FindFirstChild("Order"):FindFirstChild('Humanoid') and game:GetService("Workspace").Enemies:FindFirstChild("Order").Humanoid.Health > 0 then
-                                NoClip = true
                                 v = game:GetService("Workspace").Enemies:FindFirstChild("Order")
                                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                     repeat wait()
+                                        NoClip = true
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                                         v.HumanoidRootPart.Size = Vector3.new(90,90,90)
                                         v.HumanoidRootPart.CanCollide = false
@@ -2268,59 +2232,60 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do
                     pcall(function()
-                        if _G.AutoTushita then
-                            progress = getTushitaProgress()
-                            if progress ~= 100 and third_sea then
-                                if progress == 50 then
-                                    if not game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
-                                        toPoint(CFrame.new(-10148.1641, 423.734192, -9543.64648, -0.93039453, -7.7153004e-09, -0.366559714, 1.02859437e-08, 1, -4.71554458e-08, 0.366559714, -4.76435815e-08, -0.93039453))
-                                    else
-                                        v = game:GetService("Workspace").Enemies:FindFirstChild("Longma")
-                                        if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                            repeat wait()
-                                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
-                                                v.HumanoidRootPart.Size = Vector3.new(90,90,90)
-                                                v.HumanoidRootPart.CanCollide = false
-                                                v.Humanoid.WalkSpeed = 0
-                                                v.Head.CanCollide = false
-                                                BringMobFarm = false
-                                                EquipWeapon(_G.SelectWeapon)
-                                                v.HumanoidRootPart.Transparency = 1
-                                                useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
-                                            until not _G.AutoLongma or v.Humanoid.Health <= 0 or not v.Parent
-                                        end
-                                    end
-                                elseif progress == 0 then
-                                    if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
-                                        if not isWeaponInInventory("Holy Torch") then
-                                            if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
-                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
-                                                wait() 
-                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 0) 
-                                            else
+                        if _G.AutoTushita and third_sea then
+                            if not isWeaponInInventory("Tushita") then
+                                progress = getTushitaProgress()
+                                if progress ~= 100 then
+                                    if progress == 50 then
+                                        if not game:GetService("Workspace").Enemies:FindFirstChild("Longma") then
+                                            toPoint(CFrame.new(-10148.1641, 423.734192, -9543.64648, -0.93039453, -7.7153004e-09, -0.366559714, 1.02859437e-08, 1, -4.71554458e-08, 0.366559714, -4.76435815e-08, -0.93039453))
+                                        else
+                                            v = game:GetService("Workspace").Enemies:FindFirstChild("Longma")
+                                            if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                                 repeat wait()
-                                                    tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
-                                                until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
+                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                                                    v.HumanoidRootPart.Size = Vector3.new(90,90,90)
+                                                    v.HumanoidRootPart.CanCollide = false
+                                                    v.Humanoid.WalkSpeed = 0
+                                                    v.Head.CanCollide = false
+                                                    BringMobFarm = false
+                                                    EquipWeapon(_G.SelectWeapon)
+                                                    v.HumanoidRootPart.Transparency = 1
+                                                    useNearestEntrance(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                                    toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
+                                                until not _G.AutoTushita or v.Humanoid.Health <= 0 or not v.Parent
                                             end
                                         end
-                                    end
-                                    if isWeaponInInventory("Holy Torch") then
-                                        repeat wait()
-                                            tweenToPointAdvanced(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame)
-                                        until getDistance(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame) < 50
-                                        for i,torch in pairs(game.Workspace.Map.Turtle.QuestTorches:GetChildren()) do
-                                            if torch:FindFirstChild("TouchInterest") then
-                                                print("Click Torch TouchInterest")
-                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
-                                                wait()
-                                                firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 0)
-                                                wait(2)
+                                    elseif progress == 0 then
+                                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
+                                            if not isWeaponInInventory("Holy Torch") then
+                                                if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
+                                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
+                                                    wait() 
+                                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 0) 
+                                                else
+                                                    repeat wait()
+                                                        tweenToPointAdvanced(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame)
+                                                    until getDistance(game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.CFrame) < 100
+                                                end
+                                            end
+                                        end
+                                        if isWeaponInInventory("Holy Torch") then
+                                            repeat wait()
+                                                tweenToPointAdvanced(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame)
+                                            until getDistance(game.Workspace.Map.Turtle.QuestTorches.Torch1.CFrame) < 50
+                                            for i,torch in pairs(game.Workspace.Map.Turtle.QuestTorches:GetChildren()) do
+                                                if torch:FindFirstChild("TouchInterest") then
+                                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 1)
+                                                    wait()
+                                                    firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, torch.TouchInterest.Parent, 0)
+                                                    wait(2)
+                                                end
                                             end
                                         end
                                     end
                                 end
-                            end
+                            end 
                         end
                     end) 
                 end
@@ -3144,10 +3109,7 @@ local status, err = pcall(function()
             TeleportToSeaSection:NewButton("Teleport to third sea", "Teleport to third sea", function()
                 teleportToThirdSea()
             end)
-            local TeleportSettingsSection = TeleportTab:NewSection("Teleport settings")
-            TeleportSettingsSection:NewToggle("Bypass Teleport", "Bypass Teleport", function(state)
-                _G.UseBypassTP = state
-            end)
+            
             if second_sea then
                 IslandPos = {
                     ["Cafe"] = CFrame.new(-381.679047, 77.2203598, 260.130615, 0.998160779, 7.18165349e-09, -0.0606226437, -6.2934169e-09, 1, 1.48428274e-08, 0.0606226437, -1.44340042e-08, 0.998160779),
@@ -3417,6 +3379,52 @@ local status, err = pcall(function()
                         end
                     end)
                 end
+            end)
+
+            fu = MiscSection:NewToggle("Fast Attack", "Fast Attack", function(state)
+                _G.FastAttack = state
+            end)
+            fu:UpdateToggle(nil, true)
+            fu = MiscSection:NewToggle("Fast Tween", "Fast Tween", function(state)
+                _G.FastTween = state
+            end)
+            fu:UpdateToggle(nil, true)
+            MiscSection:NewButton("Redeem All Codes", "Redeem All Codes", function()
+                    local redeem = function(code)
+                        local args = {
+                            [1] = code
+                        }
+                        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+                    end
+                    redeem("SECRET_ADMIN")
+                    redeem("KITT_RESET")
+                    redeem("Sub2CaptainMaui")
+                    redeem("SUB2GAMERROBOT_RESET1")
+                    redeem("kittgaming")
+                    redeem("Sub2Fer999")
+                    redeem("Enyu_is_Pro")
+                    redeem("Magicbus")
+                    redeem("JCWK")
+                    redeem("Starcodeheo")
+                    redeem("Bluxxy")
+                    redeem("fudd10_v2")
+                    redeem("FUDD10")
+                    redeem("BIGNEWS")
+                    redeem("THEGREATACE")
+                    redeem("SUB2GAMERROBOT_EXP1")
+                    redeem("Sub2OfficialNoobie")
+                    redeem("StrawHatMaine")
+                    redeem("SUB2NOOBMASTER123")
+                    redeem("Sub2UncleKizaru")
+                    redeem("Sub2Daigrock")
+                    redeem("Axiore")
+                    redeem("TantaiGaming")               
+                    redeem("NEWTROLL")               
+                end
+            )
+            local TeleportSettingsSection = MiscTab:NewSection("Teleport settings")
+            MiscSection:NewToggle("Bypass Teleport", "Bypass Teleport", function(state)
+                _G.UseBypassTP = state
             end)
 
             local ServerTab = Window:NewTab("Server")
