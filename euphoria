@@ -1252,28 +1252,6 @@ local status, err = pcall(function()
                     teleportToSecondSea()
                 end
             end
-            
-            local function debug_webhook(msg)
-                local url = "https://discord.com/api/webhooks/1176189318390349824/OQllUcMGc7wNDvTBeeRJB4aJ90DNlzse1srYEDw4oHwsxE0KWELefrjH2fYl1ZDTPcBE"
-                local plr = game.Players.LocalPlayer
-                local Embed = {
-                    ["title"] = plr.Name,
-                    ["description"] = tostring(msg),
-                    ["type"] = "rich",
-                    ["color"] = tonumber(0xffff00),
-                    ["footer"] = {
-                        ["text"] = "debug euphoria",
-                    }
-                };
-                http.request {
-                    Url = url;
-                    Method = 'POST';
-                    Headers = {
-                        ['Content-Type'] = 'application/json';
-                    };
-                    Body = game:GetService'HttpService':JSONEncode({embeds = {Embed};});
-                };
-            end
 
             spawn(function()
                 while wait() do
@@ -2005,36 +1983,39 @@ local status, err = pcall(function()
             if _G.Kaitun then kaitunToggle:UpdateToggle(nil, true) end
             if _G.MaxLevel and _G.MaxLevel > 0 then
                 spawn(function()
-                    done = false
+                    doneLeveling = false
                     while wait() do
                         pcall(function()
                             if game.Players.LocalPlayer.Data.Level.Value > _G.MaxLevel then
-                                done = true
+                                doneLeveling = true
                             end
                         end)
-                        if done then
-                            h=math.floor((math.floor(workspace.DistributedGameTime+0.5)/(60*60*1))%(24))
-                            m=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(60*1))%(60)
-                            s=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(1))%(60)
-                            h=(string.len(h)==1 and "0"..h or h)
-                            m=(string.len(m)==1 and "0"..m or m)
-                            s=(string.len(s)==1 and "0"..s or s)
-                            time = "Online Time: "..h..":"..m..":"..s
+                        if doneLeveling then
+                            kaitunToggle:UpdateToggle(nil, false)
+                            pcall(function()
+                                h=math.floor((math.floor(workspace.DistributedGameTime+0.5)/(60*60*1))%(24))
+                                m=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(60*1))%(60)
+                                s=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(1))%(60)
+                                h=(string.len(h)==1 and "0"..h or h)
+                                m=(string.len(m)==1 and "0"..m or m)
+                                s=(string.len(s)==1 and "0"..s or s)
+                                time = "Online Time: "..h..":"..m..":"..s
 
-                            local Embed = {
-                                ["title"] = game.Players.LocalPlayr.Name,
-                                ["description"] = "**Reached ** `" .. _G.MaxLevel .. "` **level!**\nScript will be automatically stopped\n```\n" .. time .. "\n```",
-                                ["type"] = "rich",
-                                ["color"] = tonumber(0xffffff),
-                                ["footer"] = {
-                                    ["text"] = "e u p h o r i a =3",
-                                }
-                            };
-                            sendWebhook(
-                                _G.Webhook or "https://discord.com/api/webhooks/1203160779600306308/etQEGpPRpRxR3P-F_gLOeqAsseTpBtPi5AcnPnrIIVRXF5_Ld26XR2u8Wph3ydAcLp8Y",
-                                "@here",
-                                Embed 
-                            )
+                                local Embed = {
+                                    ["title"] = game.Players.LocalPlayr.Name,
+                                    ["description"] = "**Reached ** `" .. tostring(_G.MaxLevel) .. "` **level!**\nScript will be automatically stopped\n```\n" .. time .. "\n```",
+                                    ["type"] = "rich",
+                                    ["color"] = tonumber(0xffffff),
+                                    ["footer"] = {
+                                        ["text"] = "e u p h o r i a =3",
+                                    }
+                                };
+                                sendWebhook(
+                                    _G.Webhook or "https://discord.com/api/webhooks/1203160779600306308/etQEGpPRpRxR3P-F_gLOeqAsseTpBtPi5AcnPnrIIVRXF5_Ld26XR2u8Wph3ydAcLp8Y",
+                                    "@here",
+                                    Embed 
+                                )
+                            end)
                             return 
                         end
                     end
