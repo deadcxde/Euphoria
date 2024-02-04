@@ -2003,7 +2003,7 @@ local status, err = pcall(function()
 
                                 local Embed = {
                                     ["title"] = game.Players.LocalPlayr.Name,
-                                    ["description"] = "**Reached ** `" .. tostring(_G.MaxLevel) .. "` **level!**\nScript will be automatically stopped\n```\n" .. time .. "\n```",
+                                    ["description"] = "**Reached **`" .. tostring(_G.MaxLevel) .. "` **level!\nScript will be automatically stopped\n**```\n" .. time .. "\n```",
                                     ["type"] = "rich",
                                     ["color"] = tonumber(0xffffff),
                                     ["footer"] = {
