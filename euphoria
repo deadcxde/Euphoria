@@ -1947,10 +1947,10 @@ local status, err = pcall(function()
             spawn(function()
                 while wait() do
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita or NoClip then 
-                            _G.NoClip = true 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita then 
+                            NoClip = true 
                         else
-                            _G.NoClip = false 
+                            NoClip = false 
                         end
                     end)
                 end
@@ -2864,7 +2864,7 @@ local status, err = pcall(function()
             local RaidSection = RaidTab:NewSection("Raid")
             spawn(function()
                 game:GetService("RunService").Stepped:Connect(function()
-                    if _G.NoClip then
+                    if NoClip then
                         if not game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
                             local ag = Instance.new("BodyVelocity")
                             ag.Velocity = Vector3.new(0, 0, 0)
@@ -2882,7 +2882,7 @@ local status, err = pcall(function()
                                 v.CanCollide = false    
                             end
                         end
-                    elseif not _G.NoClip and game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
+                    elseif not NoClip and game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
                         game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity"):Destroy()
                     end
                 end)
