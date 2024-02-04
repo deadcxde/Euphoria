@@ -2290,7 +2290,7 @@ local status, err = pcall(function()
                                             end
                                         end
                                     elseif progress == 0 then
-                                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
+                                        if game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") or game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form") then
                                             if not isWeaponInInventory("Holy Torch") then
                                                 if game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox:FindFirstChild("TouchInterest") then
                                                     firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, game.Workspace.Map.Waterfall.SecretRoom.Room.Door.Door.Hitbox.TouchInterest.Parent, 1)
