@@ -1945,12 +1945,12 @@ local status, err = pcall(function()
             WriteSettings()
             
             spawn(function()
-                while wait() do 
+                while wait() do
                     pcall(function()
-                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita then 
-                            NoClip = true 
+                        if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita or NoClip then 
+                            _G.NoClip = true 
                         else
-                            NoClip = false 
+                            _G.NoClip = false 
                         end
                     end)
                 end
@@ -1992,7 +1992,7 @@ local status, err = pcall(function()
                         end)
                         if doneLeveling then
                             kaitunToggle:UpdateToggle(nil, false)
-                            pcall(function()
+                            st, err = pcall(function()
                                 h=math.floor((math.floor(workspace.DistributedGameTime+0.5)/(60*60*1))%(24))
                                 m=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(60*1))%(60)
                                 s=math.floor(math.floor(workspace.DistributedGameTime+0.5)/(1))%(60)
@@ -2016,6 +2016,7 @@ local status, err = pcall(function()
                                     Embed 
                                 )
                             end)
+                            if err then print(err) end
                             return 
                         end
                     end
@@ -2863,7 +2864,7 @@ local status, err = pcall(function()
             local RaidSection = RaidTab:NewSection("Raid")
             spawn(function()
                 game:GetService("RunService").Stepped:Connect(function()
-                    if NoClip then
+                    if _G.NoClip then
                         if not game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
                             local ag = Instance.new("BodyVelocity")
                             ag.Velocity = Vector3.new(0, 0, 0)
@@ -2881,7 +2882,7 @@ local status, err = pcall(function()
                                 v.CanCollide = false    
                             end
                         end
-                    elseif not NoClip and game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
+                    elseif not _G.NoClip and game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
                         game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity"):Destroy()
                     end
                 end)
@@ -3388,15 +3389,80 @@ local status, err = pcall(function()
             FruitSection:NewButton("Buy Random Fruit", "Random Fruit", function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin" , "Buy")
             end)
+            local EspTab = Window:NewTab("ESP")
+            local EspSection = EspTab:NewSection("ESP")
+            EspSection:NewToggle("Player ESP", "Player ESP", function(state)
+                _G.PlayerESP = state
+            end)
+
+            spawn(function()
+                while wait() do
+                    pcall(function()
+                        if _G.PlayerESP then
+                            for i,v in pairs(game.Players:GetChildren()) do
+                                if v.Name ~= game.Players.LocalPlayer.Name then
+                                    if not v.Character.HumanoidRootPart:FindFirstChild("PlayersEsp") then
+                                        local BillboardGui = Instance.new("BillboardGui")
+                                        local TextLabel = Instance.new("TextLabel")
+                                        BillboardGui.Parent = v.Character.HumanoidRootPart
+                                        BillboardGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+                                        BillboardGui.Active = true
+                                        BillboardGui.Name = "PlayersEsp"
+                                        BillboardGui.AlwaysOnTop = true
+                                        BillboardGui.LightInfluence = 1.000
+                                        BillboardGui.Size = UDim2.new(0, 200, 0, 50)
+                                        BillboardGui.StudsOffset = Vector3.new(0, 2.5, 0)
+                                        TextLabel.Parent = BillboardGui
+                                        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+                                        TextLabel.BackgroundTransparency = 1.000
+                                        TextLabel.Size = UDim2.new(0, 200, 0, 50)
+                                        TextLabel.Font = Enum.Font.GothamBold
+                                        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+                                        TextLabel.TextSize = 13
+                                        TextLabel.TextStrokeTransparency = 0
+                                        TextLabel.TextWrapped = true
+                                    end
+                                    local Dis = math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Character.HumanoidRootPart.Position).Magnitude / 10)
+                                    v.Character.HumanoidRootPart:FindFirstChild("PlayersEsp").TextLabel.Text = v.Name.."\n"..Dis.." m".."\n["..math.floor(v.Character.Humanoid.Health).."/"..v.Character.Humanoid.MaxHealth.." HP]"
+                                    if v.Team == game.Players.LocalPlayer.Team then
+                                        v.Character.HumanoidRootPart:FindFirstChild("PlayersEsp").TextLabel.TextStrokeColor3 = Color3.new(255,0,0)
+                                    else
+                                        v.Character.HumanoidRootPart:FindFirstChild("PlayersEsp").TextLabel.TextStrokeColor3 = Color3.new(0,255,255)
+                                    end
+                                end
+                            end
+                        else
+                            for i,v in pairs(game.Players:GetChildren()) do
+                                if v.Name ~= game.Players.LocalPlayer.Name then
+                                    if v.Character.HumanoidRootPart:FindFirstChild("PlayersEsp") then
+                                        v.Character.HumanoidRootPart.PlayersEsp:Destroy()
+                                    end
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+            
+
+            EspSection:NewToggle("Island ESP", "Island ESP", function(state)
+                _G.IslandESP = state
+            end)
+            EspSection:NewToggle("Chest ESP", "Chest ESP", function(state)
+                _G.ChestESP = state
+            end)
+
+            
+
             local MiscTab = Window:NewTab("Misc")
             local MiscSection = MiscTab:NewSection("Misc")
             afk = MiscSection:NewToggle("Anti AFK", "Anti AFK", function(state)
-                _G.AntiAFK = value
+                _G.AntiAFK = state
             end)
             afk:UpdateToggle(nil, true)
             
             anticheat = MiscSection:NewToggle("Bypass Anti Cheat", "Bypass Anti Cheat", function(state)
-                _G.AntiCheat = value
+                _G.AntiCheat = state
             end)
             anticheat:UpdateToggle(nil, true)
             _G.AntiCheat = true
