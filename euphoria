@@ -1376,7 +1376,7 @@ local status, err = pcall(function()
             if target.Data.Level.Value < 21 then
                 return false
             end
-            if target.Character.Health > game.Players.LocalPlayer.Data.Melee.Level.Value * 3 then
+            if target.Character.Health > game.Players.LocalPlayer.Data.Stats.Melee.Level.Value * 3 then
                 return false
             end
             if target.Character:FindFirstChild("HumanoidRootPart") and getDistance(target.Character.HumanoidRootPart.CFrame) < 100 and game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Text, "Safe Zone") then
