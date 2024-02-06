@@ -1376,7 +1376,7 @@ local status, err = pcall(function()
             if target.Data.Level.Value < 21 then
                 return false
             end
-            if target.Character.Health > game.Players.LocalPlayer.Data.Stats.Melee.Level.Value * 3 then
+            if target.Character.Health > game.Players.LocalPlayer.Data.Stats.Melee.Level.Value * 8 then
                 return false
             end
             if target.Character:FindFirstChild("HumanoidRootPart") and getDistance(target.Character.HumanoidRootPart.CFrame) < 100 and game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Visible and string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.PvpDisabled.Text, "Safe Zone") then
@@ -1439,6 +1439,10 @@ local status, err = pcall(function()
                                             toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                                         end
                                         char = target.Character
+                                        if not CanIKillThisShit(char.Parent) then
+                                            skipcount = skipcount + 1
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") 
+                                        end
                                         
                                         if char then
                                             if char:FindFirstChild("HumanoidRootPart") then
