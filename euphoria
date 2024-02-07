@@ -1424,14 +1424,12 @@ local status, err = pcall(function()
                                         if not target.Character:FindFirstChild("HumanoidRootPart") then done = true end
                                         if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
                                             useNearestEntrance(target.Character.HumanoidRootPart.CFrame)
-                                            print("line 1372")
                                             task.wait(.2)
                                             if getDistance(target.Character.HumanoidRootPart.CFrame) > 10000 then
                                                 Bypass(target.Character.HumanoidRootPart.CFrame)
                                             end
                                             if getDistance(target.Character.HumanoidRootPart.CFrame) > 4000 then
                                                 repeat task.wait()
-                                                    print("line 1379")
                                                     toTarget(target.Character.HumanoidRootPart.CFrame)
                                                 until getDistance(target.Character.HumanoidRootPart.CFrame) < 100 or getDistance(target.Character.HumanoidRootPart.CFrame) > 1500 or not game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible
                                                 StopTween()
