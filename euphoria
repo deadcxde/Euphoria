@@ -1415,7 +1415,7 @@ local status, err = pcall(function()
                                             target = plr
                                         end
                                     end
-                                    if not target or not CanIKillThisShit(target) then 
+                                    if not target then 
                                         skipcount = skipcount + 1
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") 
                                     end
@@ -1444,10 +1444,6 @@ local status, err = pcall(function()
                                             toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
                                         end
                                         char = target.Character
-                                        if not CanIKillThisShit(char.Parent) then
-                                            skipcount = skipcount + 1
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest") 
-                                        end
                                         
                                         if char then
                                             if char:FindFirstChild("HumanoidRootPart") then
@@ -1464,7 +1460,7 @@ local status, err = pcall(function()
                                                 toTarget(char.HumanoidRootPart.CFrame * CFrame.new(-1, -1, 1))
                                             end
                                         end
-                                    until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart") or done == true or not CanIKillThisShit(char.Parent)
+                                    until not char or not char:FindFirstChild("Parent") or not char:FindFirstChild("Humanoid") or char.Humanoid.Health <= 0 or game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false or not char:FindFirstChild("HumanoidRootPart") or done == true
                                     _G.KillingPlayer = false
                                 else
                                     if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, Quest.QuestNPCName) then
