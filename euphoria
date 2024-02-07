@@ -1027,7 +1027,7 @@ local status, err = pcall(function()
 
         spawn(function()
             while wait() do 
-                if NoClip then
+                if NoClip or _G.Kaitun then
                     if syn then
                         setfflag("HumanoidParallelRemoveNoPhysics", "False")
                         setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -2892,7 +2892,7 @@ local status, err = pcall(function()
         local RaidSection = RaidTab:NewSection("Raid")
         spawn(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if NoClip then
+                if NoClip or _G.Kaitun then
                     if not game.Players.LocalPlayer.Character.Head:FindFirstChild("BodyVelocity") then
                         local ag = Instance.new("BodyVelocity")
                         ag.Velocity = Vector3.new(0, 0, 0)
