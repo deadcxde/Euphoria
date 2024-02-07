@@ -864,7 +864,7 @@ local status, err = pcall(function()
             if Distance < 25 then
                 Speed = 1000
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
-            elseif Distance < 50 then
+            elseif Distance < 100 then
                 Speed = 600
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
             elseif Distance < 150 then
@@ -889,10 +889,11 @@ local status, err = pcall(function()
             useNearestEntrance(cframe)
             wait(.2)
             Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            cframe = CFrame.new(cframe.X,cframe.Y,cframe.Z)
             if Distance < 25 then
                 Speed = 1000
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
-            elseif Distance < 50 then
+            elseif Distance < 100 then
                 Speed = 600
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
             elseif Distance < 150 then
@@ -915,9 +916,12 @@ local status, err = pcall(function()
 
 
         local function toTarget(cframe)
+            if type(cframe) == "vector" then
+                cframe = CFrame.new(cframe.X,cframe.Y,cframe.Z)
+            end
             Distance = (cframe.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
             if Distance == nil then return end
-            cframe = CFrame.new(cframe.Position.x, cframe.Position.y, cframe.Position.z)
+            cframe = CFrame.new(cframe.X,cframe.Y,cframe.Z)
             if Distance < 25 then
                 Speed = 1000
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = cframe
@@ -1023,7 +1027,7 @@ local status, err = pcall(function()
 
         spawn(function()
             while wait() do 
-                if _G.AutoFarmLevel or _G.AutoFarmPlayer or _G.Kaitun or _G.AutoRengoku then
+                if NoClip then
                     if syn then
                         setfflag("HumanoidParallelRemoveNoPhysics", "False")
                         setfflag("HumanoidParallelRemoveNoPhysicsNoSimulate2", "False")
@@ -1052,7 +1056,7 @@ local status, err = pcall(function()
                     end
                 else
                     if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity1") then
-                        game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity1"):Destroy();
+                        game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity1"):Destroy()
                     end
                 end
             end
@@ -1280,7 +1284,7 @@ local status, err = pcall(function()
                                     else
                                         repeat task.wait()
                                             EquipWeapon(_G.SelectWeapon)
-                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                                            toTarget(v.HumanoidRootPart.Position)
                                             v.Humanoid.WalkSpeed = 0
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             v.Humanoid:ChangeState(14)
@@ -1300,7 +1304,7 @@ local status, err = pcall(function()
                                         if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("Humanoid").Health > 0 then
                                             repeat task.wait()
                                                 EquipWeapon(_G.SelectWeapon)
-                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0, 30, 5))
+                                                toTarget(v.HumanoidRootPart.Position)
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                                 v.Humanoid:ChangeState(14)
