@@ -1284,7 +1284,7 @@ local status, err = pcall(function()
                                     else
                                         repeat task.wait()
                                             EquipWeapon(_G.SelectWeapon)
-                                            toTarget(v.HumanoidRootPart.Position)
+                                            toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                             v.Humanoid.WalkSpeed = 0
                                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                             v.Humanoid:ChangeState(14)
@@ -1304,7 +1304,7 @@ local status, err = pcall(function()
                                         if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v:FindFirstChild("Humanoid").Health > 0 then
                                             repeat task.wait()
                                                 EquipWeapon(_G.SelectWeapon)
-                                                toTarget(v.HumanoidRootPart.Position)
+                                                toTarget(v.HumanoidRootPart.CFrame * CFrame.new(0,30,0))
                                                 v.Humanoid.WalkSpeed = 0
                                                 v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                                 v.Humanoid:ChangeState(14)
@@ -1980,7 +1980,7 @@ local status, err = pcall(function()
         spawn(function()
             while wait() do
                 pcall(function()
-                    if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita then 
+                    if Auto_Cursed_Dual_Katana or _G.AutoBones or _G.AutoHolyTorch or _G.AutoYama or _G.AutoTushita or _G.AutoRengoku then 
                         NoClip = true 
                     else
                         NoClip = false 
