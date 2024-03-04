@@ -202,7 +202,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
     local coverup = Instance.new("Frame")
     local title = Instance.new("TextLabel")
     local close = Instance.new("ImageButton")
-    local MainSide = Instance.new("Frame")
+    local MainSide = Instance.new("ScrollingFrame")
     local sideCorner = Instance.new("UICorner")
     local coverup_2 = Instance.new("Frame")
     local tabFrames = Instance.new("Frame")
@@ -232,6 +232,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
     Main.Name = "Main"
     Main.Parent = ScreenGui
     Main.BackgroundColor3 = themeList.Background
+    Main.BackgroundTransparency = 0.2
     Main.ClipsDescendants = true
     Main.Position = UDim2.new(0.336503863, 0, 0.275485456, 0)
     Main.Size = UDim2.new(0, 525, 0, 318)
@@ -243,6 +244,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
     MainHeader.Name = "MainHeader"
     MainHeader.Parent = Main
     MainHeader.BackgroundColor3 = themeList.Header
+    MainHeader.BackgroundTransparency = 0.8
     Objects[MainHeader] = "BackgroundColor3"
     MainHeader.Size = UDim2.new(0, 525, 0, 29)
     headerCover.CornerRadius = UDim.new(0, 4)
@@ -252,6 +254,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
     coverup.Name = "coverup"
     coverup.Parent = MainHeader
     coverup.BackgroundColor3 = themeList.Header
+    coverup.BackgroundTransparency = 0.8
     Objects[coverup] = "BackgroundColor3"
     coverup.BorderSizePixel = 0
     coverup.Position = UDim2.new(0, 0, 0.758620679, 0)
@@ -259,8 +262,8 @@ function EuphoriaUI.CreateLib(kavName, themeList)
 
     title.Name = "title"
     title.Parent = MainHeader
-    title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-    title.BackgroundTransparency = 1.000
+    title.BackgroundColor3 = themeList.Background
+    title.BackgroundTransparency = 1
     title.BorderSizePixel = 0
     title.Position = UDim2.new(0.0171428565, 0, 0.344827592, 0)
     title.Size = UDim2.new(0, 204, 0, 8)
@@ -295,7 +298,9 @@ function EuphoriaUI.CreateLib(kavName, themeList)
 
     MainSide.Name = "MainSide"
     MainSide.Parent = Main
-    MainSide.BackgroundColor3 = themeList.Header
+    MainSide.BackgroundColor3 = themeList.Background
+    MainSide.BackgroundTransparency = 0.3
+    MainSide.ScrollBarThickness = 5
     Objects[MainSide] = "Header"
     MainSide.Position = UDim2.new(-7.4505806e-09, 0, 0.0911949649, 0)
     MainSide.Size = UDim2.new(0, 149, 0, 289)
@@ -307,6 +312,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
     coverup_2.Name = "coverup"
     coverup_2.Parent = MainSide
     coverup_2.BackgroundColor3 = themeList.Header
+    coverup_2.BackgroundTransparency = 0.8
     Objects[coverup_2] = "Header"
     coverup_2.BorderSizePixel = 0
     coverup_2.Position = UDim2.new(0.949939311, 0, 0, 0)
@@ -391,6 +397,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
         page.Parent = Pages
         page.Active = true
         page.BackgroundColor3 = themeList.Background
+        page.BackgroundTransparency = 0.6
         page.BorderSizePixel = 0
         page.Position = UDim2.new(0, 0, -0.00371747208, 0)
         page.Size = UDim2.new(1, 0, 1, 0)
@@ -435,11 +442,10 @@ function EuphoriaUI.CreateLib(kavName, themeList)
         if first then
             first = false
             page.Visible = true
-            tabButton.BackgroundTransparency = 0
+            tabButton.BackgroundTransparency = .25
             UpdateSize()
         else
             page.Visible = false
-            tabButton.BackgroundTransparency = 1
         end
 
         UICorner.CornerRadius = UDim.new(0, 5)
@@ -492,7 +498,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
             secName = secName or "Section"
             local sectionFunctions = {}
             local modules = {}
-	    hidden = hidden or false
+	        hidden = hidden or false
             local sectionFrame = Instance.new("Frame")
             local sectionlistoknvm = Instance.new("UIListLayout")
             local sectionHead = Instance.new("Frame")
@@ -510,6 +516,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
             sectionFrame.Name = "sectionFrame"
             sectionFrame.Parent = page
             sectionFrame.BackgroundColor3 = themeList.Background--36, 37, 43
+            sectionFrame.BackgroundTransparency = 1--36, 37, 43
             sectionFrame.BorderSizePixel = 0
             
             sectionlistoknvm.Name = "sectionlistoknvm"
@@ -532,6 +539,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
             end
             sectionHead.Name = "sectionHead"
             sectionHead.Parent = sectionFrame
+            sectionHead.BackgroundTransparency = 0.9--36, 37, 43
             sectionHead.BackgroundColor3 = themeList.Background
             Objects[sectionHead] = "BackgroundColor3"
             sectionHead.Size = UDim2.new(0, 352, 0, 20)
@@ -563,8 +571,8 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                
             sectionInners.Name = "sectionInners"
             sectionInners.Parent = sectionFrame
-            sectionInners.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-            sectionInners.BackgroundTransparency = 1.000
+            sectionInners.BackgroundColor3 = themeList.Background
+            sectionInners.BackgroundTransparency = 0.3
             sectionInners.Position = UDim2.new(0, 0, 0.190751448, 0)
 
             sectionElListing.Name = "sectionElListing"
@@ -611,6 +619,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 buttonElement.Name = bname
                 buttonElement.Parent = sectionInners
                 buttonElement.BackgroundColor3 = themeList.ElementColor
+                buttonElement.BackgroundTransparency = 0.2
                 buttonElement.ClipsDescendants = true
                 buttonElement.Size = UDim2.new(0, 352, 0, 33)
                 buttonElement.AutoButtonColor = false
@@ -808,6 +817,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 textboxElement.Name = "textboxElement"
                 textboxElement.Parent = sectionInners
                 textboxElement.BackgroundColor3 = themeList.ElementColor
+                textboxElement.BackgroundTransparency = 0.3
                 textboxElement.ClipsDescendants = true
                 textboxElement.Size = UDim2.new(0, 352, 0, 33)
                 textboxElement.AutoButtonColor = false
@@ -852,7 +862,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 TextBox.ZIndex = 99
                 TextBox.ClearTextOnFocus = false
                 TextBox.Font = Enum.Font.Gotham
-                TextBox.PlaceholderColor3 = Color3.fromRGB(themeList.SchemeColor.r * 255 - 19, themeList.SchemeColor.g * 255 - 26, themeList.SchemeColor.b * 255 - 35)
+                TextBox.PlaceholderColor3 = Color3.fromRGB(255, 255, 255)
                 TextBox.PlaceholderText = "Type here!"
                 TextBox.Text = ""
                 TextBox.TextColor3 = themeList.SchemeColor
@@ -902,7 +912,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
 
 
                 updateSectionFrame()
-                                UpdateSize()
+                UpdateSize()
             
                 local btn = textboxElement
                 local infBtn = viewInfo
@@ -933,6 +943,10 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                         }):Play()
                         hovering = false
                     end
+                end)
+                
+                TextBox.Focused:Connect(function()
+                    TextBox.Text = ""
                 end)
 
                 TextBox.FocusLost:Connect(function(EnterPressed)
@@ -1004,8 +1018,9 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     toggleElement.Name = "toggleElement"
                     toggleElement.Parent = sectionInners
                     toggleElement.BackgroundColor3 = themeList.ElementColor
+                    toggleElement.BackgroundTransparency = 0.2
                     toggleElement.ClipsDescendants = true
-                    toggleElement.Size = UDim2.new(0, 352, 0, 33)
+                    toggleElement.Size = UDim2.new(0, 352, 0, 28)
                     toggleElement.AutoButtonColor = false
                     toggleElement.Font = Enum.Font.SourceSans
                     toggleElement.Text = ""
@@ -1110,7 +1125,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     btn.MouseButton1Click:Connect(function()
                         if not focusing then
                             if toggled == false then
-                                game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                                game.TweenService:Create(img, TweenInfo.new(0.05, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 0
                                 }):Play()
                                 local c = sample:Clone()
@@ -1123,14 +1138,14 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 else
                                     size = (btn.AbsoluteSize.Y * 1.5)
                                 end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
+                                -- c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+                                -- for i = 1, 10 do
+                                --     c.ImageTransparency = c.ImageTransparency + 0.05
+                                --     wait(.05)
+                                -- end
+                                -- c:Destroy()
                             else
-                                game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                                game.TweenService:Create(img, TweenInfo.new(0.05, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                     ImageTransparency = 1
                                 }):Play()
                                 local c = sample:Clone()
@@ -1143,12 +1158,12 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                 else
                                     size = (btn.AbsoluteSize.Y * 1.5)
                                 end
-                                c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
-                                for i = 1, 10 do
-                                    c.ImageTransparency = c.ImageTransparency + 0.05
-                                    wait(len / 12)
-                                end
-                                c:Destroy()
+                                -- c:TweenSizeAndPosition(UDim2.new(0, size, 0, size), UDim2.new(0.5, (-size / 2), 0.5, (-size / 2)), 'Out', 'Quad', len, true, nil)
+                                -- for i = 1, 10 do
+                                --     c.ImageTransparency = c.ImageTransparency + 0.05
+                                --     wait(.05)
+                                -- end
+                                -- c:Destroy()
                             end
                             toggled = not toggled
                             pcall(callback, toggled)
@@ -1163,7 +1178,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     local hovering = false
                     btn.MouseEnter:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            game.TweenService:Create(btn, TweenInfo.new(0.01, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = Color3.fromRGB(themeList.ElementColor.r * 255 + 8, themeList.ElementColor.g * 255 + 9, themeList.ElementColor.b * 255 + 10)
                             }):Play()
                             hovering = true
@@ -1171,7 +1186,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                     end)
                     btn.MouseLeave:Connect(function()
                         if not focusing then
-                            game.TweenService:Create(btn, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
+                            game.TweenService:Create(btn, TweenInfo.new(0.01, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
                                 BackgroundColor3 = themeList.ElementColor
                             }):Play()
                             hovering = false
@@ -1219,13 +1234,13 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                         end
                         if isTogOn then
                             toggled = true
-                            game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                            game.TweenService:Create(img, TweenInfo.new(0.05, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                 ImageTransparency = 0
                             }):Play()
                             pcall(callback, toggled)
                         else
                             toggled = false
-                            game.TweenService:Create(img, TweenInfo.new(0.11, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
+                            game.TweenService:Create(img, TweenInfo.new(0.05, Enum.EasingStyle.Linear,Enum.EasingDirection.In), {
                                 ImageTransparency = 1
                             }):Play()
                             pcall(callback, toggled)
@@ -1342,7 +1357,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 val.Text = minvalue
                 val.TextColor3 = themeList.TextColor
                 val.TextSize = 14.000
-                val.TextTransparency = 1.000
+                val.TextTransparency = 0.000
                 val.TextXAlignment = Enum.TextXAlignment.Right
 
                 local moreInfo = Instance.new("TextLabel")
@@ -1372,7 +1387,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 end 
 
 
-                                updateSectionFrame()
+                updateSectionFrame()
                 UpdateSize()
                 local mouse = game:GetService("Players").LocalPlayer:GetMouse();
 
@@ -1417,9 +1432,6 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 local Value
                 sliderBtn.MouseButton1Down:Connect(function()
                     if not focusing then
-                        game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                            TextTransparency = 0
-                        }):Play()
                         Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 149) * sliderDrag.AbsoluteSize.X) + tonumber(minvalue)) or 0
                         pcall(function()
                             callback(Value)
@@ -1440,9 +1452,6 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                                     callback(Value)
                                 end)
                                 val.Text = Value
-                                game.TweenService:Create(val, TweenInfo.new(0.1, Enum.EasingStyle.Linear, Enum.EasingDirection.In), {
-                                    TextTransparency = 1
-                                }):Play()
                                 sliderDrag:TweenSize(UDim2.new(0, math.clamp(mouse.X - sliderDrag.AbsolutePosition.X, 0, 149), 0, 6), "InOut", "Linear", 0.05, true)
                                 moveconnection:Disconnect()
                                 releaseconnection:Disconnect()
@@ -1509,6 +1518,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 dropFrame.Name = "dropFrame"
                 dropFrame.Parent = sectionInners
                 dropFrame.BackgroundColor3 = themeList.Background
+                dropFrame.BackgroundTransparency = 0.2
                 dropFrame.BorderSizePixel = 0
                 dropFrame.Position = UDim2.new(0, 0, 1.23571432, 0)
                 dropFrame.Size = UDim2.new(0, 352, 0, 33)
@@ -1518,6 +1528,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
                 dropOpen.Name = "dropOpen"
                 dropOpen.Parent = dropFrame
                 dropOpen.BackgroundColor3 = themeList.ElementColor
+                dropOpen.BackgroundTransparency = 0.2
                 dropOpen.Size = UDim2.new(0, 352, 0, 33)
                 dropOpen.AutoButtonColor = false
                 dropOpen.Font = Enum.Font.SourceSans
@@ -2613,6 +2624,7 @@ function EuphoriaUI.CreateLib(kavName, themeList)
             	label.Name = "label"
             	label.Parent = sectionInners
             	label.BackgroundColor3 = themeList.Background
+            	label.BackgroundTransparency = 0.95
             	label.BorderSizePixel = 0
 				label.ClipsDescendants = true
             	label.Text = title
