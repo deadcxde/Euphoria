@@ -2829,7 +2829,7 @@ local status, err = pcall(function()
             end
         end
 
-        local libUrl = "https://deadcxde.xyz/scripts/lib/ui.lua"
+        local libUrl = "https://raw.githubusercontent.com/deadcxde/Euphoria/main/lib/ui.lua"
         local Library = loadstring(game:HttpGet(libUrl))()
         local Window = Library.CreateLib("Euphoria - made with hate", "DarkTheme")
         
